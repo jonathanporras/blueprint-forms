@@ -1,5 +1,5 @@
 "use client";
-import { addSection, addStep, fetchSections, fetchSteps } from "@/utils/api";
+import { addSection, fetchSections, updateSection } from "@/utils/api";
 import { useState, useEffect } from "react";
 import StepsEditor from "./steps-editor";
 
@@ -63,8 +63,6 @@ export default function SectionEditor({ params }: { params: { templateId: string
     }
   }
 
-  const handleBlur = async () => {};
-
   return (
     <div className="p-6 max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold">Edit Template</h1>
@@ -87,6 +85,9 @@ export default function SectionEditor({ params }: { params: { templateId: string
           <input
             className="border p-2 rounded w-full"
             placeholder="Section Name"
+            onBlur={async () => {
+              await updateSection(section);
+            }}
             value={section.name}
             onChange={(e) =>
               setSections(

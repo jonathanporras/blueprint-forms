@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
-import { Template } from "@/app/template/builder/page";
+import { Template } from "@/app/template/editor/page";
 import { Section, Step } from "@/app/template/[templateId]/page";
 
 const supabase = createClient();
@@ -68,6 +68,17 @@ export async function fetchSections(templateId: string) {
 
   if (error) {
     console.error("Error fetching sections:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function updateSection(section: Section) {
+  const { data, error } = await supabase.from("sections").update(section).eq("id", section.id);
+
+  if (error) {
+    console.error("Error updating section:", error);
     throw error;
   }
 
