@@ -27,7 +27,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
   }
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-6 max-w-2xl mx-auto p-2 border rounded mt-2">
       <input
         className="border p-2 rounded w-full mt-2"
         placeholder="Step Name"
@@ -41,7 +41,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
         Add Step
       </button>
       {steps.map((step) => (
-        <div key={step.id}>
+        <div key={step.id} className="p-2 border rounded mt-2">
           <h3>Step</h3>
           Name:
           <>

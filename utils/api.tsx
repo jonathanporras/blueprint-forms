@@ -106,7 +106,11 @@ export async function addStep({ name, section_id, position }: Step) {
 }
 
 export async function fetchSteps(section_id: string) {
-  const { data, error } = await supabase.from("steps").select().eq("section_id", section_id);
+  const { data, error } = await supabase
+    .from("steps")
+    .select()
+    .eq("section_id", section_id)
+    .order("position", { ascending: true });
 
   if (error) {
     console.error("Error fetching steps:", error);
