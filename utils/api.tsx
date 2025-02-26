@@ -116,6 +116,17 @@ export async function fetchSteps(section_id: string) {
   return data;
 }
 
+export async function updateStep(step: Step) {
+  const { data, error } = await supabase.from("steps").update(step).eq("id", step.id);
+
+  if (error) {
+    console.error("Error updating step:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function fetchFields(step_id: string) {
   const { data, error } = await supabase.from("fields").select().eq("step_id", step_id);
 

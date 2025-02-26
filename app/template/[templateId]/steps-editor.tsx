@@ -1,5 +1,5 @@
 "use client";
-import { addStep, fetchSteps } from "@/utils/api";
+import { addStep, fetchSteps, updateStep } from "@/utils/api";
 import { useState, useEffect } from "react";
 import { Step } from "./page";
 
@@ -44,27 +44,37 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
         <div>
           <h3>Step</h3>
           Name:
-          <input
-            className="border p-2 rounded w-full"
-            placeholder={step.name ? `${step.name}` : "None"}
-            value={step.name}
-            onChange={(e) =>
-              setSteps(
-                steps.map((s) => (s.id === step.id ? { ...s, name: e.target.value } : s))
-              )
-            }
-          />
-          Step Number:
-          <input
-            className="border p-2 rounded w-full"
-            placeholder={step.position ? `${step.position}` : "None"}
-            value={step.position}
-            onChange={(e) =>
-              setSteps(
-                steps.map((s) => (s.id === step.id ? { ...s, name: e.target.value } : s))
-              )
-            }
-          />
+          <>
+            <input
+              className="border p-2 rounded w-full"
+              placeholder={step.name ? `${step.name}` : "None"}
+              value={step.name}
+              onBlur={async () => {
+                await updateStep(step);
+              }}
+              onChange={(e) =>
+                setSteps(
+                  steps.map((s) => (s.id === step.id ? { ...s, name: e.target.value } : s))
+                )
+              }
+            />
+            Number:
+            <input
+              className="border p-2 rounded w-full"
+              placeholder={step.position ? `${step.position}` : "None"}
+              value={step.position}
+              onBlur={async () => {
+                await updateStep(step);
+              }}
+              onChange={(e) =>
+                setSteps(
+                  steps.map((s) =>
+                    s.id === step.id ? { ...s, position: Number(e.target.value) } : s
+                  )
+                )
+              }
+            />
+          </>
         </div>
       ))}
     </div>
