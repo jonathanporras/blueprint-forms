@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/client";
-import { Template } from "@/app/template/editor/page";
+import { Template } from "@/app/template/manager/page";
 import { Section, Step } from "@/app/template/[templateId]/page";
 
 const supabase = createClient();

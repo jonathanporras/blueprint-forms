@@ -41,14 +41,14 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
         Add Step
       </button>
       {steps.map((step) => (
-        <div>
+        <div key={step.id}>
           <h3>Step</h3>
           Name:
           <>
             <input
               className="border p-2 rounded w-full"
               placeholder={step.name ? `${step.name}` : "None"}
-              value={step.name}
+              value={step.name ? step.name : ""}
               onBlur={async () => {
                 await updateStep(step);
               }}
@@ -62,7 +62,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
             <input
               className="border p-2 rounded w-full"
               placeholder={step.position ? `${step.position}` : "None"}
-              value={step.position}
+              value={step.position ? step.position : ""}
               onBlur={async () => {
                 await updateStep(step);
               }}
