@@ -27,8 +27,10 @@ export interface Field {
   options?: string[];
 }
 
-export default async function TemplateEditor({ params }: { params: { templateId: string } }) {
-  const { templateId } = params;
+type ParamsProps = Promise<{ templateId: string }>;
+
+export default async function TemplateEditor(props: { params: ParamsProps }) {
+  const { templateId } = await props.params;
 
   return <SectionsEditor templateId={templateId} />;
 }
