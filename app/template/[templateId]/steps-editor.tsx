@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { Step } from "./page";
 import FieldsEditor from "./fields-editor";
 
+const DEFAULT_STEP_NAME = "Step Name";
+const DEFAULT_STEP_HEADING = "What is the property address?";
+
 export default function StepsEditor({ sectionId }: { sectionId: string }) {
   const [steps, setSteps] = useState<Step[]>([]);
-  const [name, setName] = useState("");
-  const [heading, setHeading] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -18,88 +19,65 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
 
   async function createStep(sectionId: string) {
     const newStep = {
-      name: name,
-      heading: heading,
+      name: DEFAULT_STEP_NAME,
+      heading: DEFAULT_STEP_HEADING,
       section_id: sectionId,
       position: steps.length + 1,
     };
     const data = await addStep(newStep);
     if (data) {
       setSteps([...steps, ...data]);
-      setName("");
-      setHeading("");
     }
   }
 
   return (
-    <div className="p-6 max-w-2xl mx-auto p-2 border rounded mt-2">
-      <input
-        className="border p-2 rounded w-full mt-2"
-        placeholder="Step Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        className="border p-2 rounded w-full mt-2"
-        placeholder="Step Heading"
-        value={heading}
-        onChange={(e) => setHeading(e.target.value)}
-      />
-      <button
-        className="bg-green-500 text-white px-4 py-2 rounded mt-2"
-        onClick={() => createStep(sectionId)}
-      >
-        Add Step
+    <div>
+      <button className="text-2xl pl-6" onClick={() => createStep(sectionId)}>
+        +
       </button>
       {steps.map((step) => (
-        <div key={step.id} className="p-2 border rounded mt-2">
-          <h3>Step</h3>
-          <>
-            Name:
-            <input
-              className="border p-2 rounded w-full"
-              placeholder={step.name ? `${step.name}` : "None"}
-              value={step.name ? step.name : ""}
-              onBlur={async () => {
-                await updateStep(step);
-              }}
-              onChange={(e) =>
-                setSteps(
-                  steps.map((s) => (s.id === step.id ? { ...s, name: e.target.value } : s))
+        <div key={step.id} className="flex flex-col justify-start text-lg pl-10">
+          <input
+            className="text-left"
+            placeholder={step.position ? `${step.position}` : "None"}
+            value={step.position ? step.position : ""}
+            onBlur={async () => {
+              await updateStep(step);
+            }}
+            onChange={(e) =>
+              setSteps(
+                steps.map((s) =>
+                  s.id === step.id ? { ...s, position: Number(e.target.value) } : s
                 )
-              }
-            />
-            Heading:
-            <input
-              className="border p-2 rounded w-full"
-              placeholder={step.heading ? `${step.heading}` : "None"}
-              value={step.heading ? step.heading : ""}
-              onBlur={async () => {
-                await updateStep(step);
-              }}
-              onChange={(e) =>
-                setSteps(
-                  steps.map((s) => (s.id === step.id ? { ...s, heading: e.target.value } : s))
-                )
-              }
-            />
-            Position:
-            <input
-              className="border p-2 rounded w-full"
-              placeholder={step.position ? `${step.position}` : "None"}
-              value={step.position ? step.position : ""}
-              onBlur={async () => {
-                await updateStep(step);
-              }}
-              onChange={(e) =>
-                setSteps(
-                  steps.map((s) =>
-                    s.id === step.id ? { ...s, position: Number(e.target.value) } : s
-                  )
-                )
-              }
-            />
-          </>
+              )
+            }
+          />
+          <input
+            className="text-left"
+            placeholder={step.name ? `${step.name}` : "None"}
+            value={step.name ? step.name : ""}
+            onBlur={async () => {
+              await updateStep(step);
+            }}
+            onChange={(e) =>
+              setSteps(
+                steps.map((s) => (s.id === step.id ? { ...s, name: e.target.value } : s))
+              )
+            }
+          />
+          <input
+            className="text-left"
+            placeholder={step.heading ? `${step.heading}` : "None"}
+            value={step.heading ? step.heading : ""}
+            onBlur={async () => {
+              await updateStep(step);
+            }}
+            onChange={(e) =>
+              setSteps(
+                steps.map((s) => (s.id === step.id ? { ...s, heading: e.target.value } : s))
+              )
+            }
+          />
           {step.id && <FieldsEditor stepId={step.id} />}
         </div>
       ))}
