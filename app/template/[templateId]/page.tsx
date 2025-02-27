@@ -1,5 +1,6 @@
 import React from "react";
 import SectionsEditor from "./sections-editor";
+import { global } from "styled-jsx/css";
 
 export interface Section {
   id?: string;
@@ -16,14 +17,14 @@ export interface Step {
 }
 
 export interface Field {
-  id: string;
-  template_id: string;
+  id?: string;
+  template_id?: string;
   section_id?: string;
   step_id: string;
   label: string;
   name: string;
-  type: "text" | "number" | "dropdown" | "checkbox" | "date";
-  required: boolean;
+  type: string | "text" | "number" | "dropdown" | "checkbox" | "date";
+  required?: boolean;
   options?: string[];
 }
 

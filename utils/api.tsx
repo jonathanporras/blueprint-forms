@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/client";
 import { Template } from "@/app/template/manager/page";
-import { Section, Step } from "@/app/template/[templateId]/page";
+import { Field, Section, Step } from "@/app/template/[templateId]/page";
 
 const supabase = createClient();
 
@@ -125,6 +125,40 @@ export async function updateStep(step: Step) {
 
   if (error) {
     console.error("Error updating step:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function addField({
+  template_id,
+  section_id,
+  step_id,
+  label,
+  name,
+  type,
+  required,
+  options,
+}: Field) {
+  const { data, error } = await supabase
+    .from("fields")
+    .upsert([
+      {
+        template_id,
+        section_id,
+        step_id,
+        label,
+        name,
+        type,
+        required,
+        options,
+      },
+    ])
+    .select();
+
+  if (error) {
+    console.error("Error adding steps:", error);
     throw error;
   }
 

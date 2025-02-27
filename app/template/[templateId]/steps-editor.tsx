@@ -2,6 +2,7 @@
 import { addStep, fetchSteps, updateStep } from "@/utils/api";
 import { useState, useEffect } from "react";
 import { Step } from "./page";
+import FieldsEditor from "./fields-editor";
 
 export default function StepsEditor({ sectionId }: { sectionId: string }) {
   const [steps, setSteps] = useState<Step[]>([]);
@@ -23,6 +24,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
     const data = await addStep(newStep);
     if (data) {
       setSteps([...steps, ...data]);
+      setName("");
     }
   }
 
@@ -75,6 +77,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
               }
             />
           </>
+          {step.id && <FieldsEditor stepId={step.id} />}
         </div>
       ))}
     </div>
