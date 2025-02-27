@@ -1,6 +1,5 @@
 import React from "react";
 import SectionsEditor from "./sections-editor";
-import { global } from "styled-jsx/css";
 
 export interface Section {
   id?: string;
