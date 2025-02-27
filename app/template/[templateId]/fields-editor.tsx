@@ -87,7 +87,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
           onSelect={(option) => {
             setField({
               ...field,
-              required: option,
+              required: option === "true",
             });
           }}
         />
@@ -153,7 +153,9 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
               options={["true", "false"]}
               onSelect={async (option) => {
                 setFields(
-                  fields.map((s) => (s.id === field.id ? { ...s, required: option } : s))
+                  fields.map((s) =>
+                    s.id === field.id ? { ...s, required: option === "true" } : s
+                  )
                 );
                 await updateField(field);
               }}
