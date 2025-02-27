@@ -40,7 +40,7 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
   }
 
   return (
-    <>
+    <div className="">
       <div className="flex justify-start align-top text-2xl">
         <h1>{templateName}</h1>
         <button className="pl-4" onClick={createSection}>
@@ -49,9 +49,9 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
       </div>
       {sections.map((section) => (
         <div key={section.id}>
-          <div className="flex flex-col justify-start text-xl pl-6">
+          <div className="flex flex-col justify-start text-xl pl-6 py-5">
             <input
-              className="text-left"
+              className="text-left w-xl"
               placeholder="Section Position"
               onBlur={async () => {
                 await updateSection(section);
@@ -86,6 +86,6 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
           {section.id && <StepsEditor sectionId={section.id} />}
         </div>
       ))}
-    </>
+    </div>
   );
 }

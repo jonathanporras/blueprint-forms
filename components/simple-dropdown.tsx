@@ -1,42 +1,36 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-interface SimpleDropdownProps {
+const SimpleDropdown = ({
+  options,
+  onBlur,
+  onSelect,
+  defaultOption,
+}: {
   options: string[];
-  onSelect: (value: string) => void;
-}
+  onBlur: Function;
+  onSelect: Function;
+  defaultOption?: string;
+}) => {
+  const [selected, setSelected] = useState(defaultOption || options[0]);
 
-const SimpleDropdown: React.FC<SimpleDropdownProps> = ({ options, onSelect }) => {
-  const [selected, setSelected] = useState(options[0]);
-  const [isOpen, setIsOpen] = useState(false);
+  const handleChange = (event: any) => {
+    const value = event?.target?.value;
+    setSelected(value);
+    onSelect(value);
+  };
 
-  const handleSelect = (option: string) => {
-    setSelected(option);
-    onSelect(option);
-    setIsOpen(false);
+  const handleBlur = (event: any) => {
+    onBlur();
   };
 
   return (
-    <div className="relative w-64">
-      <button
-        className="w-full p-2 bg-white border rounded-md shadow-sm text-left"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {selected}
-      </button>
-      {isOpen && (
-        <ul className="w-full bg-white border rounded-md shadow-md mt-1 z-1">
-          {options.map((option) => (
-            <li
-              key={option}
-              className="p-2 hover:bg-gray-100 cursor-pointer"
-              onClick={() => handleSelect(option)}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <select value={selected} onChange={handleChange} onBlur={handleBlur}>
+      {options.map((option, index) => (
+        <option key={index} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
   );
 };
 

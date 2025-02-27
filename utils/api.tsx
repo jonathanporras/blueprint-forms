@@ -180,7 +180,11 @@ export async function addField({
 }
 
 export async function fetchFields(step_id: string) {
-  const { data, error } = await supabase.from("fields").select().eq("step_id", step_id);
+  const { data, error } = await supabase
+    .from("fields")
+    .select()
+    .eq("step_id", step_id)
+    .order("position", { ascending: true });
 
   if (error) {
     console.error("Error fetching fields:", error);

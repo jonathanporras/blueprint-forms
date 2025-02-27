@@ -4,16 +4,21 @@ import { useState, useEffect } from "react";
 import { Field } from "./page";
 import SimpleDropdown from "@/components/simple-dropdown";
 
+const DEFAULT_FIELD_LABEL = "Field Label";
+const DEFAULT_FIELD_NAME = "Field Name";
+const DEFAULT_FIELD_TYPE = "text";
+const DEFAULT_FIELD_REQUIRED = true;
+const DEFAULT_FIELD_OPTIONS = [""];
+
 export default function FieldsEditor({ stepId }: { stepId: string }) {
   const [fields, setFields] = useState<Field[]>([]);
   const [field, setField] = useState({
     step_id: "",
-    position: 0,
-    label: "",
-    name: "",
-    type: "text",
-    required: true,
-    options: [],
+    label: DEFAULT_FIELD_LABEL,
+    name: DEFAULT_FIELD_NAME,
+    type: DEFAULT_FIELD_TYPE,
+    required: DEFAULT_FIELD_REQUIRED,
+    options: DEFAULT_FIELD_OPTIONS,
   } as Field);
 
   useEffect(() => {
@@ -38,85 +43,23 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
       setFields([...fields, ...data]);
       setField({
         step_id: "",
-        position: 0,
-        label: "",
-        name: "",
-        type: "text",
-        required: true,
-        options: [],
+        label: DEFAULT_FIELD_LABEL,
+        name: DEFAULT_FIELD_NAME,
+        type: DEFAULT_FIELD_TYPE,
+        required: DEFAULT_FIELD_REQUIRED,
+        options: DEFAULT_FIELD_OPTIONS,
       });
     }
   }
 
   return (
-    <div className="p-6 max-w-2xl mx-auto p-2 border rounded mt-2">
-      Add Field
-      <input
-        className="border p-2 rounded w-full mt-2"
-        placeholder="Field Label"
-        value={field.label}
-        onChange={(e) =>
-          setField({
-            ...field,
-            label: e.target.value,
-          })
-        }
-      />
-      <input
-        className="border p-2 rounded w-full mt-2"
-        placeholder="Field Name"
-        value={field.name}
-        onChange={(e) =>
-          setField({
-            ...field,
-            name: e.target.value,
-          })
-        }
-      />
-      <>
-        <SimpleDropdown
-          options={["text", "number", "dropdown", "checkbox", "date"]}
-          onSelect={(option) => {
-            setField({
-              ...field,
-              type: option,
-            });
-          }}
-        />
-      </>
-      <>
-        <SimpleDropdown
-          options={["true", "false"]}
-          onSelect={(option) => {
-            setField({
-              ...field,
-              required: option === "true",
-            });
-          }}
-        />
-      </>
-      <input
-        className="border p-2 rounded w-full mt-2"
-        placeholder="Options"
-        value={field.options}
-        onChange={(e) =>
-          setField({
-            ...field,
-            options: e.target.value.split(","),
-          })
-        }
-      />
-      <button
-        className="bg-green-500 text-white px-4 py-2 rounded mt-2"
-        onClick={() => createField(stepId)}
-      >
-        Add Field
+    <div className="">
+      <button className="text-2xl" onClick={() => createField(stepId)}>
+        +
       </button>
       {fields.map((field) => (
-        <div key={field.id} className="p-2 border rounded mt-2">
-          Field:
+        <div key={field.id} className="flex flex-col justify-start text-sm pl-6 py-5">
           <input
-            className="border p-2 rounded w-full mt-2"
             placeholder="Field Position"
             value={field.position}
             onChange={(e) => {
@@ -130,43 +73,53 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
               await updateField(field);
             }}
           />
-          <input
-            className="border p-2 rounded w-full mt-2"
-            placeholder="Field Label"
-            value={field.label}
-            onChange={(e) => {
-              setFields(
-                fields.map((s) => (s.id === field.id ? { ...s, label: e.target.value } : s))
-              );
-            }}
-            onBlur={async () => {
-              await updateField(field);
-            }}
-          />
-          <input
-            className="border p-2 rounded w-full mt-2"
-            placeholder="Field Name"
-            value={field.name}
-            onChange={(e) => {
-              setFields(
-                fields.map((s) => (s.id === field.id ? { ...s, name: e.target.value } : s))
-              );
-            }}
-            onBlur={async () => {
-              await updateField(field);
-            }}
-          />
-          <>
-            {`Type: ${field.type}`}
-            <SimpleDropdown
-              options={["text", "number", "dropdown", "checkbox", "date"]}
-              onSelect={(option) => {
-                setFields(fields.map((s) => (s.id === field.id ? { ...s, type: option } : s)));
+          <div className="flex justify-start">
+            <p className="pr-2 italic">Label:</p>
+            <input
+              placeholder="Field Label"
+              value={field.label}
+              onChange={(e) => {
+                setFields(
+                  fields.map((s) => (s.id === field.id ? { ...s, label: e.target.value } : s))
+                );
+              }}
+              onBlur={async () => {
+                await updateField(field);
               }}
             />
-          </>
-          <>
-            {`Required: ${field.required}`}
+          </div>
+
+          <div className="flex justify-start">
+            <p className="pr-2 italic">Name:</p>
+            <input
+              placeholder="Field Name"
+              value={field.name}
+              onChange={(e) => {
+                setFields(
+                  fields.map((s) => (s.id === field.id ? { ...s, name: e.target.value } : s))
+                );
+              }}
+              onBlur={async () => {
+                await updateField(field);
+              }}
+            />
+          </div>
+
+          <div className="flex justify-start">
+            <p className="pr-2 italic">Type:</p>
+            <SimpleDropdown
+              options={["text", "number", "dropdown", "checkbox", "date"]}
+              onSelect={async (option) => {
+                setFields(fields.map((s) => (s.id === field.id ? { ...s, type: option } : s)));
+              }}
+              onBlur={async () => {
+                await updateField(field);
+              }}
+              defaultOption={field.type}
+            />
+          </div>
+          <div className="flex justify-start">
+            <p className="pr-2 italic">Required:</p>
             <SimpleDropdown
               options={["true", "false"]}
               onSelect={async (option) => {
@@ -175,25 +128,31 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
                     s.id === field.id ? { ...s, required: option === "true" } : s
                   )
                 );
+              }}
+              onBlur={async () => {
+                await updateField(field);
+              }}
+              defaultOption={field?.required?.toString()}
+            />
+          </div>
+          <div className="flex justify-start">
+            <p className="pr-2 italic">Options:</p>
+            <input
+              className=""
+              placeholder="For dropdown: a,b,c"
+              value={field.options}
+              onChange={(e) =>
+                setFields(
+                  fields.map((s) =>
+                    s.id === field.id ? { ...s, options: e.target.value.split(",") } : s
+                  )
+                )
+              }
+              onBlur={async () => {
                 await updateField(field);
               }}
             />
-          </>
-          <input
-            className="border p-2 rounded w-full mt-2"
-            placeholder="Options"
-            value={field.options}
-            onChange={(e) =>
-              setFields(
-                fields.map((s) =>
-                  s.id === field.id ? { ...s, options: e.target.value.split(",") } : s
-                )
-              )
-            }
-            onBlur={async () => {
-              await updateField(field);
-            }}
-          />
+          </div>
         </div>
       ))}
     </div>
