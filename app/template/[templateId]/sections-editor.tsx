@@ -1,19 +1,25 @@
 "use client";
-import { addSection, fetchSections, updateSection } from "@/utils/api";
+import { addSection, addStep, fetchSections, fetchTemplate, updateSection } from "@/utils/api";
 import React, { useState, useEffect } from "react";
 import StepsEditor from "./steps-editor";
 import { Section } from "./page";
 
+const DEFAULT_SECTION_NAME = "Section Name";
+
 export default function SectionsEditor({ templateId }: { templateId: string }) {
   const [sections, setSections] = useState<Section[]>([]);
-  const [name, setName] = useState("");
+  const [templateName, setTemplateName] = useState("");
 
   useEffect(() => {
     (async () => {
       const sectionData = await fetchSections(templateId);
+      const template = await fetchTemplate(templateId);
 
       if (sectionData) {
         setSections(sectionData);
+      }
+      if (template) {
+        setTemplateName(template.name);
       }
     })();
   }, [templateId]);
@@ -21,7 +27,7 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
   async function createSection() {
     const newSection = {
       template_id: templateId,
-      name,
+      name: DEFAULT_SECTION_NAME,
       position: sections.length + 1,
     };
     console.log(newSection);
@@ -30,40 +36,53 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
     const data = await addSection(newSection);
     if (data) {
       setSections([...sections, ...data]);
-      setName("");
     }
   }
 
   return (
     <>
-      <input
-        className="border p-2 rounded w-full mt-2"
-        placeholder="Section Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-        onClick={createSection}
-      >
-        Add Section
-      </button>
+      <div className="flex justify-start align-top text-xl">
+        <h1>{templateName}</h1>
+        <button className="pl-4" onClick={createSection}>
+          +
+        </button>
+      </div>
       {sections.map((section) => (
-        <div key={section.id} className="p-2 border rounded mt-2">
-          Section:
-          <input
-            className="border p-2 rounded w-full"
-            placeholder="Section Name"
-            onBlur={async () => {
-              await updateSection(section);
-            }}
-            value={section.name}
-            onChange={(e) =>
-              setSections(
-                sections.map((s) => (s.id === section.id ? { ...s, name: e.target.value } : s))
-              )
-            }
-          />
+        <div key={section.id}>
+          <div className="flex flex-col justify-start">
+            <input
+              className="text-left"
+              placeholder="Section Position"
+              onBlur={async () => {
+                await updateSection(section);
+              }}
+              value={section.position}
+              onChange={(e) =>
+                setSections(
+                  sections.map((s) =>
+                    s.id === section.id ? { ...s, position: Number(e.target.value) } : s
+                  )
+                )
+              }
+            />
+            <div className="flex flex-row justify-start">
+              <input
+                className="text-left"
+                placeholder="Section Name"
+                onBlur={async () => {
+                  await updateSection(section);
+                }}
+                value={section.name}
+                onChange={(e) =>
+                  setSections(
+                    sections.map((s) =>
+                      s.id === section.id ? { ...s, name: e.target.value } : s
+                    )
+                  )
+                }
+              />
+            </div>
+          </div>
           {section.id && <StepsEditor sectionId={section.id} />}
         </div>
       ))}

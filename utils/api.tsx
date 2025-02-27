@@ -39,6 +39,17 @@ export async function createTemplate({ user_id, name, description, active }: Tem
   return data;
 }
 
+export async function fetchTemplate(id: string) {
+  const { data, error } = await supabase.from("templates").select("*").eq("id", id).single();
+
+  if (error) {
+    console.error("Error fetching template:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function addSection({ template_id, name, position }: Section) {
   const { data, error } = await supabase
     .from("sections")

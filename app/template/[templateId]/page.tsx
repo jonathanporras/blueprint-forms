@@ -1,5 +1,6 @@
 import React from "react";
 import SectionsEditor from "./sections-editor";
+import { fetchTemplate } from "@/utils/api";
 
 export interface Section {
   id?: string;
@@ -34,10 +35,5 @@ type ParamsProps = Promise<{ templateId: string }>;
 export default async function TemplateEditor(props: { params: ParamsProps }) {
   const { templateId } = await props.params;
 
-  return (
-    <div className="p-2 border rounded mt-2">
-      <h1 className="text-2xl font-bold">Edit Template</h1>
-      <SectionsEditor templateId={templateId} />
-    </div>
-  );
+  return <SectionsEditor templateId={templateId} />;
 }
