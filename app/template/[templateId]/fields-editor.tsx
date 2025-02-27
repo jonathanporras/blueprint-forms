@@ -8,6 +8,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
   const [fields, setFields] = useState<Field[]>([]);
   const [field, setField] = useState({
     step_id: "",
+    position: 0,
     label: "",
     name: "",
     type: "text",
@@ -25,6 +26,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
   async function createField(stepId: string) {
     const newField = {
       step_id: stepId,
+      position: fields.length + 1,
       label: field.label,
       name: field.name,
       type: field.type,
@@ -36,6 +38,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
       setFields([...fields, ...data]);
       setField({
         step_id: "",
+        position: 0,
         label: "",
         name: "",
         type: "text",
@@ -111,7 +114,22 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
       </button>
       {fields.map((field) => (
         <div key={field.id} className="p-2 border rounded mt-2">
-          Field: Name:
+          Field:
+          <input
+            className="border p-2 rounded w-full mt-2"
+            placeholder="Field Position"
+            value={field.position}
+            onChange={(e) => {
+              setFields(
+                fields.map((s) =>
+                  s.id === field.id ? { ...s, position: Number(e.target.value) } : s
+                )
+              );
+            }}
+            onBlur={async () => {
+              await updateField(field);
+            }}
+          />
           <input
             className="border p-2 rounded w-full mt-2"
             placeholder="Field Label"

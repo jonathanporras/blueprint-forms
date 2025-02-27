@@ -20,6 +20,7 @@ export interface Field {
   id?: string;
   template_id?: string;
   section_id?: string;
+  position?: number;
   step_id: string;
   label: string;
   name: string;
