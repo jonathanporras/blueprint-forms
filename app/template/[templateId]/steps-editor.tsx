@@ -7,6 +7,7 @@ import FieldsEditor from "./fields-editor";
 export default function StepsEditor({ sectionId }: { sectionId: string }) {
   const [steps, setSteps] = useState<Step[]>([]);
   const [name, setName] = useState("");
+  const [heading, setHeading] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -18,6 +19,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
   async function createStep(sectionId: string) {
     const newStep = {
       name: name,
+      heading: heading,
       section_id: sectionId,
       position: steps.length + 1,
     };
@@ -25,6 +27,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
     if (data) {
       setSteps([...steps, ...data]);
       setName("");
+      setHeading("");
     }
   }
 
@@ -36,6 +39,12 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      <input
+        className="border p-2 rounded w-full mt-2"
+        placeholder="Step Heading"
+        value={heading}
+        onChange={(e) => setHeading(e.target.value)}
+      />
       <button
         className="bg-green-500 text-white px-4 py-2 rounded mt-2"
         onClick={() => createStep(sectionId)}
@@ -45,8 +54,8 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
       {steps.map((step) => (
         <div key={step.id} className="p-2 border rounded mt-2">
           <h3>Step</h3>
-          Name:
           <>
+            Name:
             <input
               className="border p-2 rounded w-full"
               placeholder={step.name ? `${step.name}` : "None"}
@@ -60,7 +69,21 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
                 )
               }
             />
-            Number:
+            Heading:
+            <input
+              className="border p-2 rounded w-full"
+              placeholder={step.heading ? `${step.heading}` : "None"}
+              value={step.heading ? step.heading : ""}
+              onBlur={async () => {
+                await updateStep(step);
+              }}
+              onChange={(e) =>
+                setSteps(
+                  steps.map((s) => (s.id === step.id ? { ...s, heading: e.target.value } : s))
+                )
+              }
+            />
+            Position:
             <input
               className="border p-2 rounded w-full"
               placeholder={step.position ? `${step.position}` : "None"}

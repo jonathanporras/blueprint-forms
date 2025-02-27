@@ -85,12 +85,13 @@ export async function updateSection(section: Section) {
   return data;
 }
 
-export async function addStep({ name, section_id, position }: Step) {
+export async function addStep({ name, heading, section_id, position }: Step) {
   const { data, error } = await supabase
     .from("steps")
     .upsert([
       {
         name,
+        heading,
         section_id,
         position,
       },

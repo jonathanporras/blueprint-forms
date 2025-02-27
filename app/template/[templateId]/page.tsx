@@ -10,6 +10,7 @@ export interface Section {
 
 export interface Step {
   id?: string;
+  heading: string;
   section_id: string;
   name?: string;
   position: number;
