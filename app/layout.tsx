@@ -39,8 +39,12 @@ export default function RootLayout({
         >
           <main className="min-h-screen flex flex-col items-center">
             <div className="flex-1 w-full flex flex-col gap-20 items-center">
-              <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-                <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
+              <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16 bg-[#3B5680]">
+                <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm ">
+                  <div className="logo-wrap text-white">
+                    <p>Blueprint</p>
+                    <p>Forms</p>
+                  </div>{" "}
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
               </nav>
