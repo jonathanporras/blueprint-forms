@@ -158,7 +158,7 @@ export async function addField({
     .select();
 
   if (error) {
-    console.error("Error adding steps:", error);
+    console.error("Error adding field:", error);
     throw error;
   }
 
@@ -169,7 +169,18 @@ export async function fetchFields(step_id: string) {
   const { data, error } = await supabase.from("fields").select().eq("step_id", step_id);
 
   if (error) {
-    console.error("Error fetching steps:", error);
+    console.error("Error fetching fields:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function updateField(field: Field) {
+  const { data, error } = await supabase.from("fields").update(field).eq("id", field.id);
+
+  if (error) {
+    console.error("Error updating step:", error);
     throw error;
   }
 

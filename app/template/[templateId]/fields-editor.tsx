@@ -1,5 +1,5 @@
 "use client";
-import { addField, fetchFields } from "@/utils/api";
+import { addField, fetchFields, updateField } from "@/utils/api";
 import { useState, useEffect } from "react";
 import { Field } from "./page";
 import SimpleDropdown from "@/components/simple-dropdown";
@@ -47,7 +47,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
 
   return (
     <div className="p-6 max-w-2xl mx-auto p-2 border rounded mt-2">
-      Field
+      Add Field
       <input
         className="border p-2 rounded w-full mt-2"
         placeholder="Field Label"
@@ -121,6 +121,9 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
                 fields.map((s) => (s.id === field.id ? { ...s, label: e.target.value } : s))
               );
             }}
+            onBlur={async () => {
+              await updateField(field);
+            }}
           />
           <input
             className="border p-2 rounded w-full mt-2"
@@ -131,8 +134,12 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
                 fields.map((s) => (s.id === field.id ? { ...s, name: e.target.value } : s))
               );
             }}
+            onBlur={async () => {
+              await updateField(field);
+            }}
           />
           <>
+            {`Type: ${field.type}`}
             <SimpleDropdown
               options={["text", "number", "dropdown", "checkbox", "date"]}
               onSelect={(option) => {
@@ -141,12 +148,14 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
             />
           </>
           <>
+            {`Required: ${field.required}`}
             <SimpleDropdown
               options={["true", "false"]}
-              onSelect={(option) => {
+              onSelect={async (option) => {
                 setFields(
                   fields.map((s) => (s.id === field.id ? { ...s, required: option } : s))
                 );
+                await updateField(field);
               }}
             />
           </>
@@ -161,6 +170,9 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
                 )
               )
             }
+            onBlur={async () => {
+              await updateField(field);
+            }}
           />
         </div>
       ))}
