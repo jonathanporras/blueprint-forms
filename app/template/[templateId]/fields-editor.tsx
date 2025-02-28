@@ -117,7 +117,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
             <p className="pr-2 italic">Type:</p>
             <SimpleDropdown
               options={["text", "number", "dropdown", "checkbox", "date"]}
-              onSelect={async (option) => {
+              onSelect={async (option: string) => {
                 setFields(fields.map((s) => (s.id === field.id ? { ...s, type: option } : s)));
               }}
               onBlur={async () => {
@@ -130,7 +130,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
             <p className="pr-2 italic">Required:</p>
             <SimpleDropdown
               options={["true", "false"]}
-              onSelect={async (option) => {
+              onSelect={async (option: string) => {
                 setFields(
                   fields.map((s) =>
                     s.id === field.id ? { ...s, required: option === "true" } : s
