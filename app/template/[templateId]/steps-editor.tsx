@@ -36,7 +36,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
         +
       </button>
       {steps.map((step) => (
-        <div key={step.id} className="flex flex-col justify-start text-lg pl-10 py-5 my-6">
+        <div key={step.id} className="flex flex-col justify-start text-lg pl-10 py-5">
           <input
             className="text-left py-1"
             placeholder={"Step Position"}
