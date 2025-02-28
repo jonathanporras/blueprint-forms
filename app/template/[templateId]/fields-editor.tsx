@@ -19,12 +19,14 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
     type: DEFAULT_FIELD_TYPE,
     required: DEFAULT_FIELD_REQUIRED,
     options: DEFAULT_FIELD_OPTIONS,
+    dependent_field_id: "",
+    dependent_field_value: "",
   } as Field);
 
   useEffect(() => {
     (async () => {
-      const stepsData = await fetchFields(stepId);
-      setFields([...fields, ...stepsData]);
+      const fieldsData = await fetchFields(stepId);
+      setFields([...fields, ...fieldsData]);
     })();
   }, [stepId]);
 
@@ -37,6 +39,8 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
       type: field.type,
       required: field.required,
       options: field.options,
+      dependent_field_id: field.dependent_field_id,
+      dependent_field_value: field.dependent_field_value,
     };
     const data = await addField(newField);
     if (data) {
@@ -75,6 +79,10 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
             }}
           />
           <div className="flex justify-start py-1">
+            <p className="pr-2 italic">ID: </p>
+            <p>{field.id}</p>
+          </div>
+          <div className="flex justify-start py-1">
             <p className="pr-2 italic">Label:</p>
             <input
               placeholder="Field Label"
@@ -89,7 +97,6 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
               }}
             />
           </div>
-
           <div className="flex justify-start py-1">
             <p className="pr-2 italic">Name:</p>
             <input
@@ -146,6 +153,42 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
                 setFields(
                   fields.map((s) =>
                     s.id === field.id ? { ...s, options: e.target.value.split(",") } : s
+                  )
+                )
+              }
+              onBlur={async () => {
+                await updateField(field);
+              }}
+            />
+          </div>
+          <div className="flex justify-start py-1">
+            <p className="pr-2 italic">Dependent Field:</p>
+            <input
+              className=""
+              placeholder="Dependent Field ID"
+              value={field.dependent_field_id ? field.dependent_field_id : ""}
+              onChange={(e) =>
+                setFields(
+                  fields.map((s) =>
+                    s.id === field.id ? { ...s, dependent_field_id: e.target.value } : s
+                  )
+                )
+              }
+              onBlur={async () => {
+                await updateField(field);
+              }}
+            />
+          </div>
+          <div className="flex justify-start py-1">
+            <p className="pr-2 italic">Dependent Field Value:</p>
+            <input
+              className=""
+              placeholder="Dependent Field Value"
+              value={field.dependent_field_value ? field.dependent_field_value : ""}
+              onChange={(e) =>
+                setFields(
+                  fields.map((s) =>
+                    s.id === field.id ? { ...s, dependent_field_value: e.target.value } : s
                   )
                 )
               }

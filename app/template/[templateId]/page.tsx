@@ -27,6 +27,8 @@ export interface Field {
   type: string | "text" | "number" | "dropdown" | "checkbox" | "date";
   required?: boolean;
   options?: string[];
+  dependent_field_id?: string;
+  dependent_field_value?: string;
 }
 
 type ParamsProps = Promise<{ templateId: string }>;
