@@ -50,6 +50,20 @@ export async function fetchTemplate(id: string) {
   return data;
 }
 
+export async function updateTemplate(template: Template) {
+  const { data, error } = await supabase
+    .from("templates")
+    .update(template)
+    .eq("id", template.id);
+
+  if (error) {
+    console.error("Error updating section:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function addSection({ template_id, name, position }: Section) {
   const { data, error } = await supabase
     .from("sections")

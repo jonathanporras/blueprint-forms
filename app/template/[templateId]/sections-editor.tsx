@@ -1,16 +1,23 @@
 "use client";
-import { addSection, addStep, fetchSections, fetchTemplate, updateSection } from "@/utils/api";
+import {
+  addSection,
+  fetchSections,
+  fetchTemplate,
+  updateSection,
+  updateTemplate,
+} from "@/utils/api";
 import React, { useState, useEffect } from "react";
 import StepsEditor from "./steps-editor";
 import { Section } from "./page";
 import Spinner from "@/components/spinner";
+import { Template } from "../manager/page";
 
 const DEFAULT_SECTION_NAME = "Section Name";
 
 export default function SectionsEditor({ templateId }: { templateId: string }) {
   const [loading, isLoading] = useState(true);
   const [sections, setSections] = useState<Section[]>([]);
-  const [templateName, setTemplateName] = useState("");
+  const [template, setTemplate] = useState<Template>();
 
   useEffect(() => {
     (async () => {
@@ -21,7 +28,7 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
         setSections(sectionData);
       }
       if (template) {
-        setTemplateName(template.name);
+        setTemplate(template);
       }
 
       isLoading(false);
@@ -48,7 +55,22 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
   ) : (
     <div className="">
       <div className="flex flex-col justify-start align-top text-2xl py-5 w-full">
-        <h1>{templateName}</h1>
+        <input
+          value={template?.name ? template.name : ""}
+          onChange={(e) => {
+            if (template) {
+              setTemplate({
+                ...template,
+                name: e.target.value,
+              });
+            }
+          }}
+          onBlur={async () => {
+            if (template) {
+              await updateTemplate(template);
+            }
+          }}
+        />
         <button className="text-left" onClick={createSection}>
           +
         </button>
