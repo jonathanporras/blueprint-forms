@@ -47,9 +47,9 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
     <Spinner />
   ) : (
     <div className="">
-      <div className="flex justify-start align-top text-2xl py-5 w-full">
+      <div className="flex flex-col justify-start align-top text-2xl py-5 w-full">
         <h1>{templateName}</h1>
-        <button className="pl-4" onClick={createSection}>
+        <button className="text-left" onClick={createSection}>
           +
         </button>
       </div>
@@ -57,7 +57,7 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
         <div key={section.id}>
           <div className="flex flex-col justify-start text-xl pl-6">
             <input
-              className="text-left"
+              className="text-left py-1"
               placeholder="Section Position"
               onBlur={async () => {
                 await updateSection(section);
@@ -73,7 +73,7 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
             />
             <div className="flex flex-row justify-start">
               <input
-                className="text-left"
+                className="text-left py-1"
                 placeholder="Section Name"
                 onBlur={async () => {
                   await updateSection(section);

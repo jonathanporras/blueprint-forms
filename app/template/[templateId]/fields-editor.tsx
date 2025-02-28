@@ -60,6 +60,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
       {fields.map((field) => (
         <div key={field.id} className="flex flex-col justify-start text-sm pl-6 py-5">
           <input
+            className="py-1"
             placeholder="Field Position"
             value={field.position}
             onChange={(e) => {
@@ -73,7 +74,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
               await updateField(field);
             }}
           />
-          <div className="flex justify-start">
+          <div className="flex justify-start py-1">
             <p className="pr-2 italic">Label:</p>
             <input
               placeholder="Field Label"
@@ -89,7 +90,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
             />
           </div>
 
-          <div className="flex justify-start">
+          <div className="flex justify-start py-1">
             <p className="pr-2 italic">Name:</p>
             <input
               placeholder="Field Name"
@@ -105,7 +106,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
             />
           </div>
 
-          <div className="flex justify-start">
+          <div className="flex justify-start py-1">
             <p className="pr-2 italic">Type:</p>
             <SimpleDropdown
               options={["text", "number", "dropdown", "checkbox", "date"]}
@@ -118,7 +119,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
               defaultOption={field.type}
             />
           </div>
-          <div className="flex justify-start">
+          <div className="flex justify-start py-1">
             <p className="pr-2 italic">Required:</p>
             <SimpleDropdown
               options={["true", "false"]}
@@ -135,7 +136,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
               defaultOption={field?.required?.toString()}
             />
           </div>
-          <div className="flex justify-start">
+          <div className="flex justify-start py-1">
             <p className="pr-2 italic">Options:</p>
             <input
               className=""
