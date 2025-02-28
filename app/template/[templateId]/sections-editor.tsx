@@ -3,10 +3,12 @@ import { addSection, addStep, fetchSections, fetchTemplate, updateSection } from
 import React, { useState, useEffect } from "react";
 import StepsEditor from "./steps-editor";
 import { Section } from "./page";
+import Spinner from "@/components/spinner";
 
 const DEFAULT_SECTION_NAME = "Section Name";
 
 export default function SectionsEditor({ templateId }: { templateId: string }) {
+  const [loading, isLoading] = useState(true);
   const [sections, setSections] = useState<Section[]>([]);
   const [templateName, setTemplateName] = useState("");
 
@@ -21,6 +23,8 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
       if (template) {
         setTemplateName(template.name);
       }
+
+      isLoading(false);
     })();
   }, [templateId]);
 
@@ -39,9 +43,11 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
     }
   }
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <div className="">
-      <div className="flex justify-start align-top text-2xl">
+      <div className="flex justify-start align-top text-2xl py-5 w-full">
         <h1>{templateName}</h1>
         <button className="pl-4" onClick={createSection}>
           +
@@ -49,9 +55,9 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
       </div>
       {sections.map((section) => (
         <div key={section.id}>
-          <div className="flex flex-col justify-start text-xl pl-6 py-5">
+          <div className="flex flex-col justify-start text-xl pl-6">
             <input
-              className="text-left w-xl"
+              className="text-left"
               placeholder="Section Position"
               onBlur={async () => {
                 await updateSection(section);

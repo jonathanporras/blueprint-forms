@@ -1,6 +1,5 @@
 import React from "react";
 import SectionsEditor from "./sections-editor";
-import { fetchTemplate } from "@/utils/api";
 
 export interface Section {
   id?: string;

@@ -36,10 +36,10 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
         +
       </button>
       {steps.map((step) => (
-        <div key={step.id} className="flex flex-col justify-start text-lg pl-10">
+        <div key={step.id} className="flex flex-col justify-start text-lg pl-10 py-5">
           <input
             className="text-left"
-            placeholder={step.position ? `${step.position}` : "None"}
+            placeholder={"Step Position"}
             value={step.position ? step.position : ""}
             onBlur={async () => {
               await updateStep(step);
@@ -54,7 +54,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
           />
           <input
             className="text-left"
-            placeholder={step.name ? `${step.name}` : "None"}
+            placeholder={"Step Name"}
             value={step.name ? step.name : ""}
             onBlur={async () => {
               await updateStep(step);
@@ -67,7 +67,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
           />
           <input
             className="text-left"
-            placeholder={step.heading ? `${step.heading}` : "None"}
+            placeholder={"What is the property address?"}
             value={step.heading ? step.heading : ""}
             onBlur={async () => {
               await updateStep(step);
