@@ -218,3 +218,14 @@ export async function updateField(field: Field) {
 
   return data;
 }
+
+export async function deleteField(fieldid: Field["id"]) {
+  const { data, error } = await supabase.from("fields").delete().match({ id: fieldid });
+
+  if (error) {
+    console.error("Error updating step:", error);
+    throw error;
+  }
+
+  return data;
+}

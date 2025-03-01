@@ -1,6 +1,6 @@
 "use client";
-import { addField, fetchFields, updateField } from "@/utils/api";
-import { useState, useEffect } from "react";
+import { addField, deleteField, fetchFields, updateField } from "@/utils/api";
+import { useState, useEffect, useRef } from "react";
 import { Field } from "./page";
 import SimpleDropdown from "@/components/simple-dropdown";
 
@@ -22,11 +22,12 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
     dependent_field_id: "",
     dependent_field_value: "",
   } as Field);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     (async () => {
       const fieldsData = await fetchFields(stepId);
-      setFields([...fields, ...fieldsData]);
+      setFields(fieldsData);
     })();
   }, [stepId]);
 
@@ -56,6 +57,21 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
     }
   }
 
+  async function handleDeleteField(fieldId: Field["id"]) {
+    await deleteField(fieldId);
+
+    timeoutRef.current = setTimeout(async () => {
+      const fieldsData = await fetchFields(stepId);
+      setFields(fieldsData);
+    }, 300);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }
+
   return (
     <div className="">
       <button className="text-2xl" onClick={() => createField(stepId)}>
@@ -63,6 +79,14 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
       </button>
       {fields.map((field) => (
         <div key={field.id} className="flex flex-col justify-start text-sm pl-6 py-5">
+          <button
+            className="text-[#d19292]"
+            onClick={() => {
+              handleDeleteField(field.id);
+            }}
+          >
+            delete
+          </button>
           <input
             className="py-1"
             placeholder="Field Position"
