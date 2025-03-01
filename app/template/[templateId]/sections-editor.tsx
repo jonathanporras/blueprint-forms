@@ -1,12 +1,13 @@
 "use client";
 import {
   addSection,
+  deleteSection,
   fetchSections,
   fetchTemplate,
   updateSection,
   updateTemplate,
 } from "@/utils/api";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import StepsEditor from "./steps-editor";
 import { Section } from "./page";
 import Spinner from "@/components/spinner";
@@ -18,6 +19,8 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
   const [loading, isLoading] = useState(true);
   const [sections, setSections] = useState<Section[]>([]);
   const [template, setTemplate] = useState<Template>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -50,10 +53,25 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
     }
   }
 
+  async function handleDeleteSection(sectionId: Section["id"]) {
+    await deleteSection(sectionId);
+
+    timeoutRef.current = setTimeout(async () => {
+      const fieldsData = await fetchSections(templateId);
+      setSections(fieldsData);
+    }, 500);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }
+
   return loading ? (
     <Spinner />
   ) : (
-    <div className="">
+    <div>
       <div className="flex flex-col justify-start align-top text-2xl py-5 w-full">
         <input
           value={template?.name ? template.name : ""}
@@ -78,6 +96,14 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
       {sections.map((section) => (
         <div key={section.id}>
           <div className="flex flex-col justify-start text-xl pl-6">
+            <button
+              className="text-[#d19292] text-sm"
+              onClick={() => {
+                handleDeleteSection(section.id);
+              }}
+            >
+              delete
+            </button>
             <input
               className="text-left py-1"
               placeholder="Section Position"

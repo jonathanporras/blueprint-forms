@@ -37,7 +37,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
     timeoutRef.current = setTimeout(async () => {
       const fieldsData = await fetchSteps(sectionId);
       setSteps(fieldsData);
-    }, 300);
+    }, 500);
 
     return () => {
       if (timeoutRef.current) {
@@ -54,7 +54,7 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
       {steps.map((step) => (
         <div key={step.id} className="flex flex-col justify-start text-lg pl-10 py-5">
           <button
-            className="text-[#d19292]"
+            className="text-[#d19292] text-sm"
             onClick={() => {
               handleDeleteStep(step.id);
             }}

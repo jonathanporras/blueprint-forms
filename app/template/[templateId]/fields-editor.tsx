@@ -63,7 +63,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
     timeoutRef.current = setTimeout(async () => {
       const fieldsData = await fetchFields(stepId);
       setFields(fieldsData);
-    }, 300);
+    }, 500);
 
     return () => {
       if (timeoutRef.current) {
@@ -80,7 +80,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
       {fields.map((field) => (
         <div key={field.id} className="flex flex-col justify-start text-sm pl-6 py-5">
           <button
-            className="text-[#d19292]"
+            className="text-[#d19292] text-sm"
             onClick={() => {
               handleDeleteField(field.id);
             }}

@@ -110,6 +110,17 @@ export async function updateSection(section: Section) {
   return data;
 }
 
+export async function deleteSection(sectionId: Section["id"]) {
+  const { data, error } = await supabase.from("sections").delete().match({ id: sectionId });
+
+  if (error) {
+    console.error("Error deleting step:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function addStep({ name, heading, section_id, position }: Step) {
   const { data, error } = await supabase
     .from("steps")
