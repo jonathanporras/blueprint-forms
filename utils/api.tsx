@@ -157,6 +157,17 @@ export async function updateStep(step: Step) {
   return data;
 }
 
+export async function deleteStep(stepId: Step["id"]) {
+  const { data, error } = await supabase.from("steps").delete().match({ id: stepId });
+
+  if (error) {
+    console.error("Error updating step:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function addField({
   template_id,
   section_id,
@@ -219,8 +230,8 @@ export async function updateField(field: Field) {
   return data;
 }
 
-export async function deleteField(fieldid: Field["id"]) {
-  const { data, error } = await supabase.from("fields").delete().match({ id: fieldid });
+export async function deleteField(fieldId: Field["id"]) {
+  const { data, error } = await supabase.from("fields").delete().match({ id: fieldId });
 
   if (error) {
     console.error("Error updating step:", error);

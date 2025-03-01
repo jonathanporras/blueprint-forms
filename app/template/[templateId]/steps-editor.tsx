@@ -1,6 +1,6 @@
 "use client";
-import { addStep, fetchSteps, updateStep } from "@/utils/api";
-import { useState, useEffect } from "react";
+import { addStep, deleteStep, fetchSteps, updateStep } from "@/utils/api";
+import { useState, useEffect, useRef } from "react";
 import { Step } from "./page";
 import FieldsEditor from "./fields-editor";
 
@@ -9,6 +9,7 @@ const DEFAULT_STEP_HEADING = "What is the property address?";
 
 export default function StepsEditor({ sectionId }: { sectionId: string }) {
   const [steps, setSteps] = useState<Step[]>([]);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -30,6 +31,21 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
     }
   }
 
+  async function handleDeleteStep(stepId: Step["id"]) {
+    await deleteStep(stepId);
+
+    timeoutRef.current = setTimeout(async () => {
+      const fieldsData = await fetchSteps(sectionId);
+      setSteps(fieldsData);
+    }, 300);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }
+
   return (
     <div>
       <button className="text-2xl pl-6" onClick={() => createStep(sectionId)}>
@@ -37,6 +53,14 @@ export default function StepsEditor({ sectionId }: { sectionId: string }) {
       </button>
       {steps.map((step) => (
         <div key={step.id} className="flex flex-col justify-start text-lg pl-10 py-5">
+          <button
+            className="text-[#d19292]"
+            onClick={() => {
+              handleDeleteStep(step.id);
+            }}
+          >
+            delete
+          </button>
           <input
             className="text-left py-1"
             placeholder={"Step Position"}
