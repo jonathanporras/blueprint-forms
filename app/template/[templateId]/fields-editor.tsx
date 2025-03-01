@@ -124,7 +124,7 @@ export default function FieldsEditor({ stepId }: { stepId: string }) {
           <div className="flex justify-start py-1">
             <p className="pr-2 italic">Name:</p>
             <input
-              placeholder="Field Name"
+              placeholder="field-name"
               value={field.name}
               onChange={(e) => {
                 setFields(
