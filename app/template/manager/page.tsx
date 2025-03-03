@@ -11,6 +11,7 @@ export interface Template {
   description?: string;
   active: boolean;
   sections: Section[];
+  type: string;
 }
 
 const TemplateEditor: React.FC = () => {

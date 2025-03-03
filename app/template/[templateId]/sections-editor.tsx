@@ -12,6 +12,7 @@ import StepsEditor from "./steps-editor";
 import { Section } from "./page";
 import Spinner from "@/components/spinner";
 import { Template } from "../manager/page";
+import SimpleDropdown from "@/components/simple-dropdown";
 
 const DEFAULT_SECTION_NAME = "Section Name";
 
@@ -20,7 +21,6 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
   const [sections, setSections] = useState<Section[]>([]);
   const [template, setTemplate] = useState<Template>();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -89,6 +89,43 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
             }
           }}
         />
+        <input
+          className="italic font-light text-xl"
+          value={template?.type ? template.type : ""}
+          onChange={(e) => {
+            if (template) {
+              setTemplate({
+                ...template,
+                type: e.target.value,
+              });
+            }
+          }}
+          onBlur={async () => {
+            if (template) {
+              await updateTemplate(template);
+            }
+          }}
+        />
+        <div className="flex justify-start py-1 text-xl font-light ">
+          <p className="pr-2 italic">Active:</p>
+          <SimpleDropdown
+            options={["true", "false"]}
+            onSelect={async (option: string) => {
+              if (template) {
+                setTemplate({
+                  ...template,
+                  active: option === "true",
+                });
+              }
+            }}
+            onBlur={async () => {
+              if (template) {
+                await updateTemplate(template);
+              }
+            }}
+            defaultOption={template?.active.toString()}
+          />
+        </div>
         <button className="text-left" onClick={createSection}>
           +
         </button>
