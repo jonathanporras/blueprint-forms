@@ -23,6 +23,7 @@ const TemplateEditor: React.FC = () => {
     description: "",
     active: false,
     sections: [],
+    type: "",
   });
 
   console.log("template:");
