@@ -1,20 +1,14 @@
-export interface Document {
-  id?: string;
-  template_type?: string;
-  name?: string;
-}
+import { fetchAllTemplateData, fetchTemplateByType } from "@/utils/api-server";
+import Editor from "./editor";
 
 type ParamsProps = Promise<{ template_type: string; document_id: string }>;
 
 const DocumentEditor = async (props: { params: ParamsProps }) => {
-  const { template_type, document_id } = await props.params;
+  const { template_type } = await props.params;
+  const template = await fetchTemplateByType(template_type);
+  const templateData = await fetchAllTemplateData(template.id);
 
-  return (
-    <>
-      <p>{template_type}</p>
-      <p>{document_id}</p>
-    </>
-  );
+  return <Editor formData={templateData} />;
 };
 
 export default DocumentEditor;

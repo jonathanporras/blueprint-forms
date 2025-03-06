@@ -17,6 +17,24 @@ export async function fetchTemplateByType(template_type: string) {
   return data;
 }
 
+export async function fetchAllTemplateData(template_id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("templates")
+    .select(
+      "id, name, sections(name, position, steps(name, position, fields(name, label, type, position, required, options, dependent_field_id, dependent_field_value)))"
+    )
+    .eq("id", template_id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching template data:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function createDocument({ template_type, name }: Document) {
   const supabase = await createClient();
   const { data, error } = await supabase

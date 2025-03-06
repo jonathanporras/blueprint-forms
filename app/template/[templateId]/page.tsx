@@ -6,6 +6,7 @@ export interface Section {
   template_id: string;
   name: string;
   position: number;
+  steps?: Step[];
 }
 
 export interface Step {
@@ -14,6 +15,7 @@ export interface Step {
   section_id: string;
   name?: string;
   position: number;
+  fields?: Field[];
 }
 
 export interface Field {
