@@ -3,11 +3,28 @@ import { Field, Section } from "@/app/template/[templateId]/page";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-interface FormData {
-  id: string;
-  name: string;
-  sections: Section[];
-}
+export type FormData = {
+  id: any;
+  name: any;
+  sections: {
+    name: any;
+    position: any;
+    steps: {
+      name: any;
+      position: any;
+      fields: {
+        name: any;
+        label: any;
+        type: any;
+        position: any;
+        required: any;
+        options: any;
+        dependent_field_id: any;
+        dependent_field_value: any;
+      }[];
+    }[];
+  }[];
+};
 
 const Editor = ({ formData }: { formData: FormData }) => {
   const steps = formData.sections.flatMap((section) =>
