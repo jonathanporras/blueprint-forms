@@ -2,6 +2,8 @@
 import { Field, Section } from "@/app/template/[templateId]/page";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Document, DocumentField } from "./page";
+import { createDocumentFields } from "@/utils/api";
 
 export type FormData = {
   id: any;
@@ -26,22 +28,43 @@ export type FormData = {
   }[];
 };
 
-const Editor = ({ formData }: { formData: FormData }) => {
+const Editor = ({
+  formData,
+  documentId,
+}: {
+  formData: FormData;
+  documentId: Document["id"];
+}) => {
   const steps = formData.sections.flatMap((section) =>
     section.steps?.map((step) => ({ ...step, sectionName: section.name }))
   );
   const totalSteps = steps.length;
-
   const [currentStep, setCurrentStep] = useState(0);
   const [formValues, setFormValues] = useState<Record<string, any>>({});
   const progress = ((currentStep + 1) / totalSteps) * 100;
 
+  const saveFields = async () => {
+    const document_fields = [];
+
+    for (const formValue in formValues) {
+      const document_field = {
+        value: formValues[formValue],
+        document_id: documentId,
+        field_id: formValue,
+      };
+      document_fields.push(document_field);
+    }
+
+    await createDocumentFields(...document_fields);
+  };
+
   const handleChange = (field: Field, value: any) => {
-    setFormValues((prev) => ({ ...prev, [field.name]: value }));
+    setFormValues((prev) => ({ ...prev, [field.id as string]: value }));
   };
 
   const nextStep = () => {
     if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1);
+    saveFields();
   };
 
   const prevStep = () => {
@@ -55,7 +78,7 @@ const Editor = ({ formData }: { formData: FormData }) => {
           <input
             key={field.name}
             type="text"
-            value={formValues[field.name] || ""}
+            value={formValues[field.id as string] || ""}
             onChange={(e) => handleChange(field, e.target.value)}
             placeholder={field.label}
             required={field.required}
@@ -66,7 +89,7 @@ const Editor = ({ formData }: { formData: FormData }) => {
         return (
           <select
             key={field.name}
-            value={formValues[field.name] || ""}
+            value={formValues[field.id as string] || ""}
             onChange={(e) => handleChange(field, e.target.value)}
             required={field.required}
             className="border p-2 w-full"
@@ -83,7 +106,7 @@ const Editor = ({ formData }: { formData: FormData }) => {
           <label key={field.name} className="flex items-center space-x-2">
             <input
               type="checkbox"
-              checked={formValues[field.name] || false}
+              checked={formValues[field.id as string] || false}
               onChange={(e) => handleChange(field, e.target.checked)}
             />
             <span>{field.label}</span>

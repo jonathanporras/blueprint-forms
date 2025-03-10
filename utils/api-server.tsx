@@ -22,7 +22,7 @@ export async function fetchAllTemplateData(template_id: string) {
   const { data, error } = await supabase
     .from("templates")
     .select(
-      "id, name, sections(name, position, steps(name, position, fields(name, label, type, position, required, options, dependent_field_id, dependent_field_value)))"
+      "id, name, sections(name, position, steps(name, position, fields(id, name, label, type, position, required, options, dependent_field_id, dependent_field_value)))"
     )
     .eq("id", template_id)
     .single();

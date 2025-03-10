@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/client";
 import { Template } from "@/app/template/manager/page";
 import { Field, Section, Step } from "@/app/template/[templateId]/page";
+import { DocumentField } from "@/app/document/editor/[template_type]/[document_id]/page";
 
 const supabase = createClient();
 
@@ -250,4 +251,53 @@ export async function deleteField(fieldId: Field["id"]) {
   }
 
   return data;
+}
+
+export async function createDocumentFields(...document_fields: DocumentField[]) {
+  if (document_fields.length === 0) {
+    console.error("No data provided for document_fields insertion.");
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("document_fields")
+    .insert([...document_fields])
+    .select();
+
+  if (error) {
+    console.error("Error inserting document_fields:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function updateDocumentFields(...document_fields: DocumentField[]) {
+  if (document_fields.length === 0) {
+    console.error("No document_fields provided.");
+    return;
+  }
+
+  const results = [];
+
+  for (const document_field of document_fields) {
+    if (!document_field.id) {
+      console.error('Skipping document_field: Missing "id" document_field', document_field);
+      continue;
+    }
+
+    const { data, error } = await supabase
+      .from("document_fields")
+      .update(document_field)
+      .eq("id", document_field.id);
+
+    if (error) {
+      console.error(`Error updating row with id ${document_field.id}:`, error);
+      continue;
+    }
+
+    results.push(data);
+  }
+
+  return results;
 }
