@@ -1,7 +1,10 @@
 import { createClient } from "@/utils/supabase/client";
 import { Template } from "@/app/template/manager/page";
 import { Field, Section, Step } from "@/app/template/[templateId]/page";
-import { DocumentField } from "@/app/document/editor/[template_type]/[document_id]/page";
+import {
+  Document,
+  DocumentField,
+} from "@/app/document/editor/[template_type]/[document_id]/page";
 
 const supabase = createClient();
 
@@ -300,4 +303,18 @@ export async function updateDocumentFields(...document_fields: DocumentField[]) 
   }
 
   return results;
+}
+
+export async function fetchDocumentFields(document_id: Document["id"]) {
+  const { data, error } = await supabase
+    .from("document_fields")
+    .select()
+    .eq("document_id", document_id);
+
+  if (error) {
+    console.error("Error fetching document_fields:", error);
+    throw error;
+  }
+
+  return data;
 }

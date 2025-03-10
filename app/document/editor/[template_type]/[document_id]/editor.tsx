@@ -1,9 +1,9 @@
 "use client";
 import { Field, Section } from "@/app/template/[templateId]/page";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Document, DocumentField } from "./page";
-import { createDocumentFields } from "@/utils/api";
+import { createDocumentFields, fetchDocumentFields } from "@/utils/api";
 
 export type FormData = {
   id: any;
@@ -42,6 +42,18 @@ const Editor = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [formValues, setFormValues] = useState<Record<string, any>>({});
   const progress = ((currentStep + 1) / totalSteps) * 100;
+  console.log("formValues");
+  console.log(formValues);
+  useEffect(() => {
+    fetchDocumentFields(documentId).then((data) => {
+      data.forEach((document_field) => {
+        setFormValues((prev) => ({
+          ...prev,
+          [document_field.field_id as string]: document_field.value,
+        }));
+      });
+    });
+  }, [documentId]);
 
   const saveFields = async () => {
     const document_fields = [];
