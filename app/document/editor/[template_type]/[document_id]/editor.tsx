@@ -3,7 +3,7 @@ import { Field, Section } from "@/app/template/[templateId]/page";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Document, DocumentField } from "./page";
-import { createDocumentFields, fetchDocumentFields } from "@/utils/api";
+import { createDocumentFields, fetchDocumentFields, updateDocumentFields } from "@/utils/api";
 
 export type FormData = {
   id: any;
@@ -49,29 +49,49 @@ const Editor = ({
       data.forEach((document_field) => {
         setFormValues((prev) => ({
           ...prev,
-          [document_field.field_id as string]: document_field.value,
+          [document_field.field_id as string]: {
+            value: document_field.value,
+            id: document_field.id,
+          },
         }));
       });
     });
   }, [documentId]);
 
   const saveFields = async () => {
-    const document_fields = [];
+    const document_fields_to_create = [];
+    const document_fields_to_update = [];
 
     for (const formValue in formValues) {
       const document_field = {
-        value: formValues[formValue],
+        value: formValues[formValue]?.value,
         document_id: documentId,
         field_id: formValue,
-      };
-      document_fields.push(document_field);
+      } as DocumentField;
+      console.log("formValues[formValue]?.id");
+      console.log(formValues[formValue]?.id);
+      if (formValues[formValue]?.id) {
+        document_field.id = formValues[formValue]?.id;
+        document_fields_to_update.push(document_field);
+      } else {
+        document_fields_to_create.push(document_field);
+      }
     }
 
-    await createDocumentFields(...document_fields);
+    if (document_fields_to_create.length > 0) {
+      await createDocumentFields(...document_fields_to_create);
+    }
+
+    if (document_fields_to_update.length > 0) {
+      await updateDocumentFields(...document_fields_to_update);
+    }
   };
 
   const handleChange = (field: Field, value: any) => {
-    setFormValues((prev) => ({ ...prev, [field.id as string]: value }));
+    setFormValues((prev) => ({
+      ...prev,
+      [field.id as string]: { ...prev[field.id as string], value: value },
+    }));
   };
 
   const nextStep = () => {
@@ -90,7 +110,7 @@ const Editor = ({
           <input
             key={field.name}
             type="text"
-            value={formValues[field.id as string] || ""}
+            value={formValues[field.id as string]?.value || ""}
             onChange={(e) => handleChange(field, e.target.value)}
             placeholder={field.label}
             required={field.required}
@@ -101,7 +121,7 @@ const Editor = ({
         return (
           <select
             key={field.name}
-            value={formValues[field.id as string] || ""}
+            value={formValues[field.id as string]?.value || ""}
             onChange={(e) => handleChange(field, e.target.value)}
             required={field.required}
             className="border p-2 w-full"
@@ -114,12 +134,13 @@ const Editor = ({
           </select>
         );
       case "checkbox":
+        const value = formValues[field.id as string]?.value === "true";
         return (
           <label key={field.name} className="flex items-center space-x-2">
             <input
               type="checkbox"
-              checked={formValues[field.id as string] || false}
-              onChange={(e) => handleChange(field, e.target.checked)}
+              checked={value}
+              onChange={(e) => handleChange(field, String(e.target.checked))}
             />
             <span>{field.label}</span>
           </label>
