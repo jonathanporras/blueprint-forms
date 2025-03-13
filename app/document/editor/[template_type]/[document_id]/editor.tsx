@@ -44,18 +44,21 @@ const Editor = ({
   const progress = ((currentStep + 1) / totalSteps) * 100;
 
   useEffect(() => {
-    fetchDocumentFields(documentId).then((data) => {
-      data.forEach((document_field) => {
-        setFormValues((prev) => ({
-          ...prev,
-          [document_field.field_id as string]: {
-            value: document_field.value,
-            id: document_field.id,
-          },
-        }));
-      });
-    });
+    fetchFields(documentId);
   }, [documentId]);
+
+  const fetchFields = async (documentId: Document["id"]) => {
+    const data = await fetchDocumentFields(documentId);
+    data.forEach((document_field) => {
+      setFormValues((prev) => ({
+        ...prev,
+        [document_field.field_id as string]: {
+          value: document_field.value,
+          id: document_field.id,
+        },
+      }));
+    });
+  };
 
   const saveFields = async () => {
     const document_fields_to_create = [];
@@ -83,6 +86,8 @@ const Editor = ({
     if (document_fields_to_update.length > 0) {
       await updateDocumentFields(...document_fields_to_update);
     }
+
+    await fetchFields(documentId);
   };
 
   const handleChange = (field: Field, value: any) => {
