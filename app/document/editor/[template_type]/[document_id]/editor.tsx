@@ -42,8 +42,7 @@ const Editor = ({
   const [currentStep, setCurrentStep] = useState(0);
   const [formValues, setFormValues] = useState<Record<string, any>>({});
   const progress = ((currentStep + 1) / totalSteps) * 100;
-  console.log("formValues");
-  console.log(formValues);
+
   useEffect(() => {
     fetchDocumentFields(documentId).then((data) => {
       data.forEach((document_field) => {
@@ -68,8 +67,7 @@ const Editor = ({
         document_id: documentId,
         field_id: formValue,
       } as DocumentField;
-      console.log("formValues[formValue]?.id");
-      console.log(formValues[formValue]?.id);
+
       if (formValues[formValue]?.id) {
         document_field.id = formValues[formValue]?.id;
         document_fields_to_update.push(document_field);

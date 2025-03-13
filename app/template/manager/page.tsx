@@ -26,9 +26,6 @@ const TemplateEditor: React.FC = () => {
     type: "",
   });
 
-  console.log("template:");
-  console.log(template);
-
   useEffect(() => {
     getUser().then((user) => {
       if (user) {
