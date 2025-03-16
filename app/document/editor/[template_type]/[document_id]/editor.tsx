@@ -157,13 +157,13 @@ const Editor = ({
     <div className="p-4">
       <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-4">
         <motion.div
-          className="h-2 bg-blue-500"
+          className="h-2 bg-[#1E3A5F]"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.9 }}
         />
       </div>
-      <h2 className="text-lg font-bold mb-2">
+      <h2 className="text-lg font-bold mb-2 mt-8">
         {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
       </h2>
       <motion.div
@@ -176,18 +176,18 @@ const Editor = ({
       >
         {steps[currentStep]?.fields?.map(renderField)}
       </motion.div>
-      <div className="mt-4 flex justify-between">
+      <div className="mt-4 flex justify-between mt-16">
         {currentStep > 0 && (
           <button onClick={prevStep} className="bg-gray-300 px-4 py-2 rounded">
             Back
           </button>
         )}
         {currentStep < steps.length - 1 ? (
-          <button onClick={nextStep} className="bg-blue-500 text-white px-4 py-2 rounded">
+          <button onClick={nextStep} className="bg-[#2FAF68] text-white px-4 py-2 rounded">
             Next
           </button>
         ) : (
-          <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+          <button type="submit" className="bg-[#2FAF68] text-white px-4 py-2 rounded">
             Submit
           </button>
         )}
