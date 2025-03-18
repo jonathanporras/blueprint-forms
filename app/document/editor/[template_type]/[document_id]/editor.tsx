@@ -1,5 +1,5 @@
 "use client";
-import { Field, Section } from "@/app/template/[templateId]/page";
+import { Field } from "@/app/template/[templateId]/page";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Document, DocumentField } from "./page";
@@ -28,13 +28,13 @@ export type FormData = {
   }[];
 };
 
-const Editor = ({
+export default function Editor({
   formData,
   documentId,
 }: {
   formData: FormData;
   documentId: Document["id"];
-}) => {
+}) {
   const steps = formData.sections.flatMap((section) =>
     section.steps?.map((step) => ({ ...step, sectionName: section.name }))
   );
@@ -53,8 +53,7 @@ const Editor = ({
       setFormValues((prev) => ({
         ...prev,
         [document_field.field_id as string]: {
-          value: document_field.value,
-          id: document_field.id,
+          ...document_field,
         },
       }));
     });
@@ -107,6 +106,13 @@ const Editor = ({
   };
 
   const renderField = (field: Field) => {
+    if (field.dependent_field_id) {
+      const dependentFieldValue = formValues[field.dependent_field_id]?.value;
+      if (dependentFieldValue !== field.dependent_field_value) {
+        return null; // Do not render if the condition is not met
+      }
+    }
+
     switch (field.type) {
       case "text":
         return (
@@ -194,6 +200,4 @@ const Editor = ({
       </div>
     </div>
   );
-};
-
-export default Editor;
+}

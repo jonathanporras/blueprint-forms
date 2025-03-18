@@ -44,8 +44,6 @@ export default function SectionsEditor({ templateId }: { templateId: string }) {
       name: DEFAULT_SECTION_NAME,
       position: sections.length + 1,
     };
-    console.log(newSection);
-    console.log("newSection");
 
     const data = await addSection(newSection);
     if (data) {

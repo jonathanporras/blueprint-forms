@@ -234,6 +234,17 @@ export async function fetchFields(step_id: string) {
   return data;
 }
 
+export async function fetchField(id: string) {
+  const { data, error } = await supabase.from("fields").select().eq("id", id);
+
+  if (error) {
+    console.error("Error fetching a field:", error);
+    throw error;
+  }
+
+  return data;
+}
+
 export async function updateField(field: Field) {
   const { data, error } = await supabase.from("fields").update(field).eq("id", field.id);
 
