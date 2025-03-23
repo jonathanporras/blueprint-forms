@@ -319,7 +319,7 @@ export async function updateDocumentFields(...document_fields: DocumentField[]) 
 export async function fetchDocumentFields(document_id: Document["id"]) {
   const { data, error } = await supabase
     .from("document_fields")
-    .select()
+    .select("id, value, field_id, document_id, fields(name)")
     .eq("document_id", document_id);
 
   if (error) {

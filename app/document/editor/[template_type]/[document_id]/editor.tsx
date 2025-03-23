@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Document, DocumentField } from "./page";
 import { createDocumentFields, fetchDocumentFields, updateDocumentFields } from "@/utils/api";
+import { useAtom } from "jotai";
+import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
 
 export type FormData = {
   id: any;
@@ -40,7 +42,7 @@ export default function Editor({
   );
   const totalSteps = steps.length;
   const [currentStep, setCurrentStep] = useState(0);
-  const [formValues, setFormValues] = useState<Record<string, any>>({});
+  const [formValues, setFormValues] = useAtom<Record<string, any>>(documentFieldsAtom);
   const progress = ((currentStep + 1) / totalSteps) * 100;
 
   useEffect(() => {
@@ -49,10 +51,10 @@ export default function Editor({
 
   const fetchFields = async (documentId: Document["id"]) => {
     const data = await fetchDocumentFields(documentId);
-    data.forEach((document_field) => {
+    data.forEach((document_field: any) => {
       setFormValues((prev) => ({
         ...prev,
-        [document_field.field_id as string]: {
+        [document_field.fields?.name]: {
           ...document_field,
         },
       }));
@@ -67,7 +69,7 @@ export default function Editor({
       const document_field = {
         value: formValues[formValue]?.value,
         document_id: documentId,
-        field_id: formValue,
+        field_id: formValues[formValue]?.field_id,
       } as DocumentField;
 
       if (formValues[formValue]?.id) {
@@ -92,7 +94,7 @@ export default function Editor({
   const handleChange = (field: Field, value: any) => {
     setFormValues((prev) => ({
       ...prev,
-      [field.id as string]: { ...prev[field.id as string], value: value },
+      [field.name as string]: { ...prev[field.name as string], value: value },
     }));
   };
 
@@ -107,7 +109,7 @@ export default function Editor({
 
   const renderField = (field: Field) => {
     if (field.dependent_field_id) {
-      const dependentFieldValue = formValues[field.dependent_field_id]?.value;
+      const dependentFieldValue = formValues[field.name]?.value;
       if (dependentFieldValue !== field.dependent_field_value) {
         return null; // Do not render if the condition is not met
       }
@@ -119,7 +121,7 @@ export default function Editor({
           <input
             key={field.name}
             type="text"
-            value={formValues[field.id as string]?.value || ""}
+            value={formValues[field.name]?.value || ""}
             onChange={(e) => handleChange(field, e.target.value)}
             placeholder={field.label}
             required={field.required}
@@ -130,7 +132,7 @@ export default function Editor({
         return (
           <select
             key={field.name}
-            value={formValues[field.id as string]?.value || ""}
+            value={formValues[field.name]?.value || ""}
             onChange={(e) => handleChange(field, e.target.value)}
             required={field.required}
             className="border p-2 w-full"
@@ -143,7 +145,7 @@ export default function Editor({
           </select>
         );
       case "checkbox":
-        const value = formValues[field.id as string]?.value === "true";
+        const value = formValues[field.name]?.value === "true";
         return (
           <label key={field.name} className="flex items-center space-x-2">
             <input
@@ -160,7 +162,7 @@ export default function Editor({
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-1/2">
       <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-4">
         <motion.div
           className="h-2 bg-[#1E3A5F]"
@@ -169,9 +171,6 @@ export default function Editor({
           transition={{ duration: 0.9 }}
         />
       </div>
-      <h2 className="text-lg font-bold mb-2 mt-8">
-        {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
-      </h2>
       <motion.div
         key={currentStep}
         initial={{ opacity: 0 }}
@@ -180,6 +179,9 @@ export default function Editor({
         transition={{ duration: 0.9 }}
         className="space-y-4"
       >
+        <h2 className="text-lg font-bold mb-2 mt-8">
+          {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
+        </h2>
         {steps[currentStep]?.fields?.map(renderField)}
       </motion.div>
       <div className="mt-4 flex justify-between mt-16">
