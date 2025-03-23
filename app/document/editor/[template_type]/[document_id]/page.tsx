@@ -25,7 +25,7 @@ const DocumentEditor = async (props: { params: ParamsProps }) => {
   return (
     <div className="flex">
       <Editor formData={templateData} documentId={document_id} />
-      <DocumentPreview documentId={document_id} />
+      <DocumentPreview />
     </div>
   );
 };
