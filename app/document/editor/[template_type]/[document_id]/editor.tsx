@@ -118,15 +118,18 @@ export default function Editor({
     switch (field.type) {
       case "text":
         return (
-          <input
-            key={field.name}
-            type="text"
-            value={formValues[field.name]?.value || ""}
-            onChange={(e) => handleChange(field, e.target.value)}
-            placeholder={field.label}
-            required={field.required}
-            className="border p-2 w-full"
-          />
+          <>
+            <p className="font-light text-xs">{field?.label}</p>
+            <input
+              key={field.name}
+              type="text"
+              value={formValues[field.name]?.value || ""}
+              onChange={(e) => handleChange(field, e.target.value)}
+              placeholder={field.label}
+              required={field.required}
+              className="border p-2 w-full max-w-md"
+            />
+          </>
         );
       case "dropdown":
         return (
@@ -135,7 +138,7 @@ export default function Editor({
             value={formValues[field.name]?.value || ""}
             onChange={(e) => handleChange(field, e.target.value)}
             required={field.required}
-            className="border p-2 w-full"
+            className="border p-2 w-full max-w-md"
           >
             {field.options?.map((option) => (
               <option key={option} value={option}>
@@ -162,43 +165,45 @@ export default function Editor({
   };
 
   return (
-    <div className="p-4 w-1/2">
-      <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-4">
+    <div className="p-4 w-1/2 max-w-xl">
+      <div className="">
+        <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-16">
+          <motion.div
+            className="h-2 bg-[#1E3A5F]"
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.9 }}
+          />
+        </div>
         <motion.div
-          className="h-2 bg-[#1E3A5F]"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
+          key={currentStep}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.9 }}
-        />
-      </div>
-      <motion.div
-        key={currentStep}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0, x: -50 }}
-        transition={{ duration: 0.9 }}
-        className="space-y-4"
-      >
-        <h2 className="text-lg font-bold mb-2 mt-8">
-          {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
-        </h2>
-        {steps[currentStep]?.fields?.map(renderField)}
-      </motion.div>
-      <div className="mt-4 flex justify-between mt-16">
-        {currentStep > 0 && (
-          <button onClick={prevStep} className="bg-gray-300 px-4 py-2 rounded">
-            Back
-          </button>
-        )}
-        {currentStep < steps.length - 1 ? (
-          <button onClick={nextStep} className="bg-[#2FAF68] text-white px-4 py-2 rounded">
-            Next
-          </button>
-        ) : (
-          <button type="submit" className="bg-[#2FAF68] text-white px-4 py-2 rounded">
-            Submit
-          </button>
-        )}
+          className="space-y-4 mb-16"
+        >
+          <h2 className="text-lg font-bold mb-6 mt-6">
+            {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
+          </h2>
+          {steps[currentStep]?.fields?.map(renderField)}
+        </motion.div>
+        <div className="mt-4 flex justify-end mt-16">
+          {currentStep > 0 && (
+            <button onClick={prevStep} className="bg-gray-300 px-4 py-2 px-2 mr-4 rounded">
+              Back
+            </button>
+          )}
+          {currentStep < steps.length - 1 ? (
+            <button onClick={nextStep} className="bg-[#2FAF68] text-white px-4 py-2 rounded">
+              Continue
+            </button>
+          ) : (
+            <button type="submit" className="bg-[#2FAF68] text-white px-4 py-2 rounded">
+              Submit
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

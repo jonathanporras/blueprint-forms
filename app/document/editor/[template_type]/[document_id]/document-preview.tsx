@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
-import { Button } from "@/components/ui/button";
 import { usePDF } from "react-to-pdf";
 
 export default function DocumentPreview() {
@@ -10,11 +9,11 @@ export default function DocumentPreview() {
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
 
   return (
-    <div className="w-1/2">
+    <div className="w-1/2 max-w-xl">
       <div className="flex justify-end">
-        <Button variant="outline" onClick={() => toPDF()}>
+        <button className="bg-[#2FAF68] text-white px-4 py-2 rounded" onClick={() => toPDF()}>
           Export
-        </Button>
+        </button>
       </div>
       <motion.div
         initial={{ opacity: 0 }}
@@ -22,11 +21,20 @@ export default function DocumentPreview() {
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 1 }}
       >
-        <div ref={targetRef}>
-          <p>{formValues["landlord-name"]?.value}</p>
-          <p>{formValues["tenant-name"]?.value}</p>
-          <br />
-          <br />
+        <div className="mt-4 rounded-md">
+          <div
+            style={{
+              fontFamily: "Times New Roman, Times, serif",
+            }}
+            className="bg-[#fff] border border-gray-200 px-4 py-5 rounded-md"
+          >
+            <div ref={targetRef}>
+              <p>{formValues["landlord-name"]?.value}</p>
+              <p>{formValues["tenant-name"]?.value}</p>
+              <br />
+              <br />
+            </div>
+          </div>
         </div>
       </motion.div>
     </div>

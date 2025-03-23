@@ -23,7 +23,7 @@ const DocumentEditor = async (props: { params: ParamsProps }) => {
   const templateData = await fetchAllTemplateData(template.id);
 
   return (
-    <div className="flex">
+    <div className="flex justify-center gap-16">
       <Editor formData={templateData} documentId={document_id} />
       <DocumentPreview />
     </div>
