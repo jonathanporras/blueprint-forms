@@ -9,7 +9,7 @@ export default function DocumentPreview() {
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
 
   return (
-    <div className="w-1/2 max-w-xl">
+    <div className="w-1/2">
       <div className="flex justify-end">
         <button className="bg-[#2FAF68] text-white px-4 py-2 rounded" onClick={() => toPDF()}>
           Export
@@ -25,10 +25,21 @@ export default function DocumentPreview() {
           <div
             style={{
               fontFamily: "Times New Roman, Times, serif",
+              fontSize: "14px",
             }}
             className="bg-[#fff] border border-gray-200 px-4 py-5 rounded-md"
           >
             <div ref={targetRef}>
+              <h1
+                style={{
+                  textAlign: "center",
+                  fontSize: "21px",
+                  fontStyle: "italic",
+                  fontWeight: "400",
+                }}
+              >
+                Residential Lease Agreement
+              </h1>
               <p>{formValues["landlord-name"]?.value}</p>
               <p>{formValues["tenant-name"]?.value}</p>
               <br />

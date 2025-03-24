@@ -109,8 +109,11 @@ export default function Editor({
 
   const renderField = (field: Field) => {
     if (field.dependent_field_id) {
-      const dependentFieldValue = formValues[field.name]?.value;
-      if (dependentFieldValue !== field.dependent_field_value) {
+      const dependentField = Object.values(formValues).find(
+        (formValue) => formValue.field_id === field.dependent_field_id
+      );
+
+      if (dependentField.value !== field.dependent_field_value) {
         return null; // Do not render if the condition is not met
       }
     }
@@ -119,7 +122,7 @@ export default function Editor({
       case "text":
         return (
           <div key={field.name}>
-            <p className="font-light text-xs">{field?.label}</p>
+            <p className="font-light text-sm mb-1">{field?.label}</p>
             <input
               type="text"
               value={formValues[field.name]?.value || ""}
@@ -133,7 +136,7 @@ export default function Editor({
       case "dropdown":
         return (
           <div key={field.name}>
-            <p className="font-light text-xs">{field?.label}</p>
+            <p className="font-light text-sm mb-1">{field?.label}</p>
             <select
               value={formValues[field.name]?.value || ""}
               onChange={(e) => handleChange(field, e.target.value)}
@@ -151,8 +154,7 @@ export default function Editor({
       case "checkbox":
         const value = formValues[field.name]?.value === "true";
         return (
-          <label key={field.name} className="flex items-center space-x-2">
-            <p className="font-light text-xs">{field?.label}</p>
+          <label key={field.name} className="flex items-center space-x-2 font-light">
             <input
               type="checkbox"
               checked={value}
