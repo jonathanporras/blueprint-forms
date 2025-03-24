@@ -118,10 +118,9 @@ export default function Editor({
     switch (field.type) {
       case "text":
         return (
-          <>
+          <div key={field.name}>
             <p className="font-light text-xs">{field?.label}</p>
             <input
-              key={field.name}
               type="text"
               value={formValues[field.name]?.value || ""}
               onChange={(e) => handleChange(field, e.target.value)}
@@ -129,28 +128,31 @@ export default function Editor({
               required={field.required}
               className="border p-2 w-full max-w-md"
             />
-          </>
+          </div>
         );
       case "dropdown":
         return (
-          <select
-            key={field.name}
-            value={formValues[field.name]?.value || ""}
-            onChange={(e) => handleChange(field, e.target.value)}
-            required={field.required}
-            className="border p-2 w-full max-w-md"
-          >
-            {field.options?.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
+          <div key={field.name}>
+            <p className="font-light text-xs">{field?.label}</p>
+            <select
+              value={formValues[field.name]?.value || ""}
+              onChange={(e) => handleChange(field, e.target.value)}
+              required={field.required}
+              className="border p-2 w-full max-w-md"
+            >
+              {field.options?.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
         );
       case "checkbox":
         const value = formValues[field.name]?.value === "true";
         return (
           <label key={field.name} className="flex items-center space-x-2">
+            <p className="font-light text-xs">{field?.label}</p>
             <input
               type="checkbox"
               checked={value}
