@@ -9,6 +9,7 @@ const config = {
     "./src/**/*.{ts,tsx}",
     "./document/editor/**/*.{ts,tsx}",
     "./template/**/*.{ts,tsx}",
+    "./pricing/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
