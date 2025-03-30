@@ -80,10 +80,10 @@ export default async function Pricing() {
           </div>
         ))}
       </div>
-      <div className="text-center mt-20">
+      <div className="text-center mx-auto mt-20 w-fill max-w-2xl">
         <p>
-          "Thank you so much, Blueprint's service made creating my legal documents so much
-          simpler."
+          "I truly appreciate Blueprint—their service took the hassle out of creating my legal
+          documents and made the whole process effortless!"
         </p>
         <p>- Paul N., Account Executive</p>
         <img
