@@ -54,3 +54,15 @@ export async function createDocument({ template_type, name }: Document) {
 
   return data[0];
 }
+
+export async function fetchDocuments(user_id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("documents").select("*").eq("user_id", user_id);
+
+  if (error) {
+    console.error("Error fetching template:", error);
+    throw error;
+  }
+
+  return data;
+}

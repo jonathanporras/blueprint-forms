@@ -8,6 +8,7 @@ export interface Document {
   id?: string;
   name: string;
   template_type: string;
+  user_id?: string;
 }
 
 export interface DocumentField {

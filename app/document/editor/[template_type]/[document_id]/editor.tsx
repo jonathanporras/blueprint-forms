@@ -51,6 +51,7 @@ export default function Editor({
 
   const fetchFields = async (documentId: Document["id"]) => {
     const data = await fetchDocumentFields(documentId);
+
     data.forEach((document_field: any) => {
       setFormValues((prev) => ({
         ...prev,
@@ -94,7 +95,11 @@ export default function Editor({
   const handleChange = (field: Field, value: any) => {
     setFormValues((prev) => ({
       ...prev,
-      [field.name as string]: { ...prev[field.name as string], value: value },
+      [field.name as string]: {
+        ...prev[field.name as string],
+        field_id: field.id,
+        value: value,
+      },
     }));
   };
 
@@ -113,7 +118,7 @@ export default function Editor({
         (formValue) => formValue.field_id === field.dependent_field_id
       );
 
-      if (dependentField.value !== field.dependent_field_value) {
+      if (dependentField?.value !== field.dependent_field_value) {
         return null; // Do not render if the condition is not met
       }
     }
