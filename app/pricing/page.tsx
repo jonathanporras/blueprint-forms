@@ -1,5 +1,6 @@
 import React from "react";
 import { Check } from "lucide-react";
+import Image from "next/image";
 
 interface PricingPlan {
   name: string;
@@ -78,6 +79,18 @@ export default async function Pricing() {
             </button>
           </div>
         ))}
+      </div>
+      <div className="text-center mt-20">
+        <p>
+          "Thank you so much, Blueprint's service made creating my legal documents so much
+          simpler."
+        </p>
+        <p>- Paul N., Account Executive</p>
+        <img
+          className="block mx-auto mt-8"
+          alt="Trusted Business Seals"
+          src="/images/allTheSeals-small.png"
+        />
       </div>
     </div>
   );

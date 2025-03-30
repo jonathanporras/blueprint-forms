@@ -171,7 +171,7 @@ export default function Editor({
   return (
     <div className="p-4 w-1/2 max-w-xl">
       <div className="">
-        <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-16">
+        <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-8">
           <motion.div
             className="h-2 bg-[#1E3A5F]"
             initial={{ width: 0 }}
@@ -187,7 +187,7 @@ export default function Editor({
           transition={{ duration: 0.9 }}
           className="space-y-4 mb-16"
         >
-          <h2 className="text-lg font-bold mb-6 mt-6">
+          <h2 className="text-lg font-bold mb-6">
             {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
           </h2>
           {steps[currentStep]?.fields?.map(renderField)}
