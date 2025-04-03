@@ -16,6 +16,7 @@ export type FormData = {
     steps: {
       name: any;
       position: any;
+      heading: any;
       fields: {
         name: any;
         label: any;
@@ -172,9 +173,9 @@ export default function Editor({
         return null;
     }
   };
-
+  console.log(steps[currentStep]);
   return (
-    <div className="p-4 w-1/2 max-w-xl">
+    <div className="p-4 w-1/2">
       <div className="">
         <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-8">
           <motion.div
@@ -195,6 +196,7 @@ export default function Editor({
           <h2 className="text-lg font-bold mb-6">
             {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
           </h2>
+          <h3 className="text-lg font-light mb-6">{steps[currentStep]?.heading}</h3>
           {steps[currentStep]?.fields?.map(renderField)}
         </motion.div>
         <div className="mt-4 flex justify-end mt-16">
@@ -204,11 +206,17 @@ export default function Editor({
             </button>
           )}
           {currentStep < steps.length - 1 ? (
-            <button onClick={nextStep} className="bg-[#2FAF68] text-white px-4 py-2 rounded">
+            <button
+              onClick={nextStep}
+              className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
+            >
               Continue
             </button>
           ) : (
-            <button type="submit" className="bg-[#2FAF68] text-white px-4 py-2 rounded">
+            <button
+              type="submit"
+              className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
+            >
               Submit
             </button>
           )}

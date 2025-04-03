@@ -11,7 +11,10 @@ export default function DocumentPreview() {
   return (
     <div className="w-1/2">
       <div className="flex justify-end">
-        <button className="bg-[#2FAF68] text-white px-4 py-2 rounded" onClick={() => toPDF()}>
+        <button
+          className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
+          onClick={() => toPDF()}
+        >
           Export
         </button>
       </div>
