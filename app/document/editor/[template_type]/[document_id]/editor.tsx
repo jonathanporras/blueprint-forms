@@ -6,6 +6,8 @@ import { Document, DocumentField } from "./page";
 import { createDocumentFields, fetchDocumentFields, updateDocumentFields } from "@/utils/api";
 import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export type FormData = {
   id: any;
@@ -133,7 +135,6 @@ export default function Editor({
               type="text"
               value={formValues[field.name]?.value || ""}
               onChange={(e) => handleChange(field, e.target.value)}
-              placeholder={field.label}
               required={field.required}
               className="border p-2 w-full max-w-md"
             />
@@ -168,6 +169,20 @@ export default function Editor({
             />
             <span>{field.label}</span>
           </label>
+        );
+      case "date":
+        return (
+          <div key={field.name}>
+            <p className="font-light text-sm mb-1">{field?.label}</p>
+            <DatePicker
+              id="date-picker"
+              selected={formValues[field.name]?.value}
+              onChange={(date) => handleChange(field, date)}
+              dateFormat="MM/dd/yyyy"
+              className="border p-2 rounded-md w-48"
+              placeholderText="Pick a date"
+            />
+          </div>
         );
       default:
         return null;
