@@ -49,7 +49,6 @@ export default function RootLayout({
               <div className="flex flex-col p-5 min-h-[400px] w-full align-center max-w-7xl">
                 {children}
               </div>
-
               <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
                 <ThemeSwitcher />
               </footer>

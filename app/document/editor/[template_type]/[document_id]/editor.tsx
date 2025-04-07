@@ -8,7 +8,7 @@ import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export type FormData = {
   id: any;
@@ -49,7 +49,6 @@ export default function Editor({
   const [currentStep, setCurrentStep] = useState(0);
   const [formValues, setFormValues] = useAtom<Record<string, any>>(documentFieldsAtom);
   const progress = ((currentStep + 1) / totalSteps) * 100;
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
