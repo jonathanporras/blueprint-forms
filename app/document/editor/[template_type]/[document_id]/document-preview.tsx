@@ -64,9 +64,9 @@ export default function DocumentPreview() {
                 residential premises located at{" "}
                 {renderDocumentField(formValues["property_address"]?.value)},{" "}
                 {formValues["property_unit"]?.value &&
-                  `${renderDocumentField(formValues["property_unit"]?.value)}, `}
-                {renderDocumentField(formValues["property_city"]?.value)},
-                {renderDocumentField(formValues["property_state"]?.value)},
+                  ` ${renderDocumentField(formValues["property_unit"]?.value)}, `}
+                {renderDocumentField(formValues["property_city"]?.value)},{" "}
+                {renderDocumentField(formValues["property_state"]?.value)},{" "}
                 {renderDocumentField(formValues["property_zip"]?.value)} in{" "}
                 {renderDocumentField(formValues["property_county"]?.value)} County (hereinafter
                 referred to as the "Property"). Included within this lease are any furnishings

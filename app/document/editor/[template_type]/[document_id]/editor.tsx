@@ -42,9 +42,17 @@ export default function Editor({
   documentId: Document["id"];
 }) {
   const router = useRouter();
-  const steps = formData.sections.flatMap((section) =>
+  let steps = formData.sections.flatMap((section) =>
     section.steps?.map((step) => ({ ...step, sectionName: section.name }))
   );
+  steps.sort((a, b) => {
+    // If sectionNames are the same: compare by position
+    return a.sectionName === b.sectionName ? a.position - b.position : 0;
+  });
+
+  steps.forEach((step) => {
+    step.fields.sort((a, b) => a.position - b.position);
+  });
   const totalSteps = steps.length;
   const [currentStep, setCurrentStep] = useState(0);
   const [formValues, setFormValues] = useAtom<Record<string, any>>(documentFieldsAtom);
@@ -141,7 +149,7 @@ export default function Editor({
       case "text":
         return (
           <div key={field.name}>
-            <p className="font-light text-sm mb-1">{field?.label}</p>
+            <p className="font-light text-sm mb-1 mt-4">{field?.label}</p>
             <input
               type="text"
               value={formValues[field.name]?.value || ""}
@@ -154,7 +162,7 @@ export default function Editor({
       case "dropdown":
         return (
           <div key={field.name}>
-            <p className="font-light text-sm mb-1">{field?.label}</p>
+            <p className="font-light text-sm mb-1 mt-4">{field?.label}</p>
             <select
               value={formValues[field.name]?.value || ""}
               onChange={(e) => handleChange(field, e.target.value)}
@@ -184,7 +192,7 @@ export default function Editor({
       case "date":
         return (
           <div key={field.name}>
-            <p className="font-light text-sm mb-1">{field?.label}</p>
+            <p className="font-light text-sm mt-4">{field?.label}</p>
             <DatePicker
               id="date-picker"
               selected={formValues[field.name]?.value}
@@ -216,9 +224,9 @@ export default function Editor({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.9 }}
-          className="space-y-4 mb-16"
+          className="space-y mb-16"
         >
-          <h2 className="text-sm font-regular mb-6">
+          <h2 className="text-sm font-regular mb-8">
             {steps[currentStep]?.sectionName} <span className="px-1">&#8594;</span>{" "}
             {steps[currentStep]?.name}
           </h2>
