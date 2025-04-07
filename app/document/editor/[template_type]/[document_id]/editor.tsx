@@ -188,7 +188,6 @@ export default function Editor({
         return null;
     }
   };
-  console.log(steps[currentStep]);
   return (
     <div className="p-4 w-1/2">
       <div className="">
@@ -230,9 +229,12 @@ export default function Editor({
           ) : (
             <button
               type="submit"
+              onClick={async () => {
+                await saveFields();
+              }}
               className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
             >
-              Submit
+              Export
             </button>
           )}
         </div>

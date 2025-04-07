@@ -25,6 +25,7 @@ export async function fetchAllTemplateData(template_id: string) {
       "id, name, sections(name, position, steps(name, position, heading, fields(id, name, label, type, position, required, options, dependent_field_id, dependent_field_value)))"
     )
     .eq("id", template_id)
+    .order("position", { ascending: true, referencedTable: "sections" })
     .single();
 
   if (error) {
