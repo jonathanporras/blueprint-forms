@@ -192,7 +192,7 @@ export default function Editor({
       case "date":
         return (
           <div key={field.name}>
-            <p className="font-light text-sm mt-4">{field?.label}</p>
+            <p className="font-light text-sm mb-1 mt-4">{field?.label}</p>
             <DatePicker
               id="date-picker"
               selected={formValues[field.name]?.value}
@@ -208,7 +208,7 @@ export default function Editor({
     }
   };
   return (
-    <div className="px-4 pt-2 w-1/2">
+    <div className="px-8 my-8 w-1/2">
       <div className="">
         <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-2">
           <motion.div

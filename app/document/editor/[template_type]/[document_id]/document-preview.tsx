@@ -10,7 +10,7 @@ export default function DocumentPreview() {
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
 
   return (
-    <div className="w-1/2">
+    <div className="w-1/2 px-8 py-6 bg-gray-100">
       <div className="flex justify-end">
         <button
           id="export-button"
@@ -26,13 +26,13 @@ export default function DocumentPreview() {
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 1 }}
       >
-        <div className="mt-4 rounded-md">
+        <div className="my-4">
           <div
             style={{
               fontFamily: "Times New Roman, Times, serif",
               fontSize: "14px",
             }}
-            className="bg-[#fff] border border-gray-200 px-4 py-5 rounded-md"
+            className="bg-[#fff] border border-gray-200 px-4 py-5 shadow-sm"
           >
             <div ref={targetRef}>
               <h1
