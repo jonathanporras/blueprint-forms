@@ -8,6 +8,7 @@ import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 export type FormData = {
   id: any;
@@ -40,6 +41,7 @@ export default function Editor({
   formData: FormData;
   documentId: Document["id"];
 }) {
+  const router = useRouter();
   const steps = formData.sections.flatMap((section) =>
     section.steps?.map((step) => ({ ...step, sectionName: section.name }))
   );
@@ -47,9 +49,13 @@ export default function Editor({
   const [currentStep, setCurrentStep] = useState(0);
   const [formValues, setFormValues] = useAtom<Record<string, any>>(documentFieldsAtom);
   const progress = ((currentStep + 1) / totalSteps) * 100;
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+    const stepFromQuery = searchParams.get("step");
     fetchFields(documentId);
+    setCurrentStep(Number(stepFromQuery));
   }, [documentId]);
 
   const fetchFields = async (documentId: Document["id"]) => {
@@ -106,13 +112,19 @@ export default function Editor({
     }));
   };
 
-  const nextStep = () => {
+  const nextStep = async () => {
     if (currentStep < steps.length - 1) setCurrentStep(currentStep + 1);
-    saveFields();
+    await saveFields();
+    const params = new URLSearchParams(searchParams);
+    params.set("step", (currentStep + 1).toString());
+    router.replace(`?${params.toString()}`);
   };
 
   const prevStep = () => {
     if (currentStep > 0) setCurrentStep(currentStep - 1);
+    const params = new URLSearchParams(searchParams);
+    params.set("step", (currentStep - 1).toString());
+    router.replace(`?${params.toString()}`);
   };
 
   const renderField = (field: Field) => {
