@@ -142,7 +142,7 @@ export default function Editor({
       case "text":
         return (
           <div key={field.name}>
-            <p className="font-light mb-1">{field?.label}</p>
+            <p className="font-light text-sm mb-1">{field?.label}</p>
             <input
               type="text"
               value={formValues[field.name]?.value || ""}
@@ -155,7 +155,7 @@ export default function Editor({
       case "dropdown":
         return (
           <div key={field.name}>
-            <p className="font-light mb-1">{field?.label}</p>
+            <p className="font-light text-sm mb-1">{field?.label}</p>
             <select
               value={formValues[field.name]?.value || ""}
               onChange={(e) => handleChange(field, e.target.value)}
@@ -173,7 +173,7 @@ export default function Editor({
       case "checkbox":
         const value = formValues[field.name]?.value === "true";
         return (
-          <label key={field.name} className="flex items-center space-x-2 font-light">
+          <label key={field.name} className="flex items-center space-x-2 font-light text-sm">
             <input
               type="checkbox"
               checked={value}
@@ -185,7 +185,7 @@ export default function Editor({
       case "date":
         return (
           <div key={field.name}>
-            <p className="font-light mb-1">{field?.label}</p>
+            <p className="font-light text-sm mb-1">{field?.label}</p>
             <DatePicker
               id="date-picker"
               selected={formValues[field.name]?.value}
