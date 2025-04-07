@@ -142,7 +142,7 @@ export default function Editor({
       case "text":
         return (
           <div key={field.name}>
-            <p className="font-light text-sm mb-1">{field?.label}</p>
+            <p className="font-light mb-1">{field?.label}</p>
             <input
               type="text"
               value={formValues[field.name]?.value || ""}
@@ -155,7 +155,7 @@ export default function Editor({
       case "dropdown":
         return (
           <div key={field.name}>
-            <p className="font-light text-sm mb-1">{field?.label}</p>
+            <p className="font-light mb-1">{field?.label}</p>
             <select
               value={formValues[field.name]?.value || ""}
               onChange={(e) => handleChange(field, e.target.value)}
@@ -185,7 +185,7 @@ export default function Editor({
       case "date":
         return (
           <div key={field.name}>
-            <p className="font-light text-sm mb-1">{field?.label}</p>
+            <p className="font-light mb-1">{field?.label}</p>
             <DatePicker
               id="date-picker"
               selected={formValues[field.name]?.value}
@@ -201,9 +201,9 @@ export default function Editor({
     }
   };
   return (
-    <div className="p-4 w-1/2">
+    <div className="px-4 pt-2 w-1/2">
       <div className="">
-        <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-8">
+        <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-2">
           <motion.div
             className="h-2 bg-[#1E3A5F]"
             initial={{ width: 0 }}
@@ -219,10 +219,11 @@ export default function Editor({
           transition={{ duration: 0.9 }}
           className="space-y-4 mb-16"
         >
-          <h2 className="text-lg font-bold mb-6">
-            {steps[currentStep]?.sectionName} - {steps[currentStep]?.name}
+          <h2 className="text-sm font-regular mb-6">
+            {steps[currentStep]?.sectionName} <span className="px-1">&#8594;</span>{" "}
+            {steps[currentStep]?.name}
           </h2>
-          <h3 className="text-lg font-light mb-6">{steps[currentStep]?.heading}</h3>
+          <h3 className="text-2xl font-light mb-6">{steps[currentStep]?.heading}</h3>
           {steps[currentStep]?.fields?.map(renderField)}
         </motion.div>
         <div className="mt-4 flex justify-end mt-16">
