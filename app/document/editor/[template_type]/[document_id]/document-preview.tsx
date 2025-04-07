@@ -69,10 +69,10 @@ export default function DocumentPreview() {
                 {renderDocumentField(formValues["property_state"]?.value)},{" "}
                 {renderDocumentField(formValues["property_zip"]?.value)} in{" "}
                 {renderDocumentField(formValues["property_county"]?.value)} County (hereinafter
-                referred to as the "Property"). Included within this lease are any furnishings
-                and appliances provided by the Landlord, which are as follows:
-                [included_furnishings]. The Tenant acknowledges receipt of these items and
-                agrees to maintain them in good condition throughout the duration of the lease.
+                referred to as the "Property").{" "}
+                {renderDocumentField(formValues["is_furniture_included"]?.value) === "true"
+                  ? `Included within this lease are any furnishings and appliances provided by the Landlord, which are as follows: ${renderDocumentField(formValues["list_of_furniture"]?.value)}. The Tenant acknowledges receipt of these items and agrees to maintain them in good condition throughout the duration of the lease.`
+                  : null}
               </p>
               <br />
               <br />
