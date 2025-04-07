@@ -26,7 +26,7 @@ export default function DocumentPreview() {
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 1 }}
       >
-        <div className="my-4">
+        <div className="my-4 select-none">
           <div
             style={{
               fontFamily: "Times New Roman, Times, serif",
@@ -42,10 +42,11 @@ export default function DocumentPreview() {
                   fontStyle: "italic",
                   fontWeight: "400",
                 }}
+                className="pb-8"
               >
                 Residential Lease Agreement
               </h1>
-              <p>
+              <p className="pb-4" style={{ textIndent: "32px" }}>
                 This Lease Agreement (hereinafter referred to as the "Agreement" or the
                 "Lease") is entered into on{" "}
                 {formValues["lease_date"]?.value &&
@@ -59,7 +60,7 @@ export default function DocumentPreview() {
                 the designated property to the Tenant, and both parties willingly enter into
                 this contract with the intention of upholding its terms.
               </p>
-              <p>
+              <p className="pb-4" style={{ textIndent: "32px" }}>
                 DESCRIPTION OF PROPERTY: The Landlord agrees to lease to the Tenant the
                 residential premises located at{" "}
                 {renderDocumentField(formValues["property_address"]?.value)},{" "}
@@ -73,6 +74,25 @@ export default function DocumentPreview() {
                 {renderDocumentField(formValues["is_furniture_included"]?.value) === "true"
                   ? `Included within this lease are any furnishings and appliances provided by the Landlord, which are as follows: ${renderDocumentField(formValues["list_of_furniture"]?.value)}. The Tenant acknowledges receipt of these items and agrees to maintain them in good condition throughout the duration of the lease.`
                   : null}
+              </p>
+              <p className="pb-4" style={{ textIndent: "32px" }}>
+                DURATION OF LEASE: The lease term shall commence on{" "}
+                {formValues["start_date"]?.value &&
+                  renderDocumentField(
+                    format(formValues["start_date"]?.value, "MMMM d, yyyy")
+                  )}{" "}
+                and will continue in effect until{" "}
+                {formValues["end_date"]?.value &&
+                  renderDocumentField(format(formValues["end_date"]?.value, "MMMM d, yyyy"))}
+                , unless otherwise terminated earlier in accordance with the provisions set
+                forth in this Agreement. The Tenant shall vacate the premises upon the
+                expiration of the lease unless a renewal agreement is reached between both
+                parties. the Landlord accepts further rent from the Tenant (other than past due
+                rent), in which case a month-to-month tenancy shall be created which either
+                party may terminate by a thirty (30) day written notice. In the event a
+                month-to-month tenancy results, rent shall be at a rate agreed to by the
+                Landlord and the Tenant, or as allowed by law; all other terms and conditions
+                of this Agreement shall remain in full force and effect.
               </p>
               <br />
               <br />
