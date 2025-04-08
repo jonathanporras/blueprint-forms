@@ -209,7 +209,7 @@ export default function Editor({
   };
   return (
     <div className="px-8 my-8 w-1/2">
-      <div className="">
+      <div className="ml-8">
         <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-2">
           <motion.div
             className="h-2 bg-[#1E3A5F]"
@@ -230,8 +230,10 @@ export default function Editor({
             {steps[currentStep]?.sectionName} <span className="px-1">&#8594;</span>{" "}
             {steps[currentStep]?.name}
           </h2>
-          <h3 className="text-2xl font-light mb-6">{steps[currentStep]?.heading}</h3>
-          {steps[currentStep]?.fields?.map(renderField)}
+          <div className="ml-6">
+            <h3 className="text-2xl font-light mb-6">{steps[currentStep]?.heading}</h3>
+            {steps[currentStep]?.fields?.map(renderField)}
+          </div>
         </motion.div>
         <div className="mt-4 flex justify-end mt-16">
           {currentStep > 0 && (

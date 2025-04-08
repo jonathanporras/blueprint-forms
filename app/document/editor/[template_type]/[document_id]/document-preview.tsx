@@ -2,12 +2,46 @@
 import { motion } from "framer-motion";
 import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
-import { usePDF } from "react-to-pdf";
+import { usePDF, Resolution, Margin } from "react-to-pdf";
 import { format } from "date-fns";
 
 export default function DocumentPreview() {
   const [formValues] = useAtom<Record<string, any>>(documentFieldsAtom);
-  const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
+  const { toPDF, targetRef } = usePDF({
+    filename: "lease-agreement.pdf",
+    // method: "open",
+    // default is Resolution.MEDIUM = 3, which should be enough, higher values
+    // increases the image quality but also the size of the PDF, so be careful
+    // using values higher than 10 when having multiple pages generated, it
+    // might cause the page to crash or hang.
+    // resolution: Resolution.HIGH,
+    page: {
+      // margin is in MM, default is Margin.NONE = 0
+      margin: Margin.MEDIUM,
+      // default is 'A4'
+      format: "letter",
+      // default is 'portrait'
+      // orientation: "landscape",
+    },
+    // canvas: {
+    //   // default is 'image/jpeg' for better size performance
+    //   mimeType: "image/png",
+    //   qualityRatio: 1,
+    // },
+    // Customize any value passed to the jsPDF instance and html2canvas
+    // function. You probably will not need this and things can break,
+    // so use with caution.
+    // overrides: {
+    //   // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
+    //   pdf: {
+    //     compress: true,
+    //   },
+    //   // see https://html2canvas.hertzen.com/configuration for more options
+    //   canvas: {
+    //     useCORS: true,
+    //   },
+    // },
+  });
 
   return (
     <div className="w-1/2 px-8 py-6 bg-gray-100">
@@ -26,15 +60,26 @@ export default function DocumentPreview() {
         exit={{ opacity: 0, x: -50 }}
         transition={{ duration: 1 }}
       >
-        <div className="my-4 select-none">
+        <div className="my-4 select-none max-h-full">
           <div
             style={{
               fontFamily: "Times New Roman, Times, serif",
               fontSize: "14px",
+              flexDirection: "column",
+              display: "flex",
+              margin: "0 auto !important",
+              lineHeight: "17px",
+              width: "100%",
+              padding: "30px 30px",
             }}
-            className="bg-[#fff] border border-gray-200 px-4 py-5 shadow-sm"
+            className="bg-[#fff] border border-gray-200 px-4 py-5 shadow-sm w-full"
           >
-            <div ref={targetRef}>
+            <div
+              style={{
+                margin: "0 auto !important",
+              }}
+              ref={targetRef}
+            >
               <h1
                 style={{
                   textAlign: "center",
@@ -76,7 +121,7 @@ export default function DocumentPreview() {
                 {renderDocumentField(formValues["property_zip"]?.value)} in{" "}
                 {renderDocumentField(formValues["property_county"]?.value)} County (hereinafter
                 referred to as the "Property").{" "}
-                {renderDocumentField(formValues["is_furniture_included"]?.value) === "true"
+                {formValues["is_furniture_included"]?.value === "true"
                   ? `Included within this lease are any furnishings and appliances provided by the Landlord, which are as follows: ${renderDocumentField(formValues["list_of_furniture"]?.value)}. The Tenant acknowledges receipt of these items and agrees to maintain them in good condition throughout the duration of the lease.`
                   : null}
               </p>
@@ -287,22 +332,22 @@ export default function DocumentPreview() {
                 to this Agreement on the date first stated above.
               </p>
               <div className="pb-4">
-                <p>LANDLORD: ________________________________</p>
+                <p>LANDLORD: __________________________</p>
                 <p>{renderDocumentField(formValues["landlord_name"]?.value)}</p>
               </div>
               <div className="pb-4">
-                <p>TENANT: ________________________________</p>
+                <p>TENANT: __________________________</p>
                 <p>{renderDocumentField(formValues["tenant_name"]?.value)}</p>
               </div>
               {formValues["is_second_tenant"]?.value === "true" && (
                 <div className="pb-4">
-                  <p>TENANT: ________________________________</p>
+                  <p>TENANT: __________________________</p>
                   <p>{renderDocumentField(formValues["second_tenant_name"]?.value)}</p>
                 </div>
               )}
               {formValues["is_third_tenant"]?.value === "true" && (
                 <div className="pb-4">
-                  <p>TENANT: ________________________________</p>
+                  <p>TENANT: __________________________</p>
                   <p>{renderDocumentField(formValues["third_tenant_name"]?.value)}</p>
                 </div>
               )}
@@ -318,6 +363,11 @@ const renderDocumentField = (value: string) => {
   if (value) {
     return value;
   } else {
-    return <span className="bg-gray-200 h-4 w-20 inline-block"></span>;
+    return (
+      <span
+        style={{ verticalAlign: "bottom" }}
+        className="bg-gray-200 h-4 inline-block w-20 align-bottom pb-0 mb-0"
+      ></span>
+    );
   }
 };
