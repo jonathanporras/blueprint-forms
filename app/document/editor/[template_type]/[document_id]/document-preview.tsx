@@ -287,22 +287,22 @@ export default function DocumentPreview() {
                 to this Agreement on the date first stated above.
               </p>
               <div className="pb-4">
-                <p>LANDLORD: ________________________</p>
+                <p>LANDLORD: ________________________________</p>
                 <p>{renderDocumentField(formValues["landlord_name"]?.value)}</p>
               </div>
               <div className="pb-4">
-                <p>TENANT: ________________________</p>
+                <p>TENANT: ________________________________</p>
                 <p>{renderDocumentField(formValues["tenant_name"]?.value)}</p>
               </div>
               {formValues["is_second_tenant"]?.value === "true" && (
                 <div className="pb-4">
-                  <p>TENANT: ________________________</p>
+                  <p>TENANT: ________________________________</p>
                   <p>{renderDocumentField(formValues["second_tenant_name"]?.value)}</p>
                 </div>
               )}
               {formValues["is_third_tenant"]?.value === "true" && (
                 <div className="pb-4">
-                  <p>TENANT: ________________________</p>
+                  <p>TENANT: ________________________________</p>
                   <p>{renderDocumentField(formValues["third_tenant_name"]?.value)}</p>
                 </div>
               )}
