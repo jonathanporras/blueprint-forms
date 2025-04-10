@@ -71,12 +71,15 @@ export default function DocumentPreview() {
               lineHeight: "17px",
               width: "100%",
               padding: "30px 30px",
+              height: "800px",
+              overflow: "scroll",
             }}
             className="bg-[#fff] border border-gray-200 px-4 py-5 shadow-sm w-full"
           >
             <div
               style={{
                 margin: "0 auto !important",
+                width: "100%",
               }}
               ref={targetRef}
             >
