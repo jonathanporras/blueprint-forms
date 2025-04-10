@@ -17,7 +17,7 @@ export default function DocumentPreview() {
     // resolution: Resolution.HIGH,
     page: {
       // margin is in MM, default is Margin.NONE = 0
-      margin: Margin.MEDIUM,
+      margin: Margin.LARGE,
       // default is 'A4'
       format: "letter",
       // default is 'portrait'
@@ -289,6 +289,13 @@ export default function DocumentPreview() {
                 valid reason for terminating this Agreement or failing to make the necessary
                 rental payments.
               </p>
+              {formValues["is_asbestos"]?.value === "true" && (
+                <p className="pb-4">
+                  Asbestos Disclosure: The Landlord is aware of the presence of asbestos on the
+                  Premises. The applicable Asbestos Disclosure Form is attached to and made
+                  part of this Lease.
+                </p>
+              )}
               <p className="pb-4">
                 Improvements & Alterations: The Tenant shall make no alterations to the
                 buildings or improvements on the Premises or construct any building or make any
