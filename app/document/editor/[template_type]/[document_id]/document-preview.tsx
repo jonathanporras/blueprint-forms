@@ -94,7 +94,7 @@ export default function DocumentPreview() {
               >
                 Residential Lease Agreement
               </h1>
-              <p className="pb-4" style={{ textIndent: "32px" }}>
+              <p className="pb-4 text-sm" style={{ textIndent: "32px" }}>
                 This Lease Agreement (hereinafter referred to as the "Agreement" or the
                 "Lease") is entered into on{" "}
                 {formValues["lease_date"]?.value &&
@@ -113,7 +113,7 @@ export default function DocumentPreview() {
                 agrees to lease the designated property to the Tenant, and both parties
                 willingly enter into this contract with the intention of upholding its terms.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 DESCRIPTION OF PROPERTY: The Landlord agrees to lease to the Tenant the
                 residential premises located at{" "}
                 {renderDocumentField(formValues["property_address"]?.value)},{" "}
@@ -128,7 +128,7 @@ export default function DocumentPreview() {
                   ? `Included within this lease are any furnishings and appliances provided by the Landlord, which are as follows: ${renderDocumentField(formValues["list_of_furniture"]?.value)}. The Tenant acknowledges receipt of these items and agrees to maintain them in good condition throughout the duration of the lease.`
                   : null}
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 DURATION OF LEASE: The lease term shall commence on{" "}
                 {formValues["start_date"]?.value &&
                   renderDocumentField(
@@ -147,7 +147,7 @@ export default function DocumentPreview() {
                 Landlord and the Tenant, or as allowed by law; all other terms and conditions
                 of this Agreement shall remain in full force and effect.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 RENTAL PAYMENTS: The Tenant agrees to compensate the Landlord with a monthly
                 rental payment of{" "}
                 {renderDocumentField(formValues["monthly_rent_payment"]?.value)}. All rent
@@ -164,7 +164,7 @@ export default function DocumentPreview() {
                 further action as outlined in this Agreement.
               </p>
               {formValues["is_security_deposit"]?.value === "true" && (
-                <p className="pb-4">
+                <p className="pb-4 text-sm">
                   SECURITY DEPOSIT REQUIREMENTS: The Tenant shall provide a security deposit in
                   the amount of {renderDocumentField(formValues["security_deposit"]?.value)} at
                   the commencement of this lease. This deposit is intended to cover any
@@ -173,7 +173,7 @@ export default function DocumentPreview() {
                   the Tenant vacates the Premises.
                 </p>
               )}
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 UTILITIES AND SERVICES: The responsibility for utility and service payments
                 shall be divided as follows: The Tenant shall be responsible for covering the
                 costs of: {renderDocumentField(formValues["tenant_utilities"]?.value)}. The
@@ -182,14 +182,14 @@ export default function DocumentPreview() {
                 agrees to ensure that all utility accounts for which they are responsible
                 remain in good standing throughout the lease term.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 PERMITTED USE OF PROPERTY: The Tenant agrees to use the Property solely as a
                 private residence. The Tenant shall not engage in any illegal activities on the
                 premises, nor shall they create disturbances that could negatively impact
                 neighbors or violate local laws and regulations. The Tenant shall also comply
                 with any community rules or homeowners' association guidelines that may apply.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 MAINTENANCE, REPAIRS, AND RESPONSIBILITIES: The Tenant agrees to keep the
                 Property clean, safe, and in good condition throughout the lease term. Any
                 damages beyond normal wear and tear shall be repaired at the Tenant's expense.
@@ -197,14 +197,14 @@ export default function DocumentPreview() {
                 to the building's major systems, unless the need for such repairs arises due to
                 negligence or misuse by the Tenant.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 ACCESS TO THE PROPERTY: The Landlord reserves the right to enter the Property
                 for the purposes of inspections, repairs, or in cases of emergency. Except in
                 urgent situations, the Landlord shall provide the Tenant with at least 24-hour
                 advance notice before entering the premises.
               </p>
               {formValues["are_pets_allowed"]?.value === "true" ? (
-                <p className="pb-4">
+                <p className="pb-4 text-sm">
                   PET POLICY: Pets are allowed with prior written approval from the Landlord
                   and an additional deposit of{" "}
                   {renderDocumentField(formValues["pet_deposit"]?.value)}. If permitted, the
@@ -212,16 +212,16 @@ export default function DocumentPreview() {
                   create disturbances.
                 </p>
               ) : (
-                <p className="pb-4">
+                <p className="pb-4 text-sm">
                   PET POLICY: Pets are not permitted on the premises under any circumstances.
                 </p>
               )}
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 SUBLETTING AND LEASE ASSIGNMENT: The Tenant shall not sublease the Property or
                 assign their lease rights to another party without obtaining prior written
                 consent from the Landlord.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 USE OF THE PREMISES: The Premises shall be used and occupied by the Tenant and
                 the Tenant's immediate family, consisting of{" "}
                 {renderDocumentField(formValues["people_living_on_property"]?.value)} people,
@@ -240,7 +240,7 @@ export default function DocumentPreview() {
                 aides and foster children, but excluding natural births, require the advance
                 written approval of the Landlord.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 BREACH OF AGREEMENT AND TERMINATION: The Landlord must give the Tenant a notice
                 that specifies the grounds for termination of the tenancy. The notice of
                 grounds must be given at or before commencement of any eviction action. The
@@ -250,7 +250,7 @@ export default function DocumentPreview() {
                 The Landlord may only evict the Tenant from the Premises by instituting a court
                 action.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 LATE CHARGE: The Tenant acknowledges that late payment of Rent may cause
                 Landlord to incur costs and expenses, the exact amount of which is extremely
                 difficult and impractical to determine. These costs may include but are not
@@ -263,7 +263,7 @@ export default function DocumentPreview() {
                 {renderDocumentField(formValues["late_fee"]?.value)}. Late fees are deemed
                 additional Rent.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 Indemnification: The Landlord shall not be liable for any damage or injury of
                 or to the Tenant, Tenant's family, guests, invitees, agents or employees or to
                 any person entering the Premises or the building of which the Premises are a
@@ -272,7 +272,7 @@ export default function DocumentPreview() {
                 indemnify, defend and hold the Landlord harmless from any and all claims or
                 assertions of every kind and nature relating to same.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 Neighborhood Conditions: The Tenant is advised to seek information as to the
                 neighborhood or area conditions, including: schools, proximity and adequacy of
                 law enforcement, crime statistics, proximity of registered felons or offenders,
@@ -290,13 +290,13 @@ export default function DocumentPreview() {
                 rental payments.
               </p>
               {formValues["is_asbestos"]?.value === "true" && (
-                <p className="pb-4">
+                <p className="pb-4 text-sm">
                   Asbestos Disclosure: The Landlord is aware of the presence of asbestos on the
                   Premises. The applicable Asbestos Disclosure Form is attached to and made
                   part of this Lease.
                 </p>
               )}
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 Improvements & Alterations: The Tenant shall make no alterations to the
                 buildings or improvements on the Premises or construct any building or make any
                 other improvements on the Premises without the prior written consent of the
@@ -319,7 +319,7 @@ export default function DocumentPreview() {
                 by the Tenant shall be considered unpaid Rent.
               </p>
               {formValues["was_property_built_before_1978"]?.value === "true" && (
-                <p className="pb-4">
+                <p className="pb-4 text-sm">
                   Lead-Based Paint Disclosure: This property was built before 1978. Housing
                   built before 1978 may contain lead-based paint. Lead paint, paint chips and
                   dust can cause health hazards if not managed properly. Lead exposure is
@@ -330,33 +330,33 @@ export default function DocumentPreview() {
                   regarding the presence of lead- based paint on the Premises.
                 </p>
               )}
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 LEGAL JURISDICTION: This Agreement shall be interpreted and enforced in
                 accordance with the laws of the state of{" "}
                 {renderDocumentField(formValues["property_state"]?.value)}. Any disputes
                 arising from this Agreement shall be resolved in the appropriate legal
                 jurisdiction within said state.
               </p>
-              <p className="pb-4">
+              <p className="pb-4 text-sm">
                 IN WITNESS WHEREOF, the Landlord and the Tenant have affixed their signatures
                 to this Agreement on the date first stated above.
               </p>
-              <div className="pb-4">
+              <div className="pb-4 text-sm">
                 <p>LANDLORD: __________________________</p>
                 <p>{renderDocumentField(formValues["landlord_name"]?.value)}</p>
               </div>
-              <div className="pb-4">
+              <div className="pb-4 text-sm">
                 <p>TENANT: __________________________</p>
                 <p>{renderDocumentField(formValues["tenant_name"]?.value)}</p>
               </div>
               {formValues["is_second_tenant"]?.value === "true" && (
-                <div className="pb-4">
+                <div className="pb-4 text-sm">
                   <p>TENANT: __________________________</p>
                   <p>{renderDocumentField(formValues["second_tenant_name"]?.value)}</p>
                 </div>
               )}
               {formValues["is_third_tenant"]?.value === "true" && (
-                <div className="pb-4">
+                <div className="pb-4 text-sm">
                   <p>TENANT: __________________________</p>
                   <p>{renderDocumentField(formValues["third_tenant_name"]?.value)}</p>
                 </div>
@@ -374,10 +374,9 @@ const renderDocumentField = (value: string) => {
     return value;
   } else {
     return (
-      <span
-        style={{ verticalAlign: "bottom" }}
-        className="bg-gray-200 h-4 inline-block w-20 align-bottom pb-0 mb-0"
-      ></span>
+      <span style={{ verticalAlign: "bottom" }} className="h-4 align-bottom">
+        ________________
+      </span>
     );
   }
 };

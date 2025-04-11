@@ -329,3 +329,14 @@ export async function fetchDocumentFields(document_id: Document["id"]) {
 
   return data;
 }
+
+export async function updateDocumentName({ id, name }: { id: Document["id"]; name: string }) {
+  const { data, error } = await supabase.from("documents").update({ name: name }).eq("id", id);
+
+  if (error) {
+    console.error("Error updating document name:", error);
+    throw error;
+  }
+
+  return data;
+}
