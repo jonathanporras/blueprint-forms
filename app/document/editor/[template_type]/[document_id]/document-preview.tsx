@@ -2,57 +2,23 @@
 import { motion } from "framer-motion";
 import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
-import { usePDF, Resolution, Margin } from "react-to-pdf";
 import { format } from "date-fns";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import LeaseAgreementPDF from "@/components/pdf-templates/lease-agreement-pdf";
 
 export default function DocumentPreview() {
   const [formValues] = useAtom<Record<string, any>>(documentFieldsAtom);
-  const { toPDF, targetRef } = usePDF({
-    filename: "lease-agreement.pdf",
-    // method: "open",
-    // default is Resolution.MEDIUM = 3, which should be enough, higher values
-    // increases the image quality but also the size of the PDF, so be careful
-    // using values higher than 10 when having multiple pages generated, it
-    // might cause the page to crash or hang.
-    // resolution: Resolution.HIGH,
-    page: {
-      // margin is in MM, default is Margin.NONE = 0
-      margin: Margin.LARGE,
-      // default is 'A4'
-      format: "letter",
-      // default is 'portrait'
-      // orientation: "landscape",
-    },
-    // canvas: {
-    //   // default is 'image/jpeg' for better size performance
-    //   mimeType: "image/png",
-    //   qualityRatio: 1,
-    // },
-    // Customize any value passed to the jsPDF instance and html2canvas
-    // function. You probably will not need this and things can break,
-    // so use with caution.
-    // overrides: {
-    //   // see https://artskydj.github.io/jsPDF/docs/jsPDF.html for more options
-    //   pdf: {
-    //     compress: true,
-    //   },
-    //   // see https://html2canvas.hertzen.com/configuration for more options
-    //   canvas: {
-    //     useCORS: true,
-    //   },
-    // },
-  });
 
   return (
     <div className="w-full lg:w-1/2 px-8 py-6 bg-gray-100">
       <div className="flex justify-end">
-        <button
-          id="export-button"
+        <PDFDownloadLink
           className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
-          onClick={() => toPDF()}
+          document={<LeaseAgreementPDF formValues={formValues} />}
+          fileName="somename.pdf"
         >
-          Export
-        </button>
+          {({ blob, url, loading, error }) => (loading ? "Loading..." : "Export")}
+        </PDFDownloadLink>
       </div>
       <motion.div
         initial={{ opacity: 0 }}
@@ -81,7 +47,6 @@ export default function DocumentPreview() {
                 margin: "0 auto !important",
                 width: "100%",
               }}
-              ref={targetRef}
             >
               <h1
                 style={{
@@ -264,16 +229,16 @@ export default function DocumentPreview() {
                 additional Rent.
               </p>
               <p className="pb-4 text-sm">
-                Indemnification: The Landlord shall not be liable for any damage or injury of
-                or to the Tenant, Tenant's family, guests, invitees, agents or employees or to
-                any person entering the Premises or the building of which the Premises are a
-                part or to goods or equipment, or in the structure or equipment of the
-                structure of which the Premises are a part, and the Tenant hereby agrees to
-                indemnify, defend and hold the Landlord harmless from any and all claims or
-                assertions of every kind and nature relating to same.
+                IDEMNIFICATION: The Landlord shall not be liable for any damage or injury of or
+                to the Tenant, Tenant's family, guests, invitees, agents or employees or to any
+                person entering the Premises or the building of which the Premises are a part
+                or to goods or equipment, or in the structure or equipment of the structure of
+                which the Premises are a part, and the Tenant hereby agrees to indemnify,
+                defend and hold the Landlord harmless from any and all claims or assertions of
+                every kind and nature relating to same.
               </p>
               <p className="pb-4 text-sm">
-                Neighborhood Conditions: The Tenant is advised to seek information as to the
+                NEIGHBORHOOD CONDITIONS: The Tenant is advised to seek information as to the
                 neighborhood or area conditions, including: schools, proximity and adequacy of
                 law enforcement, crime statistics, proximity of registered felons or offenders,
                 fire protection, other governmental services, availability, adequacy and cost
@@ -291,13 +256,13 @@ export default function DocumentPreview() {
               </p>
               {formValues["is_asbestos"]?.value === "true" && (
                 <p className="pb-4 text-sm">
-                  Asbestos Disclosure: The Landlord is aware of the presence of asbestos on the
+                  ASBESTOS DISCLOSURE: The Landlord is aware of the presence of asbestos on the
                   Premises. The applicable Asbestos Disclosure Form is attached to and made
                   part of this Lease.
                 </p>
               )}
               <p className="pb-4 text-sm">
-                Improvements & Alterations: The Tenant shall make no alterations to the
+                IMPROVEMENTS & ALTERATIONS: The Tenant shall make no alterations to the
                 buildings or improvements on the Premises or construct any building or make any
                 other improvements on the Premises without the prior written consent of the
                 Landlord. Any and all alterations, changes, and/or improvements built,
@@ -320,7 +285,7 @@ export default function DocumentPreview() {
               </p>
               {formValues["was_property_built_before_1978"]?.value === "true" && (
                 <p className="pb-4 text-sm">
-                  Lead-Based Paint Disclosure: This property was built before 1978. Housing
+                  LEAD-BASED PAINT DISCLOSURE: This property was built before 1978. Housing
                   built before 1978 may contain lead-based paint. Lead paint, paint chips and
                   dust can cause health hazards if not managed properly. Lead exposure is
                   especially harmful to young children and pregnant women. Before renting
