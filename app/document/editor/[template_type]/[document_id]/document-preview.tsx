@@ -44,7 +44,7 @@ export default function DocumentPreview() {
   });
 
   return (
-    <div className="w-1/2 px-8 py-6 bg-gray-100">
+    <div className="w-full lg:w-1/2 px-8 py-6 bg-gray-100">
       <div className="flex justify-end">
         <button
           id="export-button"
