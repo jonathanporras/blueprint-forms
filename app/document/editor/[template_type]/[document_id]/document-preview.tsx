@@ -17,7 +17,7 @@ export default function DocumentPreview() {
           document={<LeaseAgreementPDF formValues={formValues} />}
           fileName="somename.pdf"
         >
-          {({ blob, url, loading, error }) => (loading ? "Loading..." : "Export")}
+          {({ blob, url, loading, error }) => (loading ? "Export" : "Export")}
         </PDFDownloadLink>
       </div>
       <motion.div
