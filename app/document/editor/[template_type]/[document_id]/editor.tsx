@@ -9,6 +9,7 @@ import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useSearchParams, useRouter } from "next/navigation";
+import { MoveRight } from "lucide-react";
 
 export type FormData = {
   id: any;
@@ -247,6 +248,7 @@ export default function Editor({
               className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
             >
               Continue
+              <MoveRight className="inline pl-2" />
             </button>
           ) : (
             <button

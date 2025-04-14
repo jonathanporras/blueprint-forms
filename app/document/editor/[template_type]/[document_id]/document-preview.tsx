@@ -5,6 +5,7 @@ import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
 import { format } from "date-fns";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import LeaseAgreementPDF from "@/components/pdf-templates/lease-agreement-pdf";
+import { FolderDown } from "lucide-react";
 
 export default function DocumentPreview() {
   const [formValues] = useAtom<Record<string, any>>(documentFieldsAtom);
@@ -15,9 +16,21 @@ export default function DocumentPreview() {
         <PDFDownloadLink
           className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
           document={<LeaseAgreementPDF formValues={formValues} />}
-          fileName="somename.pdf"
+          fileName="lease-agreement.pdf"
         >
-          {({ blob, url, loading, error }) => (loading ? "Export" : "Export")}
+          {({ blob, url, loading, error }) =>
+            loading ? (
+              <div className="">
+                <FolderDown className="inline pr-2 pb-1" />
+                <span>Export</span>
+              </div>
+            ) : (
+              <div className="">
+                <FolderDown className="inline pr-2 pb-1" />
+                <span>Export</span>
+              </div>
+            )
+          }
         </PDFDownloadLink>
       </div>
       <motion.div

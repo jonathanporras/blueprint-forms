@@ -55,7 +55,6 @@ export default async function AuthButton() {
           Sign Out
         </Button>
       </form>
-      {user.email}
     </div>
   ) : (
     <div className="flex gap-2 text-white">

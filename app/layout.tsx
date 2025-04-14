@@ -5,6 +5,7 @@ import { hasEnvVars } from "@/utils/supabase/check-env-vars";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { Newspaper, Pencil, Scale, Scroll } from "lucide-react";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -12,7 +13,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Blueprint Forms",
+  title: "Quick Form Pro",
   description: "The fastest way to create legal documents online.",
 };
 
@@ -39,9 +40,9 @@ export default function RootLayout({
             <div className="flex-1 w-full flex flex-col items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16 bg-[#1E3A5F]">
                 <div className="w-full max-w-7xl flex justify-between items-center p-3 px-5 text-sm ">
-                  <div className="logo-wrap text-white">
-                    <p>Blueprint</p>
-                    <p>Forms</p>
+                  <div className="flex align-center text-xl logo-wrap text-white">
+                    <Pencil className="mr-2" />
+                    <p>Quick Form Pro</p>
                   </div>{" "}
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
