@@ -4,7 +4,6 @@ import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { SmtpMessage } from "../smtp-message";
 
 export default async function Signup(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
@@ -26,7 +25,7 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
           <p className="text-sm text text-foreground">
             Already have an account?{" "}
             <Link className="text-primary font-medium underline" href="/log-in">
-              Sign in
+              Log in
             </Link>
           </p>
           <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8 max-w-md">
@@ -51,9 +50,19 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
           </div>
         </form>
       </div>
-      <div className="md:w-1/4 w-full bg-gray-100 flex flex-col justify-center">
-        Your document Lease Agreement Ready to print Downloads as PDF and in Word Easy to
-        update
+      <div className="md:w-1/4 w-full p-4 bg-gray-100 flex flex-col justify-start pt-24 px-10">
+        <p className="text-md mb-4">
+          Your <span className="font-bold">Lease Agreement</span> is ready to download:
+        </p>
+        <p className="text-md pb-2">
+          <span className="text-[#2FAF68] pr-2">&#10003; </span>Ready to Print
+        </p>
+        <p className="text-md pb-2">
+          <span className="text-[#2FAF68] pr-2">&#10003; </span>Download as PDF
+        </p>
+        <p className="text-md pb-2">
+          <span className="text-[#2FAF68] pr-2">&#10003; </span>Easy to Update
+        </p>
       </div>
     </div>
   );
