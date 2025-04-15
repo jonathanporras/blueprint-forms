@@ -14,7 +14,7 @@ const DocumentDashbord = async () => {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/sign-in");
+    return redirect("/log-in");
   }
 
   const documents = await fetchDocuments(user.id);
