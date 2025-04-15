@@ -40,9 +40,17 @@ export default function RootLayout({
             <div className="flex-1 w-full flex flex-col items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16 bg-[#1E3A5F]">
                 <div className="w-full max-w-7xl flex justify-between items-center p-3 px-5 text-sm ">
-                  <div className="flex align-center text-xl logo-wrap text-white">
-                    <Pencil className="mr-2" />
-                    <p>Quick Form Pro</p>
+                  <div className="flex align-center text-lg font-light tracking-wide logo-wrap text-white">
+                    <img
+                      className="inline mr-2 color-white"
+                      alt="Quick Form Pro Header Logo"
+                      src="/images/logo.png"
+                      style={{
+                        width: 30,
+                      }}
+                    />
+
+                    <p>QuickForm Pro</p>
                   </div>{" "}
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>

@@ -3,35 +3,31 @@ import { motion } from "framer-motion";
 import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
 import { format } from "date-fns";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { usePDF } from "@react-pdf/renderer";
 import LeaseAgreementPDF from "@/components/pdf-templates/lease-agreement-pdf";
-import { FolderDown } from "lucide-react";
+import { useMemo } from "react";
 
 export default function DocumentPreview() {
   const [formValues] = useAtom<Record<string, any>>(documentFieldsAtom);
+  const getFormValues = useMemo(() => {
+    return () => formValues;
+  }, [formValues]);
+  const [instance] = usePDF({
+    document: <LeaseAgreementPDF formValues={getFormValues()} />,
+  });
 
   return (
     <div className="w-full lg:w-1/2 px-8 py-6 bg-gray-100">
       <div className="flex justify-end">
-        <PDFDownloadLink
-          className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
-          document={<LeaseAgreementPDF formValues={formValues} />}
-          fileName="lease-agreement.pdf"
-        >
-          {({ blob, url, loading, error }) =>
-            loading ? (
-              <div className="">
-                <FolderDown className="inline pr-2 pb-1" />
-                <span>Export</span>
-              </div>
-            ) : (
-              <div className="">
-                <FolderDown className="inline pr-2 pb-1" />
-                <span>Export</span>
-              </div>
-            )
-          }
-        </PDFDownloadLink>
+        {instance?.url && (
+          <a
+            className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
+            href={instance.url}
+            download="test.pdf"
+          >
+            Download
+          </a>
+        )}
       </div>
       <motion.div
         initial={{ opacity: 0 }}
