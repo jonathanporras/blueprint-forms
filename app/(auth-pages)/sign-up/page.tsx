@@ -5,7 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
-export default async function Signup(props: { searchParams: Promise<Message> }) {
+export default async function Signup(props: {
+  searchParams: Promise<{ document_id: string }>;
+}) {
   const searchParams = await props.searchParams;
   if ("message" in searchParams) {
     return (
@@ -38,6 +40,12 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
               placeholder="Your password"
               minLength={6}
               required
+            />
+            <Input
+              name="document_id"
+              value={searchParams?.document_id}
+              type="hidden"
+              readOnly
             />
             <SubmitButton
               className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"

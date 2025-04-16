@@ -31,7 +31,7 @@ const DocumentEditor = async (props: { params: ParamsProps }) => {
   return (
     <div className="flex-col lg:flex-row flex justify-center gap-16">
       <Editor formData={templateData} documentId={document_id} />
-      <DocumentPreview user={user} />
+      <DocumentPreview user={user} documentId={document_id} />
     </div>
   );
 };

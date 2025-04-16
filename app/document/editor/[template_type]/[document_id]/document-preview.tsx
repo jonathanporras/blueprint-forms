@@ -8,8 +8,15 @@ import LeaseAgreementPDF from "@/components/pdf-templates/lease-agreement-pdf";
 import { useMemo } from "react";
 import { FolderDown } from "lucide-react";
 import { User } from "@supabase/supabase-js";
+import { Document } from "./page";
 
-export default function DocumentPreview({ user }: { user: User | null }) {
+export default function DocumentPreview({
+  user,
+  documentId,
+}: {
+  user: User | null;
+  documentId: Document["id"] | null;
+}) {
   const [formValues] = useAtom<Record<string, any>>(documentFieldsAtom);
   const getFormValues = useMemo(() => {
     return () => formValues;
@@ -37,7 +44,7 @@ export default function DocumentPreview({ user }: { user: User | null }) {
         ) : (
           <a
             className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
-            href="/sign-up"
+            href={`/sign-up?document_id=${documentId}`}
           >
             <FolderDown className="inline pr-2" />
             Export

@@ -4,10 +4,12 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { Document } from "./document/editor/[template_type]/[document_id]/page";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
+  const documentId = formData.get("document_id")?.toString();
   const supabase = await createClient();
   const origin = (await headers()).get("origin");
 
@@ -15,7 +17,10 @@ export const signUpAction = async (formData: FormData) => {
     return encodedRedirect("error", "/sign-up", "Email and password are required");
   }
 
-  const { error } = await supabase.auth.signUp({
+  const {
+    error,
+    data: { user },
+  } = await supabase.auth.signUp({
     email,
     password,
     options: {
@@ -27,6 +32,13 @@ export const signUpAction = async (formData: FormData) => {
     console.error(error.code + " " + error.message);
     return encodedRedirect("error", "/sign-up", error.message);
   } else {
+    if (documentId) {
+      const supabase = await createClient();
+      const { data, error } = await supabase
+        .from("documents")
+        .update({ user_id: user?.id })
+        .eq("id", documentId);
+    }
     return redirect("/pricing");
   }
 };
