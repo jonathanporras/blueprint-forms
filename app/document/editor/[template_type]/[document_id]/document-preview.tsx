@@ -122,8 +122,10 @@ export default function DocumentPreview({
                 (hereinafter referred to as "Landlord") and{" "}
                 {renderDocumentField(formValues["tenant_name"]?.value)}
                 {formValues["is_second_tenant"]?.value === "true" &&
+                  formValues["second_tenant_name"]?.value &&
                   renderDocumentField(`, ${formValues["second_tenant_name"]?.value}`)}
                 {formValues["is_third_tenant"]?.value === "true" &&
+                  formValues["third_tenant_name"]?.value &&
                   renderDocumentField(`, ${formValues["third_tenant_name"]?.value}`)}{" "}
                 (hereinafter referred to as "Tenant"). No other tenants are allowed without the
                 written consent of the Landlord, or the execution of a new lease agreement.
