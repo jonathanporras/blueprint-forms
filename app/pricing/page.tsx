@@ -1,6 +1,10 @@
+"use server";
 import React from "react";
-import { Check } from "lucide-react";
-import Image from "next/image";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import { loadStripe } from "@stripe/stripe-js";
+import PricingCTA from "./pricing-cta";
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
 interface PricingPlan {
   name: string;
@@ -9,19 +13,25 @@ interface PricingPlan {
   features: string[];
   buttonText: string;
   isPopular?: boolean;
+  mode: string;
+  priceId: string;
+  trial_period_days?: number;
 }
 
 const pricingPlans: PricingPlan[] = [
   {
-    name: "Trial",
-    price: "$1.95",
+    name: "FREE Trial",
+    price: "$0",
     term: "for 7 days",
     features: [
       "Print and export your documents. Full access to our library of legal docs.",
-      "Try us for 7 days for only $1.95",
+      "Try us for 7 days for FREE",
       "Renews at $37 plus applicable taxes on the 8th day, and automatically renews each month. Cancel anytime.",
     ],
     buttonText: "Choose Plan",
+    mode: "subscription",
+    priceId: "price_1REuVXDpqPmduxm5EJUoYppF",
+    trial_period_days: 7,
   },
   {
     name: "12 Months",
@@ -33,6 +43,8 @@ const pricingPlans: PricingPlan[] = [
       "Charged as one upfront payment of $99 plus applicable taxes and automatically renews annually thereafter.",
     ],
     buttonText: "Choose Plan",
+    mode: "subscription",
+    priceId: "price_1RExwyDpqPmduxm5BLxlbKqD",
   },
   {
     name: "Just This Document",
@@ -43,10 +55,21 @@ const pricingPlans: PricingPlan[] = [
       "One time charge",
     ],
     buttonText: "Choose Plan",
+    mode: "payment",
+    priceId: "price_1REuWLDpqPmduxm5u5ddK7kJ",
   },
 ];
 
 export default async function Pricing() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return redirect("/sign-up");
+  }
+
   return (
     <div className="max-w-6xl mx-auto my-10">
       <h1 className="text-3xl text-center mb-8">Choose a Plan for Your Account</h1>
@@ -71,12 +94,7 @@ export default async function Pricing() {
                 </li>
               ))}
             </ul>
-            <button
-              style={{ marginTop: "auto" }}
-              className="bg-[#2FAF68] text-white px-4 py-2 rounded-lg font-medium w-full hover:bg-[#37c476] transition"
-            >
-              {plan.buttonText}
-            </button>
+            <PricingCTA plan={plan} text={plan.buttonText} />
           </div>
         ))}
       </div>
