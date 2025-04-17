@@ -54,7 +54,7 @@ export default async function Signup(props: {
             >
               Create My Account
             </SubmitButton>
-            <FormMessage message={searchParams} />
+            {/* <FormMessage message={searchParams} /> */}
           </div>
         </form>
       </div>

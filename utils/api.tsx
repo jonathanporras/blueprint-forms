@@ -340,3 +340,14 @@ export async function updateDocumentName({ id, name }: { id: Document["id"]; nam
 
   return data;
 }
+
+export async function fetchProfile(user_id: string) {
+  const { data, error } = await supabase.from("profiles").select().eq("id", user_id);
+
+  if (error) {
+    console.error("Error fetching steps:", error);
+    throw error;
+  }
+
+  return data[0];
+}

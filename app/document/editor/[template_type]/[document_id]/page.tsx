@@ -1,7 +1,7 @@
 import { fetchAllTemplateData, fetchTemplateByType } from "@/utils/api-server";
 import Editor from "./editor";
 import DocumentPreview from "./document-preview";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/server";
 
 type ParamsProps = Promise<{ template_type: string; document_id: string }>;
 
