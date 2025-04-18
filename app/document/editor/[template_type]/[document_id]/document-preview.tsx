@@ -23,13 +23,11 @@ export default function DocumentPreview({
   documentId: Document["id"] | null;
 }) {
   const [formValues] = useAtom<Record<string, any>>(documentFieldsAtom);
-  const getFormValues = useMemo(() => {
-    return () => formValues;
-  }, [formValues]);
-  const [instance] = usePDF({
-    document: <LeaseAgreementPDF formValues={getFormValues()} />,
+  const [instance, update] = usePDF({
+    document: <LeaseAgreementPDF formValues={formValues} />,
   });
   const [profile, setProfile] = useState({} as Profile);
+
   useEffect(() => {
     if (user?.id) {
       fetchProfile(user.id).then((data) => {
@@ -37,6 +35,10 @@ export default function DocumentPreview({
       });
     }
   }, [user]);
+
+  useEffect(() => {
+    update(<LeaseAgreementPDF formValues={formValues} />);
+  }, [formValues]);
 
   return (
     <div className="w-full lg:w-1/2 px-8 py-6 bg-gray-100">
@@ -48,7 +50,7 @@ export default function DocumentPreview({
                 <a
                   className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
                   href={instance.url}
-                  download="test.pdf"
+                  download="lease-agreement.pdf"
                 >
                   <FolderDown className="inline pr-2" />
                   Export
