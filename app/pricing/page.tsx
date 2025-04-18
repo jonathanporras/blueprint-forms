@@ -94,7 +94,7 @@ export default async function Pricing() {
                 </li>
               ))}
             </ul>
-            <PricingCTA plan={plan} text={plan.buttonText} />
+            <PricingCTA plan={plan} text={plan.buttonText} user={user} />
           </div>
         ))}
       </div>

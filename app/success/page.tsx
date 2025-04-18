@@ -10,7 +10,7 @@ export default async function Success(props: { searchParams: Promise<Message> })
 
   const {
     status,
-    customer_details: { email: customerEmail },
+    // customer_details: { email: customerEmail },
   } = await stripe.checkout.sessions.retrieve(session_id, {
     expand: ["line_items", "payment_intent"],
   });
@@ -22,9 +22,10 @@ export default async function Success(props: { searchParams: Promise<Message> })
   if (status === "complete") {
     return (
       <section id="success">
+        <p>Session{session_id}</p>
         <p>
-          We appreciate your business! A confirmation email will be sent to {customerEmail}. If
-          you have any questions, please contact us:
+          We appreciate your business! A confirmation email will be sent to . If you have any
+          questions, please contact us:
         </p>
         <a href="mailto:orders@example.com">support@quickformpro.com</a>.
       </section>

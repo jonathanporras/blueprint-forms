@@ -7,18 +7,23 @@ export async function POST(request: Request) {
   try {
     const headersList = await headers();
     const origin = headersList.get("origin");
-    const { user_id, priceId, mode } = await request.json();
+    const { plan, priceId, mode } = await request.json();
 
-    const session = await stripe.checkout?.sessions.create({
+    const session = await stripe.checkout.sessions.create({
+      mode: mode,
       line_items: [
         {
           price: priceId,
           quantity: 1,
         },
       ],
-      mode: mode,
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/pricing`,
+      ...(plan?.trial_period_days && {
+        subscription_data: {
+          trial_period_days: plan?.trial_period_days,
+        },
+      }),
     });
 
     return NextResponse.json({ sessionId: session.id });
