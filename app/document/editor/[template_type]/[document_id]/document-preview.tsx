@@ -12,6 +12,7 @@ import { Document } from "./page";
 import { fetchProfile } from "@/utils/api";
 
 export interface Profile {
+  id?: string;
   status: "paid" | "unpaid";
 }
 export default function DocumentPreview({

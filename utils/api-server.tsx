@@ -1,3 +1,4 @@
+import { Profile } from "@/app/document/editor/[template_type]/[document_id]/document-preview";
 import { Document } from "@/app/document/editor/[template_type]/[document_id]/page";
 import { createClient } from "@/utils/supabase/server";
 
@@ -66,6 +67,27 @@ export async function fetchDocuments(user_id: string) {
 
   if (error) {
     console.error("Error fetching template:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function updateProfileStatus({
+  status,
+  id,
+}: {
+  status: Profile["status"];
+  id: Profile["id"];
+}) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("profiles")
+    .update({ status: status })
+    .eq("id", id);
+
+  if (error) {
+    console.error("Error updating profile status:", error);
     throw error;
   }
 
