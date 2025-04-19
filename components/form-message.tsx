@@ -2,7 +2,7 @@ export type Message = { success: string } | { error: string } | { message: strin
 
 export function FormMessage({ message }: { message: Message }) {
   return (
-    <div className="flex flex-col gap-2 w-full max-w-md text-xl">
+    <div className="flex flex-col w-full max-w-md text-md">
       {"success" in message && (
         <div className="text-[green] font-md font-md">{message.success}</div>
       )}

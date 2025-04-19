@@ -9,18 +9,12 @@ export default async function Signup(props: {
   searchParams: Promise<{ document_id: string }>;
 }) {
   const searchParams = await props.searchParams;
-  if ("message" in searchParams) {
-    return (
-      <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
-        <FormMessage message={searchParams as Message} />
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col md:flex-row w-full">
       <div className="md:w-3/4 mb-40 w-full p-4">
         <form className="flex flex-col min-w-64 mx-auto max-w-2xl my-20">
+          {searchParams && <FormMessage message={searchParams as any} />}
           <h1 className="text-2xl font-medium">
             Almost Done! Create an Account to Save Your Document
           </h1>
@@ -54,7 +48,6 @@ export default async function Signup(props: {
             >
               Create My Account
             </SubmitButton>
-            {/* <FormMessage message={searchParams} /> */}
           </div>
         </form>
       </div>
