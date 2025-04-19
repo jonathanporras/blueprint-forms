@@ -5,7 +5,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import DocumentName from "./document-name";
 import { Document } from "../editor/[template_type]/[document_id]/page";
-import { FilePenLine, FolderDown } from "lucide-react";
+import { ExternalLink, FilePenLine, FolderDown } from "lucide-react";
 
 const DocumentDashbord = async () => {
   const supabase = await createClient();
@@ -26,9 +26,15 @@ const DocumentDashbord = async () => {
         {documents.map((document: Document) => (
           <div
             key={document.id}
-            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 border-b bg-white"
+            className="flex sm:flex-row sm:items-center justify-between gap-4 p-4 border-b bg-white"
           >
-            <div className="flex-1">
+            <div className="flex-1 flex">
+              <Link
+                href={`/document/editor/${document.template_type}/${document.id}`}
+                className="pr-4"
+              >
+                <ExternalLink className="" />
+              </Link>
               <DocumentName document={document} />
             </div>
             <div className="flex gap-2 justify-end">

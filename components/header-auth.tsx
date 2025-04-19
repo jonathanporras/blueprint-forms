@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { createClient } from "@/utils/supabase/server";
+import { House } from "lucide-react";
 
 export default async function AuthButton() {
   const supabase = await createClient();
@@ -46,9 +47,11 @@ export default async function AuthButton() {
     );
   }
   return user ? (
-    <div className="flex text-white items-center gap-4">
+    <div className="flex text-white items-center gap-1">
       <Button className="text-white" asChild size="sm" variant="link">
-        <Link href={"/document/dashboard"}>My Documents</Link>
+        <Link href={"/document/dashboard"}>
+          <House />
+        </Link>
       </Button>
       <form action={signOutAction}>
         <Button className="text-white" type="submit" variant="link">

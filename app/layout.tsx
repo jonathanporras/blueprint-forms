@@ -5,6 +5,8 @@ import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import Footer from "@/components/footer";
+import HeaderLogoLink from "@/components/header-logo-link";
+import { createClient } from "@/utils/supabase/server";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -21,11 +23,15 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
       <body className="bg-background text-foreground">
@@ -39,18 +45,7 @@ export default function RootLayout({
             <div className="flex-1 w-full flex flex-col items-center">
               <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16 bg-[#1E3A5F]">
                 <div className="w-full max-w-7xl flex justify-between items-center p-3 px-5 text-sm ">
-                  <div className="flex align-center text-lg tracking-wide logo-wrap text-white">
-                    <img
-                      className="inline mr-2 color-white"
-                      alt="QuickForm Pro Header Logo"
-                      src="/images/logo.png"
-                      style={{
-                        width: 30,
-                      }}
-                    />
-
-                    <p>QuickForm Pro</p>
-                  </div>{" "}
+                  <HeaderLogoLink user={user} />{" "}
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
               </nav>
