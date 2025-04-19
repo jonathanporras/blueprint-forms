@@ -1,7 +1,7 @@
 import { fetchAllTemplateData, fetchTemplateByType } from "@/utils/api-server";
 import Editor from "./editor";
-import DocumentPreview from "./document-preview";
 import { createClient } from "@/utils/supabase/server";
+import DocumentPreviewWrapper from "./document-preview-wrapper";
 
 type ParamsProps = Promise<{ template_type: string; document_id: string }>;
 
@@ -31,7 +31,7 @@ const DocumentEditor = async (props: { params: ParamsProps }) => {
   return (
     <div className="flex-col lg:flex-row flex justify-center gap-16">
       <Editor formData={templateData} documentId={document_id} />
-      <DocumentPreview user={user} documentId={document_id} />
+      <DocumentPreviewWrapper user={user} documentId={document_id} />
     </div>
   );
 };

@@ -41,7 +41,7 @@ export default function DocumentPreview({
   }, [formValues]);
 
   return (
-    <div className="w-full lg:w-1/2 px-8 py-6 bg-gray-100">
+    <div className="">
       <div className="flex justify-end">
         {user ? (
           profile?.status === "paid" ? (
