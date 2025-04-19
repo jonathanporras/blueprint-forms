@@ -36,10 +36,6 @@ export default function DocumentPreview({
     }
   }, [user]);
 
-  useEffect(() => {
-    update(<LeaseAgreementPDF formValues={formValues} />);
-  }, [formValues]);
-
   return (
     <div className="">
       <div className="flex justify-end">
