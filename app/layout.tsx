@@ -14,7 +14,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Quick Form Pro",
+  title: "QuickForm Pro",
   description: "The fastest way to create legal documents online.",
 };
 
@@ -44,14 +44,14 @@ export default function RootLayout({
                   <div className="flex align-center text-lg tracking-wide logo-wrap text-white">
                     <img
                       className="inline mr-2 color-white"
-                      alt="Quick Form Pro Header Logo"
+                      alt="QuickForm Pro Header Logo"
                       src="/images/logo.png"
                       style={{
                         width: 30,
                       }}
                     />
 
-                    <p>Quick Form Pro</p>
+                    <p>QuickForm Pro</p>
                   </div>{" "}
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>

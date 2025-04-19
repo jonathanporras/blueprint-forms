@@ -11,7 +11,7 @@ export default async function Signup(props: {
   const searchParams = await props.searchParams;
 
   return (
-    <div className="flex flex-col md:flex-row w-full">
+    <div className="flex flex-col md:flex-row w-full min-h-screen">
       <div className="md:w-3/4 mb-40 w-full p-4">
         <form className="flex flex-col min-w-64 mx-auto max-w-2xl my-20">
           {searchParams && <FormMessage message={searchParams as any} />}

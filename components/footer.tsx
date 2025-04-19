@@ -16,7 +16,7 @@ const Footer = () => {
             Terms
           </a>
         </div>
-        <p className="text-sm mt-4">&copy; {new Date().getFullYear()} Quick Form Pro.</p>
+        <p className="text-sm mt-4">&copy; {new Date().getFullYear()} QuickForm Pro.</p>
       </div>
     </footer>
   );
