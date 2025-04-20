@@ -1,0 +1,87 @@
+"use client";
+import { ArrowUpRight, Check } from "lucide-react";
+import { redirect } from "next/navigation";
+
+export default function LeaseAgreementLanding() {
+  return (
+    <div className="min-h-screen bg-white text-gray-800 flex flex-col">
+      <main className="flex-grow">
+        <section className="py-20 bg-[#EDF2FA] text-center flex flex-col md:flex-row px-14">
+          <div className="w-full md:w-1/2 flex justify-end align-center items-center">
+            <div className="max-w-2xl text-left pr-8 pb-8">
+              <h2 className="text-4xl font-bold mb-4">Create a Free Lease Agreement</h2>
+              <p className="text-lg mb-8 max-w-xl mx-auto">
+                Build a legally sound rental agreement in minutes. <br />
+                No legal jargon, no hassle—just fast and free.
+              </p>
+              <button
+                onClick={() => redirect("/document/editor/lease-agreement")}
+                className="bg-[#2FAF68] hover:bg-[#37c476] text-white px-8 py-3 rounded-lg transition flex items-center"
+              >
+                Get Started for Free
+                <ArrowUpRight className="ml-2" size={18} />
+              </button>
+            </div>
+          </div>
+          <div className="w-full md:w-1/2">
+            <img
+              className="max-w-xl w-full block mx-auto"
+              src="/images/lease-agreement-screen.png"
+            />
+          </div>
+        </section>
+
+        <section className="py-16 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-14">
+          <div>
+            <h3 className="text-xl font-semibold mb-2 flex items-center justify-center">
+              <Check className="text-[#2FAF68] mr-2" />
+              Create Documents
+            </h3>
+            <p className="text-gray-600">
+              Create customizable documents for legal, tax, business, and personal use.
+              Download your finished file in PDF format.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-2 flex items-center justify-center">
+              <Check className="text-[#2FAF68] mr-2" />
+              Quick & Easy
+            </h3>
+            <p className="text-gray-600">
+              Answer a few simple questions and download your lease instantly.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold mb-2 flex items-center justify-center">
+              <Check className="text-[#2FAF68] mr-2" />
+              Lawyer-Approved
+            </h3>
+            <p className="text-gray-600 ">
+              Our templates are built with guidance from real attorneys and stay compliant with
+              U.S. laws.
+            </p>
+          </div>
+        </section>
+
+        <section className="bg-white py-20 border-t border-gray-200 px-14">
+          <div className="max-w-4xl mx-auto text-center">
+            <h3 className="text-3xl font-bold mb-6">Why Choose QuickForm Pro?</h3>
+            <p className="text-gray-700 mb-8">
+              QuickForm Pro helps landlords and tenants create trusted, legally accurate lease
+              agreements in just a few clicks. No expensive lawyers or outdated templates—just
+              fast, clear, and reliable documents.
+            </p>
+            <button
+              onClick={() => redirect("/document/editor/lease-agreement")}
+              className="bg-[#2FAF68] hover:bg-[#37c476] text-white px-8 py-3 rounded-lg transition mx-auto flex items-center"
+            >
+              Start Now
+              <ArrowUpRight className="ml-2" size={18} />
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
