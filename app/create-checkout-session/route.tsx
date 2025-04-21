@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   try {
     const headersList = await headers();
     const origin = headersList.get("origin");
-    const { plan, priceId, mode } = await request.json();
+    const { plan, priceId, mode, user } = await request.json();
 
     const session = await stripe.checkout.sessions.create({
       mode: mode,
@@ -24,6 +24,7 @@ export async function POST(request: Request) {
           trial_period_days: plan?.trial_period_days,
         },
       }),
+      customer_email: user.email,
     });
 
     return NextResponse.json({ sessionId: session.id });

@@ -3,13 +3,22 @@ import { loadStripe } from "@stripe/stripe-js";
 import { User } from "@supabase/supabase-js";
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "");
 
-export default function PricingCTA({ plan, text }: { plan: any; text: string; user: User }) {
+export default function PricingCTA({
+  plan,
+  text,
+  user,
+}: {
+  plan: any;
+  text: string;
+  user: User;
+}) {
   async function handleSubscribe(priceId: string, mode: string, trial_period_days?: number) {
     const stripe = await stripePromise;
     const body = {
       priceId,
       mode,
       plan,
+      user,
       ...(trial_period_days && { trial_period_days: trial_period_days }),
     };
     const { sessionId } = await fetch("/create-checkout-session", {

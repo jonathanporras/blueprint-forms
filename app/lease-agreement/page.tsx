@@ -64,7 +64,7 @@ export default function LeaseAgreementLanding() {
           </div>
         </section>
 
-        <section className="bg-white py-20 border-t border-gray-200 px-14">
+        <section className="py-20 border-t border-gray-200 px-14">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-3xl font-bold mb-6">Why Choose QuickForm Pro?</h3>
             <p className="text-gray-700 mb-8">
