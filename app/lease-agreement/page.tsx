@@ -8,7 +8,7 @@ export default function LeaseAgreementLanding() {
       <main className="flex-grow">
         <section className="py-20 bg-[#EDF2FA] text-center flex flex-col md:flex-row px-14">
           <div className="w-full md:w-1/2 flex justify-end align-center items-center">
-            <div className="max-w-2xl text-left pr-8 pb-8">
+            <div className="max-w-2xl text-left pr-0 md:pr-8 pb-8">
               <h2 className="text-4xl font-bold mb-4">Create a Free Lease Agreement</h2>
               <p className="text-lg mb-8 max-w-xl mx-auto">
                 Create a Professional Lease Agreement in Minutes. <br />
@@ -16,7 +16,7 @@ export default function LeaseAgreementLanding() {
               </p>
               <button
                 onClick={() => redirect("/document/editor/lease-agreement")}
-                className="bg-[#2FAF68] hover:bg-[#37c476] text-white px-8 py-3 rounded-lg transition flex items-center"
+                className="bg-[#2FAF68] hover:bg-[#37c476] w-full md:w-auto text-white px-8 py-3 rounded-lg transition flex justify-center items-center"
               >
                 Get Started for Free
                 <ArrowUpRight className="ml-2" size={18} />
@@ -74,7 +74,7 @@ export default function LeaseAgreementLanding() {
             </p>
             <button
               onClick={() => redirect("/document/editor/lease-agreement")}
-              className="bg-[#2FAF68] hover:bg-[#37c476] text-white px-8 py-3 rounded-lg transition mx-auto flex items-center"
+              className="bg-[#2FAF68] hover:bg-[#37c476] w-full md:w-auto text-white px-8 py-3 rounded-lg transition mx-auto flex items-center justify-center items-center"
             >
               Start Now
               <ArrowUpRight className="ml-2" size={18} />
