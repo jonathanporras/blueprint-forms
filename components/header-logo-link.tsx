@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export default function HeaderLogoLink({ user }: { user?: User | null }) {
   const onClick = () => {
     if (!user) {
-      return redirect("/log-in");
+      return redirect("/");
     }
 
     if (user) {
