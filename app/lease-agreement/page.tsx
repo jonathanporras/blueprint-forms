@@ -11,7 +11,7 @@ export default function LeaseAgreementLanding() {
             <div className="max-w-2xl text-left pr-8 pb-8">
               <h2 className="text-4xl font-bold mb-4">Create a Free Lease Agreement</h2>
               <p className="text-lg mb-8 max-w-xl mx-auto">
-                Build a legally sound rental agreement in minutes. <br />
+                Create a Professional Lease Agreement in Minutes. <br />
                 No legal jargon, no hassle—just fast and free.
               </p>
               <button
