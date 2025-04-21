@@ -11,7 +11,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
   return (
     <form className="flex-1 flex flex-col min-w-64 my-10 max-w-md min-h-screen pt-12">
       <FormMessage message={searchParams} />
-      <h1 className="text-2xl font-medium">Sign in</h1>
+      <h1 className="text-2xl font-medium">Log in</h1>
       <p className="text-sm text-foreground">
         Don't have an account?{" "}
         <Link className="text-foreground font-medium underline" href="/sign-up">
