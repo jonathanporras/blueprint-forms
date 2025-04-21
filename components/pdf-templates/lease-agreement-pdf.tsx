@@ -139,6 +139,24 @@ export default function LeaseAgreementPDF(formValues: Record<string, any>) {
             remain in good standing throughout the lease term.
           </Text>
         </View>
+        {formValues?.formValues["is_parking"]?.value === "true" && (
+          <View style={styles.section}>
+            <Text>
+              PARKING: Parking on the Premises is limited to properly licensed and fully
+              operational motor vehicles. The storage or parking of trailers, boats, campers,
+              RVs, buses, oversized trucks, or unregistered vehicles is strictly prohibited.
+              Vehicles may not be driven or parked on lawns, including those belonging to
+              neighbors. Any vehicle found on the lawn is subject to towing at the Tenant cost.
+              Parking areas must remain clean and organized at all times. All vehicles must be
+              parked in a neat and orderly manner. Mechanical repairs or storage of
+              non-functioning vehicles is not allowed in the garage, driveway, or any other
+              part of the Premises. The Landlord reserves the right to remove any
+              non-operational or unregistered vehicle at the Tenant expense. No vehicle
+              maintenance, including oil or brake changes, is permitted on-site. All local and
+              town parking ordinances must be observed.
+            </Text>
+          </View>
+        )}
         <View style={styles.section}>
           <Text>
             {" "}

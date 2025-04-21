@@ -201,6 +201,22 @@ export default function DocumentPreview({
                 agrees to ensure that all utility accounts for which they are responsible
                 remain in good standing throughout the lease term.
               </p>
+              {formValues["is_parking"]?.value === "true" && (
+                <p className="pb-4 text-sm">
+                  PARKING: Parking on the Premises is limited to properly licensed and fully
+                  operational motor vehicles. The storage or parking of trailers, boats,
+                  campers, RVs, buses, oversized trucks, or unregistered vehicles is strictly
+                  prohibited. Vehicles may not be driven or parked on lawns, including those
+                  belonging to neighbors. Any vehicle found on the lawn is subject to towing at
+                  the Tenant cost. Parking areas must remain clean and organized at all times.
+                  All vehicles must be parked in a neat and orderly manner. Mechanical repairs
+                  or storage of non-functioning vehicles is not allowed in the garage,
+                  driveway, or any other part of the Premises. The Landlord reserves the right
+                  to remove any non-operational or unregistered vehicle at the Tenant expense.
+                  No vehicle maintenance, including oil or brake changes, is permitted on-site.
+                  All local and town parking ordinances must be observed.
+                </p>
+              )}
               <p className="pb-4 text-sm">
                 PERMITTED USE OF PROPERTY: The Tenant agrees to use the Property solely as a
                 private residence. The Tenant shall not engage in any illegal activities on the
