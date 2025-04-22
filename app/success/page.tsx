@@ -6,6 +6,9 @@ import { createClient } from "@/utils/supabase/server";
 import { fetchDocuments, updateProfile } from "@/utils/api-server";
 import { ArrowUpRight } from "lucide-react";
 import CTA from "@/components/cta";
+import ConversionTracking from "./conversion-tracking";
+
+const COST_PER_CLICK = 4;
 
 export default async function Success(props: { searchParams: Promise<Message> }) {
   const { session_id } = await props.searchParams;
@@ -31,6 +34,9 @@ export default async function Success(props: { searchParams: Promise<Message> })
     expand: ["line_items", "payment_intent"],
   });
   const priceName = line_items?.data[0].price?.nickname;
+  const value = line_items?.data[0]?.price?.unit_amount
+    ? (Number(line_items?.data[0]?.price?.unit_amount / 100) - COST_PER_CLICK).toString()
+    : null;
 
   if (status === "open") {
     return redirect("/");
@@ -67,6 +73,7 @@ export default async function Success(props: { searchParams: Promise<Message> })
             />
           </div>
         </section>
+        {value && <ConversionTracking value={value} transaction_id={session_id} />}
       </div>
     );
   }
