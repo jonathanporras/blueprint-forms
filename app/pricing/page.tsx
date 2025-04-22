@@ -71,7 +71,7 @@ export default async function Pricing() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto my-10">
+    <div className="max-w-6xl mx-auto my-10 px-6">
       <h1 className="text-3xl text-center mb-8">Choose a Plan for Your Account</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {pricingPlans.map((plan, index) => (
@@ -100,8 +100,8 @@ export default async function Pricing() {
       </div>
       <div className="text-center mx-auto mt-20 w-fill max-w-2xl">
         <p>
-          "I truly appreciate Blueprint—their service took the hassle out of creating my legal
-          documents and made the whole process effortless!"
+          "I truly appreciate QuickForm Pro—their service took the hassle out of creating my
+          legal documents and made the whole process effortless!"
         </p>
         <p>- Paul N., Account Executive</p>
         <img
