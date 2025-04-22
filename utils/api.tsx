@@ -351,3 +351,14 @@ export async function fetchProfile(user_id: string) {
 
   return data[0];
 }
+
+export async function deleteDocument(documentId: Document["id"]) {
+  const { data, error } = await supabase.from("documents").delete().match({ id: documentId });
+
+  if (error) {
+    console.error("Error deleting document:", error);
+    throw error;
+  }
+
+  return data;
+}

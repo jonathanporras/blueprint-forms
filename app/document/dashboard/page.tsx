@@ -6,6 +6,7 @@ import DocumentName from "./document-name";
 import { Document } from "../editor/[template_type]/[document_id]/page";
 import { ExternalLink, FilePenLine, FolderDown } from "lucide-react";
 import MyAccount from "./my-account";
+import TwoStepDeleteButton from "./delete-button";
 
 const DocumentDashbord = async () => {
   const supabase = await createClient();
@@ -45,15 +46,16 @@ const DocumentDashbord = async () => {
                   href={`/document/editor/${document.template_type}/${document.id}`}
                 >
                   <FilePenLine className="inline pr-2" />
-                  edit
+                  Edit
                 </Link>
                 <Link
                   className="bg-[#2FAF68] hover:bg-[#37c476] text-white px-4 py-1 rounded-lg transition"
                   href={`/document/editor/${document.template_type}/${document.id}`}
                 >
                   <FolderDown className="inline pr-2" />
-                  export
+                  Export
                 </Link>
+                {document?.id && <TwoStepDeleteButton documentId={document?.id} />}
               </div>
             </div>
           ))}

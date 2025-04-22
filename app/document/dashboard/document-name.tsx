@@ -12,7 +12,7 @@ export default function DocumentName({ document }: { document: Document }) {
 
   return (
     <input
-      placeholder="Field Label"
+      placeholder="Document Name"
       value={name}
       onChange={(e) => {
         setName(e.target.value);

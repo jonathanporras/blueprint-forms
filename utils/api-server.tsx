@@ -37,7 +37,7 @@ export async function fetchAllTemplateData(template_id: string) {
   return data;
 }
 
-export async function createDocument({ template_type, name }: Document) {
+export async function createDocument({ template_type, name, user_id }: Document) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("documents")
@@ -45,6 +45,7 @@ export async function createDocument({ template_type, name }: Document) {
       {
         template_type: template_type,
         name: name,
+        user_id: user_id,
       },
     ])
     .select();
@@ -66,7 +67,7 @@ export async function fetchDocuments(user_id: string) {
     .eq("user_id", user_id);
 
   if (error) {
-    console.error("Error fetching template:", error);
+    console.error("Error fetching documents:", error);
     throw error;
   }
 
