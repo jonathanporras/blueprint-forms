@@ -1,5 +1,7 @@
 import React from "react";
 import SectionsEditor from "./sections-editor";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
 
 export interface Section {
   id?: string;
@@ -37,6 +39,14 @@ type ParamsProps = Promise<{ templateId: string }>;
 
 export default async function TemplateEditor(props: { params: ParamsProps }) {
   const { templateId } = await props.params;
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user?.email !== "porrasjon@gmail.com") {
+    return redirect("/");
+  }
 
   return <SectionsEditor templateId={templateId} />;
 }
