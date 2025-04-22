@@ -7,6 +7,7 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import HeaderLogoLink from "@/components/header-logo-link";
 import { createClient } from "@/utils/supabase/server";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -55,6 +56,7 @@ export default async function RootLayout({
           </main>
         </ThemeProvider>
       </body>
+      <GoogleAnalytics gaId="G-399R1XXJVR" />
     </html>
   );
 }
