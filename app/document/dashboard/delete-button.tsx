@@ -27,15 +27,15 @@ export default function TwoStepDeleteButton({ documentId }: { documentId: string
   return (
     <button
       onClick={handleClick}
-      className={`px-4 py-1 rounded-lg text-white font-medium transition-colors flex ${
+      className={`px-2 py-1 rounded-lg text-white font-medium transition-colors flex items-center ${
         armed ? "bg-red-700 hover:bg-red-800" : "bg-red-500 hover:bg-red-600"
       }`}
     >
       {armed ? (
-        "Confirm"
+        "Confirm Delete"
       ) : (
         <>
-          <Trash2 className="pr-2" /> Delete
+          <Trash2 size="18" />
         </>
       )}
     </button>

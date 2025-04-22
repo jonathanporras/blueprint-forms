@@ -7,6 +7,7 @@ import { Document } from "../editor/[template_type]/[document_id]/page";
 import { ExternalLink, FilePenLine, FolderDown } from "lucide-react";
 import MyAccount from "./my-account";
 import TwoStepDeleteButton from "./delete-button";
+import CreateNewDoc from "./create-new-doc";
 
 const DocumentDashbord = async () => {
   const supabase = await createClient();
@@ -61,8 +62,9 @@ const DocumentDashbord = async () => {
           ))}
         </div>
       </div>
-      <div className="w-full max-w-7xl mx-auto pt-8 flex flex-col mb-8">
-        <MyAccount priceName={profile?.price_name} />
+      <div className="w-full max-w-7xl mx-auto pt-8 flex md:flex-row flex-col mb-8 gap-8">
+        <MyAccount priceName={profile?.price_name} email={user?.email} />
+        <CreateNewDoc />
       </div>
     </div>
   );
