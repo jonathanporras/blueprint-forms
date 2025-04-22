@@ -8,7 +8,7 @@ export default function MyAccount({
   email,
 }: {
   priceName?: string;
-  email: string;
+  email?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
