@@ -14,6 +14,8 @@ import { fetchProfile } from "@/utils/api";
 export interface Profile {
   id?: string;
   status: "paid" | "unpaid";
+  planName: string;
+  stripeCustomerId: string;
 }
 export default function DocumentPreview({
   user,

@@ -73,17 +73,33 @@ export async function fetchDocuments(user_id: string) {
   return data;
 }
 
-export async function updateProfileStatus({
+export async function fetchProfile(user_id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("profiles").select().eq("id", user_id);
+
+  if (error) {
+    console.error("Error fetching steps:", error);
+    throw error;
+  }
+
+  return data[0];
+}
+
+export async function updateProfile({
   status,
   id,
+  priceName,
+  stripeCustomerId,
 }: {
   status: Profile["status"];
   id: Profile["id"];
+  priceName: Profile["planName"];
+  stripeCustomerId: Profile["stripeCustomerId"];
 }) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("profiles")
-    .update({ status: status })
+    .update({ status: status, price_name: priceName, stripe_customer_id: stripeCustomerId })
     .eq("id", id);
 
   if (error) {

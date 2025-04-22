@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import stripe from "@/lib/stripe";
 import { Message } from "postcss";
 import { createClient } from "@/utils/supabase/server";
-import { fetchDocuments, updateProfileStatus } from "@/utils/api-server";
+import { fetchDocuments, updateProfile } from "@/utils/api-server";
 import { ArrowUpRight } from "lucide-react";
 import CTA from "@/components/cta";
 
@@ -22,29 +22,40 @@ export default async function Success(props: { searchParams: Promise<Message> })
   }
 
   const documents = await fetchDocuments(user.id);
-  console.log(documents);
   const documentUrl = `/document/editor/${documents[0].template_type}/${documents[0].id}`;
-  const { status } = await stripe.checkout.sessions.retrieve(session_id, {
+  const {
+    status,
+    line_items,
+    customer: customerId,
+  } = await stripe.checkout.sessions.retrieve(session_id, {
     expand: ["line_items", "payment_intent"],
   });
+  const priceName = line_items?.data[0].price?.nickname;
 
   if (status === "open") {
     return redirect("/");
   }
 
-  if (status === "complete") {
-    await updateProfileStatus({ status: "paid", id: user.id });
+  if (status === "complete" && priceName && customerId) {
+    await updateProfile({
+      status: "paid",
+      id: user.id,
+      priceName: priceName,
+      stripeCustomerId: customerId.toString(),
+    });
   }
 
   if (status === "complete") {
     return (
       <div className="w-full my-20 max-w-4xl mx-auto min-h-screen flex flex-col">
         <section id="success">
-          <h2 className="text-xl font-bold">Payment Successful!</h2>
+          <h2 className="text-xl font-bold pb-2">Payment Successful! 🎉</h2>
           <p>
             A confirmation email will be sent to {user.email}. <br />
             If you have any questions, please contact us:{" "}
-            <a href="mailto:orders@example.com">support@quickformpro.com</a>
+            <a href="mailto:orders@example.com" className="text-[#4285F4]">
+              support@quickformpro.com
+            </a>
             . <br />
             Print and export your documents now!
           </p>
