@@ -108,6 +108,7 @@ export default function LeaseAgreementPDF(formValues: Record<string, any>) {
             {formValues?.formValues["rent_payment_unit"]?.value &&
               ` ${renderDocumentField(formValues?.formValues["rent_payment_unit"]?.value)}, `}
             {renderDocumentField(formValues?.formValues["rent_payment_city"]?.value)},{" "}
+            {renderDocumentField(formValues?.formValues["rent_payment_state"]?.value)},{" "}
             {renderDocumentField(formValues?.formValues["rent_payment_zip"]?.value)} or any
             other location subsequently specified by the Landlord in writing to the Tenant, on
             or before its due date and without demand. This payment is due on the of each
