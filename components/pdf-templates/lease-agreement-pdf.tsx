@@ -40,9 +40,8 @@ export default function LeaseAgreementPDF(formValues: Record<string, any>) {
                 format(formValues?.formValues["lease_date"]?.value, "MMMM d, yyyy")
               )}
             , by and between{" "}
-            {renderDocumentField(formValues?.formValues["landlord_name"]?.value)}
-            {"  "}
-            (hereinafter referred to as "Landlord") and{" "}
+            {renderDocumentField(formValues?.formValues["landlord_name"]?.value)} (hereinafter
+            referred to as "Landlord") and{" "}
             {renderDocumentField(formValues?.formValues["tenant_name"]?.value)}
             {formValues?.formValues["is_second_tenant"]?.value === "true" &&
               renderDocumentField(`, ${formValues?.formValues["second_tenant_name"]?.value}`)}

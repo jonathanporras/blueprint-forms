@@ -24,8 +24,9 @@ export default async function Success(props: { searchParams: Promise<Message> })
     return redirect("/sign-up");
   }
 
-  const documents = await fetchDocuments(user.id);
-  const documentUrl = `/document/editor/${documents[0].template_type}/${documents[0].id}`;
+  // const documents = await fetchDocuments(user.id);
+  // const documentUrl = `/document/editor/${documents[0].template_type}/${documents[0].id}`;
+  const myDocsUrl = "/document/dashboard";
   const {
     status,
     line_items,
@@ -68,8 +69,8 @@ export default async function Success(props: { searchParams: Promise<Message> })
           <div className="mt-8">
             <CTA
               icon={<ArrowUpRight className="pl-2" />}
-              buttonText="Print and Export Now"
-              url={documentUrl}
+              buttonText="My Documents"
+              url={myDocsUrl}
             />
           </div>
         </section>

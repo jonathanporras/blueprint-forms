@@ -77,8 +77,7 @@ export default function DocumentPreview({
                 "Lease") is entered into on{" "}
                 {formValues["lease_date"]?.value &&
                   renderDocumentField(format(formValues["lease_date"]?.value, "MMMM d, yyyy"))}
-                , by and between {renderDocumentField(formValues["landlord_name"]?.value)}
-                {"  "}
+                , by and between {renderDocumentField(formValues["landlord_name"]?.value)}{" "}
                 (hereinafter referred to as "Landlord") and{" "}
                 {renderDocumentField(formValues["tenant_name"]?.value)}
                 {formValues["is_second_tenant"]?.value === "true" &&
