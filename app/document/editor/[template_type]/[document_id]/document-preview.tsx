@@ -11,6 +11,7 @@ import { User } from "@supabase/supabase-js";
 import { Document } from "./page";
 import { fetchProfile } from "@/utils/api";
 import { debounce } from "@/lib/utils";
+import ExportButton from "@/components/export-button";
 
 export interface Profile {
   id?: string;
@@ -26,62 +27,11 @@ export default function DocumentPreview({
   documentId: Document["id"] | null;
 }) {
   const [formValues] = useAtom<Record<string, any>>(documentFieldsAtom);
-  const [instance, update] = usePDF({
-    document: <LeaseAgreementPDF formValues={formValues} />,
-  });
-  const [profile, setProfile] = useState({} as Profile);
-
-  useEffect(() => {
-    if (user?.id) {
-      fetchProfile(user.id).then((data) => {
-        setProfile(data);
-      });
-    }
-    debouncedUpdateExport(formValues);
-  }, [user, formValues]);
-
-  const debouncedUpdateExport = useCallback(
-    debounce((formValues) => {
-      update(<LeaseAgreementPDF formValues={formValues} />);
-    }, 300),
-    [formValues]
-  );
 
   return (
     <div className="">
       <div className="flex justify-end">
-        {user ? (
-          profile?.status === "paid" ? (
-            <>
-              {instance?.url && (
-                <a
-                  className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
-                  href={instance.url}
-                  download="lease-agreement.pdf"
-                >
-                  <FolderDown className="inline pr-2" />
-                  Export
-                </a>
-              )}
-            </>
-          ) : (
-            <a
-              className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
-              href={`/pricing`}
-            >
-              <FolderDown className="inline pr-2" />
-              Export
-            </a>
-          )
-        ) : (
-          <a
-            className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
-            href={`/sign-up?document_id=${documentId}`}
-          >
-            <FolderDown className="inline pr-2" />
-            Export
-          </a>
-        )}
+        <ExportButton user={user} documentId={documentId} />
       </div>
       <motion.div
         initial={{ opacity: 0 }}
