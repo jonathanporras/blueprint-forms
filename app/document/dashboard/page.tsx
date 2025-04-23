@@ -30,7 +30,7 @@ const DocumentDashbord = async () => {
           {documents.map((document: Document) => (
             <div
               key={document.id}
-              className="flex sm:flex-row sm:items-center justify-between gap-4 p-4 bg-white border-t"
+              className="flex md:flex-row flex-col md:justify-between justify-start gap-4 p-4 bg-white border-t"
             >
               <div className="flex-1 flex">
                 <Link
@@ -41,7 +41,7 @@ const DocumentDashbord = async () => {
                 </Link>
                 <DocumentName document={document} />
               </div>
-              <div className="flex gap-2 justify-end">
+              <div className="flex gap-2 md:justify-end justify-start">
                 <Link
                   className="bg-[#2FAF68] hover:bg-[#37c476] text-white px-4 py-1 rounded-lg transition"
                   href={`/document/editor/${document.template_type}/${document.id}`}
