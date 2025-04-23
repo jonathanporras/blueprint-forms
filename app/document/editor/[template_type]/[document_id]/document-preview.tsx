@@ -5,11 +5,12 @@ import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
 import { format } from "date-fns";
 import { usePDF } from "@react-pdf/renderer";
 import LeaseAgreementPDF from "@/components/pdf-templates/lease-agreement-pdf";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FolderDown } from "lucide-react";
 import { User } from "@supabase/supabase-js";
 import { Document } from "./page";
 import { fetchProfile } from "@/utils/api";
+import { debounce } from "@/lib/utils";
 
 export interface Profile {
   id?: string;
@@ -36,7 +37,15 @@ export default function DocumentPreview({
         setProfile(data);
       });
     }
-  }, [user]);
+    debouncedUpdateExport(formValues);
+  }, [user, formValues]);
+
+  const debouncedUpdateExport = useCallback(
+    debounce((formValues) => {
+      update(<LeaseAgreementPDF formValues={formValues} />);
+    }, 300),
+    [formValues]
+  );
 
   return (
     <div className="">

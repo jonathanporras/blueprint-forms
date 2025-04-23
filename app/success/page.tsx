@@ -42,12 +42,12 @@ export default async function Success(props: { searchParams: Promise<Message> })
     return redirect("/");
   }
 
-  if (status === "complete" && priceName && customerId) {
+  if (status === "complete" && priceName) {
     await updateProfile({
       status: "paid",
       id: user.id,
       priceName: priceName,
-      stripeCustomerId: customerId.toString(),
+      ...(customerId && { stripeCustomerId: customerId.toString() }),
     });
   }
 

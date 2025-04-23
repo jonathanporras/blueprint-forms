@@ -95,12 +95,16 @@ export async function updateProfile({
   status: Profile["status"];
   id: Profile["id"];
   priceName: Profile["planName"];
-  stripeCustomerId: Profile["stripeCustomerId"];
+  stripeCustomerId?: Profile["stripeCustomerId"];
 }) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("profiles")
-    .update({ status: status, price_name: priceName, stripe_customer_id: stripeCustomerId })
+    .update({
+      status: status,
+      price_name: priceName,
+      ...(stripeCustomerId && { stripe_customer_id: stripeCustomerId }),
+    })
     .eq("id", id);
 
   if (error) {
