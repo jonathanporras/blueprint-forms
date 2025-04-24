@@ -21,13 +21,14 @@ export default function LeaseAgreementLanding() {
         <main className="flex-grow">
           <section className="py-20 bg-[#EDF2FA] text-center flex flex-col md:flex-row px-14">
             <div className="w-full md:w-1/2 flex justify-end align-center items-center">
-              <div className="max-w-2xl text-left pr-0 md:pr-8 pb-8">
-                <h2 className="text-4xl font-bold mb-4">Build a Lease Agreement in Minutes</h2>
+              <div className="max-w-3xl text-left pr-0 md:pr-8 pb-8">
+                <h2 className="text-4xl font-bold mb-4">
+                  Create a Lease Agreement in Minutes
+                </h2>
                 <p className="text-lg mb-8 max-w-xl">
-                  Create a personalized lease in just a few clicks — no lawyers, no hassle.{" "}
+                  Create a custom lease in just a few clicks — no lawyers, no hassle.
                   <br />
-                  🔒 Your info stays private and encrypted.
-                  <br />⭐ Start for free, cancel anytime.
+                  Secure and private. Get started free!
                 </p>
                 <button
                   onClick={() => {
@@ -59,7 +60,7 @@ export default function LeaseAgreementLanding() {
                     </svg>
                   ) : (
                     <>
-                      Start My Lease
+                      Create My Lease Agreement
                       <ArrowUpRight className="ml-2" size={18} />
                     </>
                   )}
@@ -145,7 +146,7 @@ export default function LeaseAgreementLanding() {
                   </svg>
                 ) : (
                   <>
-                    Start Now
+                    Create My Lease Agreement
                     <ArrowUpRight className="ml-2" size={18} />
                   </>
                 )}
