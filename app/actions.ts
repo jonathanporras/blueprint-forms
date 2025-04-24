@@ -30,7 +30,11 @@ export const signUpAction = async (formData: FormData) => {
 
   if (error) {
     console.error(error.code + " " + error.message);
-    return encodedRedirect("error", "/sign-up", error.message);
+    if (documentId) {
+      return encodedRedirect("error", "/sign-up", error.message, `&document_id=${documentId}`);
+    } else {
+      return encodedRedirect("error", "/sign-up", error.message);
+    }
   } else {
     if (documentId) {
       const supabase = await createClient();

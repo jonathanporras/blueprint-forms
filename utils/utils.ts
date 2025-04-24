@@ -11,6 +11,11 @@ export function encodedRedirect(
   type: "error" | "success",
   path: string,
   message: string,
+  params?: string
 ) {
-  return redirect(`${path}?${type}=${encodeURIComponent(message)}`);
+  if (params) {
+    return redirect(`${path}?${type}=${encodeURIComponent(message)}${params}`);
+  } else {
+    return redirect(`${path}?${type}=${encodeURIComponent(message)}`);
+  }
 }
