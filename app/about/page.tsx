@@ -1,12 +1,65 @@
-export default async function About() {
+import React from "react";
+
+export default function AboutPage() {
   return (
-    <div className="max-w-xl mx-auto px-4 my-20 flex flex-col items-center min-h-screen">
-      <h3 className="font-bold text-xl pb-8">Welcome to QuickForm Pro!</h3>{" "}
-      <p>
-        QuickForm Pro helps business owners create, customize, and manage legal documents with
-        ease. We simplify complex workflows and reduce drafting time. QuickForm Pro is ideal
-        for small business owners who need reliable, professional-grade documents quickly.
-      </p>
+    <div className="max-w-4xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold mb-6">About QuickForm Pro</h1>
+
+      <section className="mb-10">
+        <h2 className="text-2xl font-semibold mb-2">
+          Empowering Small Businesses with Effortless Legal Document Creation
+        </h2>
+        <p className="text-gray-700">
+          At <strong>QuickForm Pro</strong>, we understand the challenges small business owners
+          face when dealing with legal paperwork. Our mission is to simplify the process of
+          creating, customizing, and managing legal documents, enabling you to focus on what
+          matters most—growing your business.
+        </p>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="text-2xl font-semibold mb-4">Why Choose QuickForm Pro?</h2>
+        <ul className="list-disc list-inside text-gray-700 space-y-2">
+          <li>
+            <strong>Time-Saving Efficiency:</strong> Our intuitive platform streamlines the
+            document creation process, reducing drafting time and eliminating the complexities
+            of legal jargon.
+          </li>
+          <li>
+            <strong>Professional-Grade Documents:</strong> Access a comprehensive library of
+            customizable templates crafted to meet the needs of small businesses, ensuring
+            reliability and professionalism.
+          </li>
+          <li>
+            <strong>User-Friendly Interface:</strong> Designed with simplicity in mind,
+            QuickForm Pro requires no legal expertise, making it accessible for all users.
+          </li>
+          <li>
+            <strong>Secure and Confidential:</strong> We prioritize your privacy. All your
+            information is securely stored, giving you peace of mind.
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-10">
+        <h2 className="text-2xl font-semibold mb-2">Proudly Based in San Francisco</h2>
+        <p className="text-gray-700">
+          QuickForm Pro is proud to be based in the heart of San Francisco. Our team is
+          dedicated to providing high-quality legal document solutions to entrepreneurs and
+          small businesses nationwide. As a growing, trusted company, we are committed to
+          supporting our community and delivering innovative tools that make legal
+          documentation easier for everyone.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-2">Our Commitment</h2>
+        <p className="text-gray-700">
+          QuickForm Pro is dedicated to empowering entrepreneurs by providing tools that make
+          legal documentation straightforward and stress-free. We're here to support your
+          business journey every step of the way.
+        </p>
+      </section>
     </div>
   );
 }
