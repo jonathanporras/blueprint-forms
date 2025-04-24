@@ -51,7 +51,9 @@ export default async function RootLayout({
                   {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                 </div>
               </nav>
-              <div className="flex flex-col min-h-[400px] w-full align-center">{children}</div>
+              <div className="flex flex-col min-h-[400px] w-full min-h-screen align-center">
+                {children}
+              </div>
               <Footer />
             </div>
           </main>
