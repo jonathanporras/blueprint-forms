@@ -1,5 +1,5 @@
 "use client";
-import { sendGAEvent } from "@next/third-parties/google";
+import { sendGAEvent, sendGTMEvent } from "@next/third-parties/google";
 import { useEffect } from "react";
 
 export default function ConversionTracking({ value }: { value: string }) {
@@ -8,6 +8,7 @@ export default function ConversionTracking({ value }: { value: string }) {
       sendGAEvent("event", "purchase", {
         value: value,
       });
+      sendGTMEvent({ event: "conversion", value: value });
     }, 1000);
   });
 
