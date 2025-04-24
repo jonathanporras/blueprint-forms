@@ -56,7 +56,7 @@ export default async function RootLayout({
           </main>
         </ThemeProvider>
       </body>
-      <GoogleAnalytics gaId="G-399R1XXJVR" />
+      {process.env.VERCEL_ENV === "production" && <GoogleAnalytics gaId="G-399R1XXJVR" />}
     </html>
   );
 }

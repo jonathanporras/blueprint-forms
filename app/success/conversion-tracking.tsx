@@ -1,22 +1,15 @@
 "use client";
 import { sendGAEvent } from "@next/third-parties/google";
+import { useEffect } from "react";
 
-export default function ConversionTracking({
-  value,
-  transaction_id,
-}: {
-  value: string;
-  transaction_id: string;
-}) {
-  if (typeof window !== "undefined") {
-    sendGAEvent({
-      event: "purchase", // Event name
-      value: {
-        transaction_id: transaction_id, // Transaction ID
-        value: value, // Transaction value
-      },
-    });
-  }
+export default function ConversionTracking({ value }: { value: string }) {
+  useEffect(() => {
+    setTimeout(() => {
+      sendGAEvent("event", "purchase", {
+        value: value,
+      });
+    }, 1000);
+  });
 
   return <></>;
 }
