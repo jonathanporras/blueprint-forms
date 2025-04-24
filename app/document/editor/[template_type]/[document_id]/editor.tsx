@@ -12,6 +12,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { MoveRight } from "lucide-react";
 import ExportButton from "@/components/export-button";
 import { User } from "@supabase/supabase-js";
+import Spinner from "@/components/spinner";
 
 export type FormData = {
   id: any;
@@ -63,11 +64,13 @@ export default function Editor({
   const [formValues, setFormValues] = useAtom<Record<string, any>>(documentFieldsAtom);
   const progress = ((currentStep + 1) / totalSteps) * 100;
   const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const stepFromQuery = searchParams.get("step");
     fetchFields(documentId);
     setCurrentStep(Number(stepFromQuery));
+    setLoading(false);
   }, [documentId]);
 
   const fetchFields = async (documentId: Document["id"]) => {
@@ -212,7 +215,11 @@ export default function Editor({
         return null;
     }
   };
-  return (
+  return loading ? (
+    <div className="w-full">
+      <Spinner />
+    </div>
+  ) : (
     <div className="px-8 my-8 lg:w-1/2 sm:w-full ">
       <div className="ml-0 lg:ml-8">
         <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-2">
