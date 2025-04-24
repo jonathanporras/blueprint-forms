@@ -7,7 +7,7 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import HeaderLogoLink from "@/components/header-logo-link";
 import { createClient } from "@/utils/supabase/server";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -35,6 +35,7 @@ export default async function RootLayout({
   } = await supabase.auth.getUser();
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
+      {process.env.VERCEL_ENV === "production" && <GoogleTagManager gtmId="AW-966833656" />}
       <body className="bg-background text-foreground">
         <ThemeProvider
           attribute="class"
