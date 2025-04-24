@@ -26,10 +26,11 @@ export default function LeaseAgreementLanding() {
                   Create a Lease Agreement in Minutes
                 </h2>
                 <p className="text-lg mb-8 max-w-3xl">
-                  Build your lease agreement in minutes.
-                  <br /> Easy and affordable — no lawyers, no hassle.
+                  Create a custom lease agreement with just a few clicks. <br /> Easy and
+                  affordable — no lawyers, no hassle.
                   <br />
-                  🔒 Secure and private. ✔️ Get started today for free!
+                  🔒 Secure and private. <br />
+                  ✔️ Get started today for free!
                 </p>
                 <button
                   onClick={() => {
