@@ -30,7 +30,7 @@ const pricingPlans: PricingPlan[] = [
     ],
     buttonText: "Choose Plan",
     mode: "subscription",
-    priceId: "price_1REuVXDpqPmduxm5EJUoYppF",
+    priceId: "price_1RH8HIDpqPmduxm5OqK4jivT",
     trial_period_days: 7,
   },
   {
@@ -44,7 +44,7 @@ const pricingPlans: PricingPlan[] = [
     ],
     buttonText: "Choose Plan",
     mode: "subscription",
-    priceId: "price_1RExwyDpqPmduxm5BLxlbKqD",
+    priceId: "price_1RH8IJDpqPmduxm57q6mYzC5",
   },
   {
     name: "Just This Document",
@@ -56,7 +56,7 @@ const pricingPlans: PricingPlan[] = [
     ],
     buttonText: "Choose Plan",
     mode: "payment",
-    priceId: "price_1REuWLDpqPmduxm5u5ddK7kJ",
+    priceId: "price_1RH8JjDpqPmduxm5L6Mwgtlf",
   },
 ];
 
