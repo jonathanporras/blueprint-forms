@@ -59,6 +59,7 @@ export default async function RootLayout({
           </main>
         </ThemeProvider>
       </body>
+      {process.env.VERCEL_ENV === "production" && <GoogleAnalytics gaId="G-399R1XXJVR" />}
     </html>
   );
 }
