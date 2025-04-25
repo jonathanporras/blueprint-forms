@@ -35,7 +35,7 @@ export default async function RootLayout({
   } = await supabase.auth.getUser();
   return (
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
-      {process.env.VERCEL_ENV === "production" && <GoogleTagManager gtmId="AW-966833656" />}
+      {process.env.VERCEL_ENV === "production" && <GoogleTagManager gtmId="GTM-WP32SS3L" />}
       <body className="bg-background text-foreground">
         <ThemeProvider
           attribute="class"
@@ -59,7 +59,6 @@ export default async function RootLayout({
           </main>
         </ThemeProvider>
       </body>
-      {process.env.VERCEL_ENV === "production" && <GoogleAnalytics gaId="G-399R1XXJVR" />}
     </html>
   );
 }

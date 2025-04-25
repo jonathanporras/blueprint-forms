@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import stripe from "@/lib/stripe";
 import { Message } from "postcss";
 import { createClient } from "@/utils/supabase/server";
-import { fetchDocuments, updateProfile } from "@/utils/api-server";
+import { updateProfile } from "@/utils/api-server";
 import { ArrowUpRight } from "lucide-react";
 import CTA from "@/components/cta";
 import ConversionTracking from "./conversion-tracking";
