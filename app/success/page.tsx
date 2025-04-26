@@ -58,7 +58,7 @@ export default async function Success(props: { searchParams: Promise<Message> })
         <section id="success">
           <h2 className="text-xl font-bold pb-2">Payment Successful! 🎉</h2>
           <p>
-            A confirmation email will be sent to {user.email}. <br />
+            {/* A confirmation email will be sent to {user.email}. <br /> */}
             If you have any questions, please contact us:{" "}
             <a href="mailto:orders@example.com" className="text-[#4285F4]">
               support@quickformpro.com
