@@ -29,7 +29,7 @@ const DocumentEditor = async (props: { params: ParamsProps }) => {
   } = await supabase.auth.getUser();
 
   return (
-    <div className="flex-col lg:flex-row flex justify-center gap-16">
+    <div className="flex-col lg:flex-row flex justify-center gap-16 w-full">
       <Editor user={user} formData={templateData} documentId={document_id} />
       <DocumentPreviewWrapper user={user} documentId={document_id} />
     </div>
