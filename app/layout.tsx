@@ -17,6 +17,7 @@ export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "QuickForm Pro",
   description: "The fastest way to create legal documents online.",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 const geistSans = Geist({
