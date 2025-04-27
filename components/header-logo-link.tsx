@@ -14,16 +14,25 @@ export default function HeaderLogoLink({ user }: { user?: User | null }) {
   };
   return (
     <div className="flex align-center text-lg tracking-wide logo-wrap text-white">
-      <a className="flex cursor-pointer" onClick={() => onClick()}>
+      <a className="flex cursor-pointer items-center" onClick={() => onClick()}>
         <img
-          className="inline mr-2 color-white"
+          className="inline color-white"
           alt="QuickForm Pro Header Logo"
           src="/images/logo.png"
           style={{
-            width: 30,
+            height: 40,
           }}
         />
-        <p>QuickForm Pro</p>
+        {/* <p>QuickForm Pro</p> */}
+        <img
+          className="inline mr-2 color-white pt-1"
+          alt="QuickForm Pro Header Logo"
+          src="/images/text-logo.png"
+          style={{
+            width: 120,
+          }}
+        />
+        {/* <p>QuickForm Pro</p> */}
       </a>
     </div>
   );
