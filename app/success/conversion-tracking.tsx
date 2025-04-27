@@ -8,7 +8,7 @@ export default function ConversionTracking({ value }: { value: string | null }) 
       // sendGAEvent("event", "purchase", {
       //   value: value || "0",
       // });
-      sendGTMEvent({ event: "conversion", value: value || "0" });
+      //sendGTMEvent({ event: "conversion", value: value || "0" });
     }, 1000);
   });
 
