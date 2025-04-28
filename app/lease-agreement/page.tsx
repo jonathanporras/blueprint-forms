@@ -27,9 +27,10 @@ export default function LeaseAgreementLanding() {
                 <p className="text-lg mb-8 max-w-3xl">
                   Create a custom lease agreement with just a few clicks. <br /> Easy and
                   affordable — no lawyers, no hassle.
-                  <br />
-                  🔒 Secure and private. <br />
-                  ✔️ Get started today for free!
+                  {/* <p className="mt-3">✔️ Get started today for free. </p> */}
+                  <p className="mt-3">🖊️ Unlimited edits. </p>
+                  <p>🔒 Secure and private. </p>
+                  <p>📄 Download a high-quality PDF. </p>
                 </p>
                 <button
                   onClick={() => {
