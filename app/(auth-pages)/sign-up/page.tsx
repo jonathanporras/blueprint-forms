@@ -63,18 +63,21 @@ export default async function Signup(props: {
       </div>
       <div className="md:w-1/4 w-full p-4 bg-gray-100 flex flex-col items-center md:items-start pt-8 md:pt-24 px-10 pb-20">
         <p className="text-md mb-4">
-          Your <span className="font-bold">Lease Agreement</span> is all set!
+          Your <span className="font-bold">Lease Agreement</span> is all set:
         </p>
         <p className="text-md pb-2">
-          <span className="text-[#2FAF68] pr-2">&#10003; </span>Ready to Print or Download as
+          <span className="text-[#2FAF68] pr-2">&#10003; </span>Ready to Print or Download as a
           PDF
+        </p>
+        <p className="text-md pb-2">
+          <span className="text-[#2FAF68] pr-2">&#10003; </span> Unlimited Edits
         </p>
         <p className="text-md pb-2">
           <span className="text-[#2FAF68] pr-2">&#10003; </span> Cancel Anytime
         </p>
-        <p className="text-md pb-2">
-          <span className="pr-1">🔒</span> Secure storage of personal documents
-        </p>
+        {/* <p className="text-md pb-2">
+          <span className="text-[#2FAF68] pr-2">&#10003; </span> Secure storage
+        </p> */}
       </div>
     </div>
   );
