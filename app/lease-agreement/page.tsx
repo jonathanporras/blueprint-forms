@@ -1,6 +1,5 @@
 "use client";
-import { ArrowUpRight, Check } from "lucide-react";
-import { redirect } from "next/navigation";
+import { ArrowUpRight, FileText, Scale, Timer } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -80,7 +79,7 @@ export default function LeaseAgreementLanding() {
           <section className="py-16 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-14">
             <div>
               <h3 className="text-xl font-semibold mb-2 flex items-center justify-center">
-                <Check className="text-[#2FAF68] mr-2" />
+                <FileText className="text-[#6B7280] mr-2" />
                 Create Documents
               </h3>
               <p className="text-gray-600">
@@ -90,7 +89,7 @@ export default function LeaseAgreementLanding() {
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2 flex items-center justify-center">
-                <Check className="text-[#2FAF68] mr-2" />
+                <Timer className="text-[#6B7280] mr-2" />
                 Quick & Easy
               </h3>
               <p className="text-gray-600">
@@ -100,7 +99,7 @@ export default function LeaseAgreementLanding() {
 
             <div>
               <h3 className="text-xl font-semibold mb-2 flex items-center justify-center">
-                <Check className="text-[#2FAF68] mr-2" />
+                <Scale className="text-[#6B7280] mr-2" />
                 Lawyer-Approved
               </h3>
               <p className="text-gray-600 ">
