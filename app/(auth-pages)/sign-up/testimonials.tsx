@@ -10,14 +10,13 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     name: "Sarah W.",
-    title: "Landlord, Oakland CA",
-    quote:
-      "QuickForm Pro saved me hours of paperwork. I had my lease signed and sent in minutes!",
+    title: "Landlord, Charlotte",
+    quote: "QuickForm Pro saved me hours of paperwork. I had my lease done in minutes!",
     image: "https://randomuser.me/api/portraits/women/65.jpg",
   },
   {
     name: "Jason M.",
-    title: "Real Estate Investor, San Francisco",
+    title: "Real Estate Investor, Los Angeles",
     quote: "The sign-up process was seamless, and the templates are incredibly helpful.",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
   },
