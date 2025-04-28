@@ -24,14 +24,14 @@ export default function LeaseAgreementLanding() {
                 <h2 className="text-4xl font-bold mb-4">
                   Create a Lease Agreement in Minutes
                 </h2>
-                <p className="text-lg mb-8 max-w-3xl">
+                <div className="text-lg mb-8 max-w-3xl">
                   Create a custom lease agreement with just a few clicks. <br /> Easy and
                   affordable — no lawyers, no hassle.
                   {/* <p className="mt-3">✔️ Get started today for free. </p> */}
                   <p className="mt-3">🖊️ Unlimited edits. </p>
                   <p>🔒 Secure and private. </p>
                   <p>📄 Download a high-quality PDF. </p>
-                </p>
+                </div>
                 <button
                   onClick={() => {
                     setLoading(true);
@@ -116,10 +116,10 @@ export default function LeaseAgreementLanding() {
           >
             <div className="max-w-4xl mx-auto text-center">
               <h3 className="text-3xl font-bold mb-6">Why Choose QuickForm Pro?</h3>
-              <p className="text-gray-700 mb-8">
-                QuickForm Pro helps landlords and property managers create trusted, legally
-                accurate lease agreements in just a few clicks. No expensive lawyers or
-                outdated templates—just fast, clear, and reliable documents.
+              <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
+                QuickForm Pro has helped <span className="font-bold">1,000+</span> landlords
+                and property managers create custom lease agreements quickly. No expensive
+                lawyers or outdated templates—just fast, clear, and reliable documents.
               </p>
               <button
                 onClick={() => {
