@@ -101,12 +101,12 @@ export default async function Pricing() {
           </div>
         ))}
       </div>
-      <div className="text-center mx-auto mt-20 w-fill max-w-2xl text-gray-500">
+      <div className="text-center mx-auto mt-20 w-fill max-w-2xl text-black">
         <p>
           "I truly appreciate QuickForm Pro—their service took the hassle out of creating my
           legal documents and made the whole process effortless!"
         </p>
-        <p className="text-black">- Elizabeth A., Property Manager</p>
+        <p className="text-gray-500">- Elizabeth A., Property Manager</p>
         <img
           className="block mx-auto mt-8"
           alt="Trusted Business Seals"
