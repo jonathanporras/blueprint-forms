@@ -74,7 +74,7 @@ export default async function Pricing() {
     <div className="max-w-6xl mx-auto my-10 px-6">
       <h1 className="text-3xl text-center mb-1">Choose a Plan for Your Account</h1>
       <h2 className="text-lg text-center mb-8 text-gray-500">
-        Get unlimited revisions and export to PDF. Download your lease before it expires!
+        Get unlimited revisions and export to PDF. Select a plan to download your document!
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {pricingPlans.map((plan, index) => (
@@ -106,7 +106,7 @@ export default async function Pricing() {
           "I truly appreciate QuickForm Pro—their service took the hassle out of creating my
           legal documents and made the whole process effortless!"
         </p>
-        <p>- Paul N., Property Manager</p>
+        <p className="text-black">- Elizabeth A., Property Manager</p>
         <img
           className="block mx-auto mt-8"
           alt="Trusted Business Seals"
