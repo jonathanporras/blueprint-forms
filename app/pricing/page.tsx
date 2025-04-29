@@ -72,18 +72,21 @@ export default async function Pricing() {
 
   return (
     <div className="max-w-6xl mx-auto my-10 px-6">
-      <h1 className="text-3xl text-center mb-8">Choose a Plan for Your Account</h1>
+      <h1 className="text-3xl text-center mb-1">Choose a Plan for Your Account</h1>
+      <h2 className="text-lg text-center mb-8 text-gray-500">
+        Get unlimited revisions and export to PDF. Download your lease before it expires!
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {pricingPlans.map((plan, index) => (
           <div
             key={index}
-            className={`border rounded-xl p-6 flex flex-col justify-start shadow-md ${plan.isPopular ? "border-blue-500 shadow-lg" : "border-gray-300"}`}
+            className={`border rounded-xl p-6 flex flex-col justify-start shadow-md hover:border-[#2FAF68] transition ${plan.isPopular ? "border-[#2FAF68] shadow-lg" : "border-gray-300"}`}
           >
-            {plan.isPopular && (
-              <div className="bg-blue-500 text-white px-3 py-1 text-sm font-bold rounded-md inline-block mb-4">
+            {/* {plan.isPopular && (
+              <div className="bg-[#2FAF68] text-white px-3 py-1 text-sm font-bold rounded-md inline-block mb-4">
                 Most Popular
               </div>
-            )}
+            )} */}
             <h2 className="text-sm mb-8">{plan.name}</h2>
             <p className="text-3xl font-bold">{plan.price}</p>
             {plan.term && <p className="text-xs pt-1">{plan.term}</p>}
@@ -98,12 +101,12 @@ export default async function Pricing() {
           </div>
         ))}
       </div>
-      <div className="text-center mx-auto mt-20 w-fill max-w-2xl">
+      <div className="text-center mx-auto mt-20 w-fill max-w-2xl text-gray-500">
         <p>
           "I truly appreciate QuickForm Pro—their service took the hassle out of creating my
           legal documents and made the whole process effortless!"
         </p>
-        <p>- Paul N., Account Executive</p>
+        <p>- Paul N., Property Manager</p>
         <img
           className="block mx-auto mt-8"
           alt="Trusted Business Seals"
