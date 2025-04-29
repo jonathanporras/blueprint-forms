@@ -9,6 +9,7 @@ import { FolderDown } from "lucide-react";
 import { fetchProfile } from "@/utils/api";
 import { useAtom } from "jotai";
 import { documentFieldsAtom } from "@/app/atoms/documentFieldsAtom";
+import { ANALYTICS_EVENTS, MixpanelAnalytics } from "@/lib/mixpanel";
 
 export default function ExportButton({
   user,
@@ -49,6 +50,12 @@ export default function ExportButton({
             className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
             href={instance.url}
             download="lease-agreement.pdf"
+            onClick={() => {
+              MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+                action: "exportDocument",
+                document: "lease-agreement",
+              });
+            }}
           >
             <FolderDown className="inline pr-2" />
             Export
@@ -59,6 +66,12 @@ export default function ExportButton({
       <a
         className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
         href={`/pricing`}
+        onClick={() => {
+          MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+            action: "exportDocument",
+            document: "lease-agreement",
+          });
+        }}
       >
         <FolderDown className="inline pr-2" />
         Export
@@ -68,6 +81,12 @@ export default function ExportButton({
     <a
       className="bg-[#2FAF68] hover:bg-[#37c476] transition text-white px-4 py-2 rounded"
       href={`/sign-up?document_id=${documentId}`}
+      onClick={() => {
+        MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+          action: "exportDocument",
+          document: "lease-agreement",
+        });
+      }}
     >
       <FolderDown className="inline pr-2" />
       Export

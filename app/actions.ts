@@ -4,7 +4,8 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { Document } from "./document/editor/[template_type]/[document_id]/page";
+import { trackEvent } from "@/lib/mixpanel-server";
+import { ANALYTICS_EVENTS } from "@/lib/mixpanel";
 
 export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
@@ -36,6 +37,9 @@ export const signUpAction = async (formData: FormData) => {
       return encodedRedirect("error", "/sign-up", error.message);
     }
   } else {
+    trackEvent(ANALYTICS_EVENTS.USER_SIGNED_UP, {
+      document: "lease-agreement",
+    });
     if (documentId) {
       const supabase = await createClient();
       const { data, error } = await supabase
@@ -60,6 +64,10 @@ export const signInAction = async (formData: FormData) => {
   if (error) {
     return encodedRedirect("error", "/log-in", error.message);
   }
+
+  trackEvent(ANALYTICS_EVENTS.USER_SIGNED_IN, {
+    document: "lease-agreement",
+  });
 
   return redirect("/document/dashboard");
 };

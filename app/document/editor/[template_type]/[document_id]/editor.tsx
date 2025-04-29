@@ -13,6 +13,7 @@ import { MoveRight } from "lucide-react";
 import ExportButton from "@/components/export-button";
 import { User } from "@supabase/supabase-js";
 import Spinner from "@/components/spinner";
+import { ANALYTICS_EVENTS, MixpanelAnalytics } from "@/lib/mixpanel";
 
 export type FormData = {
   id: any;
@@ -72,6 +73,14 @@ export default function Editor({
     setCurrentStep(Number(stepFromQuery));
     setLoading(false);
   }, [documentId]);
+
+  useEffect(() => {
+    MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+      action: "editDocument",
+      step: currentStep,
+      document: "lease-agreement",
+    });
+  }, [currentStep]);
 
   const fetchFields = async (documentId: Document["id"]) => {
     const data = await fetchDocumentFields(documentId);

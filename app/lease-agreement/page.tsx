@@ -3,6 +3,7 @@ import { ArrowUpRight, FileText, Scale, Timer } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ANALYTICS_EVENTS, MixpanelAnalytics } from "@/lib/mixpanel";
 
 export default function LeaseAgreementLanding() {
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,10 @@ export default function LeaseAgreementLanding() {
                 <button
                   onClick={() => {
                     setLoading(true);
+                    MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+                      action: "create document",
+                      document: "lease-agreement",
+                    });
                     rounter.push("/document/editor/lease-agreement");
                   }}
                   className="bg-[#2FAF68] hover:bg-[#37c476] w-full md:w-auto text-white px-8 py-3 rounded-lg transition flex justify-center items-center"

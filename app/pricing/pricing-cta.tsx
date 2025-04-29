@@ -1,4 +1,5 @@
 "use client";
+import { ANALYTICS_EVENTS, MixpanelAnalytics } from "@/lib/mixpanel";
 import { loadStripe } from "@stripe/stripe-js";
 import { User } from "@supabase/supabase-js";
 import { set } from "date-fns";
@@ -45,6 +46,12 @@ export default function PricingCTA({
       onClick={() => {
         setLoading(true);
         handleSubscribe(plan.priceId, plan.mode, plan?.trial_period_days);
+        MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+          action: "choosePlan",
+          document: "lease-agreement",
+          planId: plan.id,
+          planMode: plan.mode,
+        });
       }}
     >
       {loading ? (

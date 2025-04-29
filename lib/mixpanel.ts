@@ -8,6 +8,7 @@ export const ANALYTICS_EVENTS = {
   USER_SIGNED_IN: "User Signed In",
   USER_SIGNED_UP: "User Signed Up",
   USER_SIGNED_OUT: "User Signed Out",
+  PURCHASE: "purchase",
   // ... other events
 };
 
