@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import HeaderLogoLink from "@/components/header-logo-link";
 import { createClient } from "@/utils/supabase/server";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import MixpanelUserTracking from "@/components/mixpanel-user-tracking";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -38,6 +39,7 @@ export default async function RootLayout({
     <html lang="en" className={geistSans.className} suppressHydrationWarning>
       {process.env.VERCEL_ENV === "production" && <GoogleTagManager gtmId="GTM-WP32SS3L" />}
       <body className="bg-background text-foreground">
+        <MixpanelUserTracking user={user} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
