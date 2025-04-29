@@ -1,8 +1,8 @@
 // lib/mixpanel.js
 const mixpanel = require("mixpanel-node");
 
-const mixpanelClient = process.env.MIXPANEL_TOKEN
-  ? mixpanel.init(process.env.MIXPANEL_TOKEN, {})
+const mixpanelClient = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN
+  ? mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL_TOKEN, {})
   : null;
 
 export const trackEvent = <T extends Record<string, any>>(
