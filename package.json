@@ -15,7 +15,6 @@
     "@stripe/stripe-js": "^7.1.0",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "^2.48.1",
-    "@types/mixpanel": "^2.14.9",
     "autoprefixer": "10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -23,8 +22,8 @@
     "framer-motion": "^12.4.10",
     "jotai": "^2.12.2",
     "lucide-react": "^0.468.0",
+    "mixpanel": "^0.18.1",
     "mixpanel-browser": "^2.64.0",
-    "mixpanel-node": "^0.0.17",
     "next": "^15.3.1",
     "next-themes": "^0.4.3",
     "prettier": "^3.3.3",
@@ -34,6 +33,7 @@
     "stripe": "^18.0.0"
   },
   "devDependencies": {
+    "@types/mixpanel": "^2.14.9",
     "@types/mixpanel-browser": "^2.54.0",
     "@types/node": "22.10.2",
     "@types/react": "^19.0.2",
