@@ -8,7 +8,7 @@ export default function MixpanelUserTracking({ user }: { user: User | null }) {
   useEffect(() => {
     const getUser = async () => {
       if (user) {
-        await MixpanelAnalytics.identifyKnownUser(user.id);
+        await MixpanelAnalytics.identifyKnownUser(user.id, { email: user.email });
       } else {
         await MixpanelAnalytics.identifyUnknownUser();
       }
