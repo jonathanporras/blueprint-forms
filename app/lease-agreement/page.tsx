@@ -1,5 +1,14 @@
 "use client";
-import { ArrowUpRight, FileText, Scale, Timer } from "lucide-react";
+import {
+  ArrowUpRight,
+  FileCheck,
+  FileText,
+  Lock,
+  Pencil,
+  Scale,
+  ThumbsUp,
+  Timer,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -22,16 +31,29 @@ export default function LeaseAgreementLanding() {
           <section className="py-16 md:py-20 bg-[#EDF2FA] text-center flex flex-col md:flex-row px-6 md:px-14">
             <div className="w-full md:w-1/2 flex justify-end align-center items-center">
               <div className="max-w-3xl text-left pr-0 md:pr-8 pb-8">
-                <h2 className="text-4xl font-bold mb-4">
+                <h2 className="text-4xl font-bold mb-2 text-[#1E3A5F]">
                   Create a Lease Agreement in Minutes
                 </h2>
-                <div className="text-lg mb-8 max-w-3xl">
-                  Create a custom lease agreement with just a few clicks. <br /> Easy and
-                  affordable — no lawyers, no hassle.
+                <div className="text-lg mb-10 max-w-3xl">
+                  <p className="text-gray-700 text-xl">
+                    Quick, clear, and compliant — draft your lease agreement now!
+                  </p>
+                  {/* Easy and affordable — no lawyers, no hassle. */}
                   {/* <p className="mt-3">✔️ Get started today for free. </p> */}
-                  <p className="mt-3">🖊️ Unlimited edits. </p>
-                  <p>🔒 Secure and private. </p>
-                  <p>📄 Download a high-quality PDF. </p>
+                  <p className="mt-8 flex items-center">
+                    <ThumbsUp className="mr-2 text-[#1E3A5F]" size={20} /> FREE for a
+                    limited-time.{" "}
+                  </p>
+                  {/* <p className=" flex items-center">
+                    <Pencil className="mr-2 text-[#1E3A5F]" size={20} /> Unlimited edits.{" "}
+                  </p> */}
+                  <p className="mt-1 flex items-center">
+                    <Lock className="mr-2 text-[#1E3A5F]" size={20} /> Secure and private.{" "}
+                  </p>
+                  <p className="mt-1 flex items-center">
+                    <FileCheck className="mr-2 text-[#1E3A5F]" size={20} /> Download a
+                    high-quality PDF.{" "}
+                  </p>
                 </div>
                 <button
                   onClick={() => {
