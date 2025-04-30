@@ -74,7 +74,7 @@ export default async function Success(props: { searchParams: Promise<Message> })
             />
           </div>
         </section>
-        {process.env.VERCEL_ENV === "production" && <ConversionTracking value={value} />}
+        <ConversionTracking value={value} />
       </div>
     );
   }
