@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-const ESTIMATED_TIME_TO_COMPLETE = 9;
+const ESTIMATED_TIME_TO_COMPLETE = 8;
 
 export default function TimeEstimate({ step }: { step: number }) {
   const [remainingTime, setRemainingTime] = useState(0);
   const [completionPercentage, setCompletionPercentage] = useState(0);
+  let timeString;
 
   useEffect(() => {
     const completionPercentage = (step * 100) / 24 / 100;
@@ -16,13 +17,18 @@ export default function TimeEstimate({ step }: { step: number }) {
     setCompletionPercentage(Math.floor(completionPercentage * 100));
   }, [step]);
 
-  return (
-    <p className="text-sm pb-2">{`${completionPercentage}% complete (about ${convertDecimalToMinutesSeconds(remainingTime)} left)`}</p>
-  );
+  timeString = `${completionPercentage}% complete `;
+  timeString = remainingTime
+    ? timeString + `(about ${convertDecimalToMinutesSeconds(remainingTime)} left)`
+    : timeString;
+
+  return <p className="text-sm pb-2">{timeString}</p>;
 }
 
 function convertDecimalToMinutesSeconds(decimalMinutes: number) {
   const minutes = Math.floor(decimalMinutes);
   const seconds = Math.round((decimalMinutes - minutes) * 60);
-  return `${minutes} min ${seconds} sec`;
+  let str = minutes ? `${minutes} min ` : "";
+  str = seconds ? `${str} ${seconds} sec` : str;
+  return str;
 }
