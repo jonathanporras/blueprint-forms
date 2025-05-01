@@ -40,18 +40,6 @@ export default function AboutPage() {
           </li>
         </ul>
       </section>
-
-      <section className="mb-10">
-        <h2 className="text-2xl font-semibold mb-2">Proudly Based in San Francisco</h2>
-        <p className="text-gray-700">
-          QuickForm Pro is proud to be based in the heart of San Francisco. Our team is
-          dedicated to providing high-quality legal document solutions to entrepreneurs and
-          small businesses nationwide. As a growing, trusted company, we are committed to
-          supporting our community and delivering innovative tools that make legal
-          documentation easier for everyone.
-        </p>
-      </section>
-
       <section>
         <h2 className="text-2xl font-semibold mb-2">Our Commitment</h2>
         <p className="text-gray-700">
