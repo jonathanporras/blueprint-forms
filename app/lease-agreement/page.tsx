@@ -98,8 +98,8 @@ export default function LeaseAgreementLanding() {
             </div>
             <div className="w-full md:w-1/2">
               <img
-                className="max-w-xl w-full block mx-auto"
-                src="/images/lease-agreement-screen.png"
+                className="max-w-xl w-full block mx-auto shadow-lg"
+                src="/images/lease-agreement-screen-2.png"
               />
             </div>
           </section>
