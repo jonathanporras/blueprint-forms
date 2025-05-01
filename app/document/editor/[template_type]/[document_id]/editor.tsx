@@ -14,6 +14,7 @@ import ExportButton from "@/components/export-button";
 import { User } from "@supabase/supabase-js";
 import Spinner from "@/components/spinner";
 import { ANALYTICS_EVENTS, MixpanelAnalytics } from "@/lib/mixpanel";
+import TimeEstimate from "./time-estimate";
 
 export type FormData = {
   id: any;
@@ -231,9 +232,10 @@ export default function Editor({
   ) : (
     <div className="px-8 my-8 lg:w-1/2 sm:w-full ">
       <div className="ml-0 lg:ml-8">
+        <TimeEstimate step={currentStep} />
         <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden mb-2">
           <motion.div
-            className="h-2 bg-[#1E3A5F]"
+            className="h-2 bg-[#2FAF68]"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.9 }}
