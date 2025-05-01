@@ -22,7 +22,9 @@ export const metadata = {
 };
 
 export const viewport: Viewport = {
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 const geistSans = Geist({
