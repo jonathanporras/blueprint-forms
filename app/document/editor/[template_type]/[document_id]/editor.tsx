@@ -75,7 +75,7 @@ export default function Editor({
   }, [documentId]);
 
   useEffect(() => {
-    MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+    MixpanelAnalytics.track(ANALYTICS_EVENTS.DOCUMENT_EDIT, {
       action: "editDocument",
       step: currentStep,
       document: "lease-agreement",
