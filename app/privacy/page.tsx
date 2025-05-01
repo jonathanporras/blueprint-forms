@@ -51,7 +51,7 @@ export default async function Privacy() {
       </p>
 
       <p>
-        7. Changes: to This Policy We may update this Privacy Policy occasionally. We'll notify
+        7. Changes to This Policy: We may update this Privacy Policy occasionally. We'll notify
         you if significant changes are made.
       </p>
 
