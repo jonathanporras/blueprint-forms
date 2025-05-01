@@ -7,8 +7,9 @@ import "./globals.css";
 import Footer from "@/components/footer";
 import HeaderLogoLink from "@/components/header-logo-link";
 import { createClient } from "@/utils/supabase/server";
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import MixpanelUserTracking from "@/components/mixpanel-user-tracking";
+import { Viewport } from "next";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -18,6 +19,9 @@ export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "QuickForm Pro",
   description: "The fastest way to create legal documents online.",
+};
+
+export const viewport: Viewport = {
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
