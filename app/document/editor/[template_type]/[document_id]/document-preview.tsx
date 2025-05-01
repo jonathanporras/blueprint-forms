@@ -75,8 +75,11 @@ export default function DocumentPreview({
               <p className="pb-4 text-sm" style={{ textIndent: "32px" }}>
                 This Lease Agreement (hereinafter referred to as the "Agreement" or the
                 "Lease") is entered into on{" "}
-                {formValues["lease_date"]?.value &&
-                  renderDocumentField(format(formValues["lease_date"]?.value, "MMMM d, yyyy"))}
+                {renderDocumentField(
+                  formValues["lease_date"]?.value
+                    ? format(formValues["lease_date"]?.value, "MMMM d, yyyy")
+                    : null
+                )}
                 , by and between {renderDocumentField(formValues["landlord_name"]?.value)}{" "}
                 (hereinafter referred to as "Landlord") and{" "}
                 {renderDocumentField(formValues["tenant_name"]?.value)}
@@ -109,13 +112,17 @@ export default function DocumentPreview({
               </p>
               <p className="pb-4 text-sm">
                 DURATION OF LEASE: The lease term shall commence on{" "}
-                {formValues["start_date"]?.value &&
-                  renderDocumentField(
-                    format(formValues["start_date"]?.value, "MMMM d, yyyy")
-                  )}{" "}
+                {renderDocumentField(
+                  formValues["start_date"]?.value
+                    ? format(formValues["start_date"]?.value, "MMMM d, yyyy")
+                    : null
+                )}{" "}
                 and will continue in effect until{" "}
-                {formValues["end_date"]?.value &&
-                  renderDocumentField(format(formValues["end_date"]?.value, "MMMM d, yyyy"))}
+                {renderDocumentField(
+                  formValues["end_date"]?.value
+                    ? format(formValues["end_date"]?.value, "MMMM d, yyyy")
+                    : null
+                )}
                 , unless otherwise terminated earlier in accordance with the provisions set
                 forth in this Agreement. The Tenant shall vacate the premises upon the
                 expiration of the lease unless a renewal agreement is reached between both
@@ -365,7 +372,7 @@ export default function DocumentPreview({
   );
 }
 
-const renderDocumentField = (value: string) => {
+const renderDocumentField = (value: string | null) => {
   if (value) {
     return value;
   } else {
