@@ -37,13 +37,13 @@ export default function MyAccount({
         </>
       ) : (
         <>
-          <Link
+          {/* <Link
             className="bg-[#2FAF68] hover:bg-[#37c476] flex justify-center text-white px-4 py-2 w-full max-w-80 text-center rounded-lg mt-10 mx-auto md:mx-0 transition"
             href="/pricing"
           >
             Upgrade To Export
             <ArrowRight className="pl-2" />
-          </Link>
+          </Link> */}
         </>
       )}
     </div>

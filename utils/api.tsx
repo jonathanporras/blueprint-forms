@@ -362,3 +362,22 @@ export async function deleteDocument(documentId: Document["id"]) {
 
   return data;
 }
+
+export async function createDocument({ template_type, name }: Document) {
+  const { data, error } = await supabase
+    .from("documents")
+    .upsert([
+      {
+        template_type: template_type,
+        name: name,
+      },
+    ])
+    .select();
+
+  if (error) {
+    console.error("Error creating document:", error);
+    throw error;
+  }
+
+  return data[0];
+}

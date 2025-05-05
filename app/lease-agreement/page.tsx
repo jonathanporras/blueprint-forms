@@ -13,10 +13,24 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ANALYTICS_EVENTS, MixpanelAnalytics } from "@/lib/mixpanel";
+import { createDocument } from "@/utils/api";
 
 export default function LeaseAgreementLanding() {
   const [loading, setLoading] = useState(false);
   const rounter = useRouter();
+
+  const ctaOnClick = async () => {
+    setLoading(true);
+    const document = await createDocument({
+      template_type: "lease-agreement",
+      name: "Lease Agreement",
+    });
+    MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
+      action: "create document",
+      document: "lease-agreement",
+    });
+    rounter.push(`/document/editor/lease-agreement/${document.id}`);
+  };
 
   return (
     <motion.div
@@ -56,14 +70,7 @@ export default function LeaseAgreementLanding() {
                   </p>
                 </div>
                 <button
-                  onClick={() => {
-                    setLoading(true);
-                    MixpanelAnalytics.track(ANALYTICS_EVENTS.BUTTON_CLICK, {
-                      action: "create document",
-                      document: "lease-agreement",
-                    });
-                    rounter.push("/document/editor/lease-agreement");
-                  }}
+                  onClick={async () => ctaOnClick()}
                   className="bg-[#2FAF68] hover:bg-[#37c476] w-full md:w-auto text-white px-8 py-3 rounded-lg transition flex justify-center items-center"
                 >
                   {loading ? (
@@ -149,10 +156,7 @@ export default function LeaseAgreementLanding() {
                 lawyers or outdated templates—just fast, clear, and reliable documents.
               </p>
               <button
-                onClick={() => {
-                  setLoading(true);
-                  rounter.push("/document/editor/lease-agreement");
-                }}
+                onClick={async () => ctaOnClick()}
                 className="bg-[#2FAF68] hover:bg-[#37c476] w-full md:w-auto text-white px-8 py-3 rounded-lg transition mx-auto flex items-center justify-center items-center"
               >
                 {loading ? (
